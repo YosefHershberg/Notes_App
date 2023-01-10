@@ -4,6 +4,7 @@ import SearchOption from './search-option';
 function Search(props) {
     const [options, setOptions] = useState([])
     const [input, setInput] = useState()
+    const inputArea = useRef();
 
     const { notes, onEdit } = props
 
@@ -26,12 +27,16 @@ function Search(props) {
         input === '' && setOptions([])
     }, [input]);
 
+    useEffect(() => {
+        inputArea.current.focus()
+    }, []);
+
 
     return (
         <React.Fragment>
             <div id="search-container">
                 <div id="serach-form">
-                    <input id='search-input' type="text" placeholder=' Serach notes ...' onChange={handleSearchEngine} />
+                    <input ref={inputArea} id='search-input' type="text" placeholder=' Serach notes ...' onChange={handleSearchEngine} />
                     {/* <button id='search-btn'>Search</button> */}
                     {options.length > 0 && <div id="options-container">
                         {options.map(option =>

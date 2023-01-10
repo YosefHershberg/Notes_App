@@ -69,19 +69,22 @@ body #main #work-space textarea {
 body #main #grid-of-notes {
   display: flex;
   justify-content: center;
+  padding: 0 120px;
+  width: 100%;
 }
 body #main #grid-of-notes .text-box-comtainer {
-  display: flex;
-  flex-wrap: wrap;
-  width: 85%;
+  display: grid;
+  column-gap: 4%;
+  grid-template-columns: 22% 22% 22% 22%;
+  width: 100%;
 }
 body #main #grid-of-notes .text-box-comtainer .text-box {
   height: 250px;
-  width: 200px;
+  width: 100%;
   padding: 5px 10px 0;
   border: solid gray 1px;
   border-radius: 10px;
-  margin: 10px;
+  margin: 10px 0;
 }
 body #main #grid-of-notes .text-box-comtainer .text-box .note-text {
   height: 90%;
@@ -122,26 +125,26 @@ body #main .no-notes-yet button {
 body #main .no-notes-yet.hidden {
   transform: translateY(-120%);
 }
-body #search-container {
+body #main #search-container {
   display: flex;
   justify-content: center;
   height: 100%;
   width: 100%;
 }
-body #search-container #search-input {
+body #main #search-container #search-input {
   margin: 100px 0 20px;
   width: 500px;
   height: 50px;
   border-radius: 50px;
   padding: 0 10px;
 }
-body #search-container #options-container {
+body #main #search-container #options-container {
   border: black solid 1px;
   max-height: 400px;
   overflow-y: scroll;
   padding: 0 5px;
 }
-body #search-container #options-container .option {
+body #main #search-container #options-container .option {
   border-bottom: #9b9b9b solid 1px;
   display: flex;
   align-items: center;
