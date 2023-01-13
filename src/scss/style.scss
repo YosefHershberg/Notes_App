@@ -2,6 +2,9 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
 
     #navbar {
         width: 100vw;
@@ -22,7 +25,28 @@ body {
             background-color: white;
             margin: 0 10px;
             height: 30px;
+            display: inline-block;
+            position: relative;
         }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
     }
 
     #main {
@@ -32,36 +56,86 @@ body {
 
         #work-space {
             position: absolute;
-            height: auto;
+            height: 100%;
             width: 100%;
             // background-color: rgb(148, 243, 141);
             padding: 15px;
             display: flex;
+            overflow: hidden;
 
             #notes-list {
-                height: 100px;
-                width: 30%px;
-                padding: 15px;
-                // background-color: aqua;
+                width: 30%;
+                padding: 0 15px;
+                overflow: auto;
+                // height: 100%;
+
+                .notes-list-note.fade-out {
+                    animation: fade-out 0.25s ease-out both;
+                }
 
                 .notes-list-note {
+                    max-height: 140px;
+                    width: 100%;
+                    margin: 10px 0;
+                    background-color: rgb(239, 239, 239);
+                    cursor: pointer;
+                    border-radius: 7px;
+                    padding: 7px 10px;
                     display: flex;
+                    flex-direction: column;
                     justify-content: space-between;
-                    align-items: center;
-                    height: 50px;
-                    // width: 100%;
-                    width: 270px;
-                    border-bottom: 1px solid gray;
+                    // animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+                    .last-modified {
+                        font-size: 13px;
+                        margin: 0;
+                        color: rgb(126, 126, 126);
+                    }
 
                     .note-list-text {
+                        width: 100%;
                         margin: 0;
-                        inline-size: 83%;
                         overflow: hidden;
-                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        /* hide text after 3 lines */
+                        -webkit-box-orient: vertical;
+                        word-wrap: break-word;
+                        /* make text wrap to the next line */
+                        font-size: 14px;
+                        color: rgb(94, 93, 93);
                     }
 
                     .edit-delete-icons {
+                        margin: 7px 0 5px;
                         display: flex;
+                        justify-content: center;
+
+                        button {
+                            font-size: 13px;
+                            margin: 0 7px;
+                            background-color: rgb(209, 209, 209);
+                            border-radius: 5px;
+                            padding: 0 7px;
+                            border: none;
+                        }
+
+                        .edit-btn:hover {
+                            background-color: white;
+                            color: black;
+                        }
+
+                        .delete-btn {
+                            color: rgb(219, 62, 62);
+                        }
+                        
+                        .delete-btn:hover {
+                            color: white;
+                            background-color: rgb(219, 62, 62);
+                        }
+
 
                         .fa-solid {
                             margin: 0 3px;
@@ -70,23 +144,26 @@ body {
                 }
             }
 
-            textarea {
-                width: 750px;
-                height: 400px;
-                border: gray 1px solid;
-                border-radius: 10px;
-                padding: 10px;
+            #text-wrapper {
+                textarea {
+                    border: rgb(190, 0, 0) 1px solid;
+                    border-radius: 5px;
+                    padding: 10px;
+                    width: 100%;
+                    border: none;
+                    margin: 0 5px;
+                }
             }
         }
 
         #grid-of-notes {
             display: flex;
             justify-content: center;
-            padding: 0 120px;
-            width: 100%;
+            padding: 20px 120px;
+            width: 100vw;
+            //NOTE: THE WIDTH SHOULD BE 100% BUT THAT MAKES IT WAYYY WIDER THE ACTUALLY 100% 
 
-            .text-box-comtainer {
-
+            .text-box-container {
                 display: grid;
                 column-gap: 4%;
                 grid-template-columns: 22% 22% 22% 22%;
@@ -96,20 +173,38 @@ body {
                     height: 250px;
                     width: 100%;
                     padding: 5px 10px 0;
-                    border: solid gray 1px;
                     border-radius: 10px;
                     margin: 10px 0;
+                    background-color: rgb(239, 239, 239);
+                    cursor: pointer;
+
 
                     .note-text {
-                        height: 90%;
+                        height: 77%;
                         inline-size: 100%;
                         overflow-wrap: break-word;
                         overflow: hidden;
+                        font-size: 14px;
+                    }
+
+                    .last-modified {
+                        font-size: 13px;
+                        margin: 0 0 3px;
+                        color: gray;
                     }
 
                     .delete-btn-container {
                         display: flex;
                         justify-content: center;
+
+                        button {
+                            border: none;
+                            border-radius: 5px;
+                            background-color: rgb(209, 209, 209);
+                            font-size: 13px;
+                            height: 25px;
+                            width: 70px;
+                        }
                     }
                 }
             }
@@ -176,10 +271,34 @@ body {
                     padding: 8px 5px;
                     max-width: 470px;
                     overflow: hidden;
+                    white-space: nowrap;
+                    cursor: pointer;
                 }
             }
         }
     }
+}
 
+@keyframes slide-in-top {
+    0% {
 
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    100% {
+
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

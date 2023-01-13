@@ -6,11 +6,14 @@ function NoteBox(props) {
     return (
         <React.Fragment>
             <div className="text-box">
-                <div className='note-text' id={note.id} onClick={onEdit}>
+                <div className='note-text' onClick={() => onEdit(note.id)}>
                     {note.text}
                 </div>
+
+                <div className="last-modified"><i>{note.lastModified}</i></div>
+
                 <div className="delete-btn-container">
-                    <i className="fa-solid fa-trash" style={{ color: 'rgb(219, 62, 62)' }} id={note.id} onClick={onDelete}></i>
+                    <button onClick={() => onDelete(note.id)} style={{ color: 'rgb(219, 62, 62)' }}>Delete <i className="fa-solid fa-trash"></i></button>
                 </div>
             </div>
         </React.Fragment>

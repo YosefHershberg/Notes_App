@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NoteTextArea from './note-text-area'
 import NotesList from './notes-list';
 
 function WorkSpace(props) {
+    const textArea = useRef()
+
     const { notes, onEdit, onDelete, displaydNote, onChange, onSave, incrememt, mode } = props
+
+    useEffect(() => {
+        mode === 'writeNoteMode' && textArea.current.focus()
+    }, [displaydNote]);
+
+    function handleNotePressed(event) {
+        console.log(event.target.id);
+    }
 
     return (
         <React.Fragment>
@@ -13,6 +23,7 @@ function WorkSpace(props) {
                     onEdit={onEdit}
                     onDelete={onDelete}
                     incrememt={incrememt}
+                    onNotePressed={handleNotePressed}
                 />
                 <NoteTextArea
                     newNote={displaydNote}
@@ -20,6 +31,7 @@ function WorkSpace(props) {
                     onSave={onSave}
                     displaydNote={displaydNote}
                     mode={mode}
+                    textArea={textArea}
                 />
             </div>
         </React.Fragment>

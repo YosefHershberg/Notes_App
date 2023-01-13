@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 
 function NotesListNote(props) {
+    const { note, onEdit, onDelete } = props;
+    const noteListNoteJSX = useRef()
 
-    const {note, onEdit, onDelete} = props;
 
     // useEffect(() => {
     //     console.log(props);
-    // }, [);
+    // }, [];
+
+    function handleDeleteNadFade() {
+        noteListNoteJSX.current.classList.add('fade-out')
+
+        setTimeout(() => {
+            onDelete(note.id)
+        }, 250);
+    }
 
     return (
         <React.Fragment>
-            <div className="notes-list-note">
-                <p className='note-list-text' id={note.id} onClick={onEdit}>{note.text}</p>
+            <div ref={noteListNoteJSX} className='notes-list-note'>
+                <div className="last-modified"><i>{note.lastModified}</i></div>
+
+                <p className='note-list-text' onClick={() => onEdit(note.id)}>{note.text}</p>
 
                 <div className="edit-delete-icons">
-                    <i className="fa-solid fa-pen-to-square" id={note.id} onClick={onEdit}></i>
-                    <i className="fa-solid fa-trash" style={{ color: 'rgb(219, 62, 62)' }} id={note.id} onClick={onDelete}></i>
+                    <button className='edit-btn' onClick={() => onEdit(note.id)}>Edit<i className="fa-solid fa-pen-to-square"></i></button>
+                    <button className='delete-btn' onClick={handleDeleteNadFade} >Delete<i className="fa-solid fa-trash"></i></button>
                 </div>
             </div>
         </React.Fragment>

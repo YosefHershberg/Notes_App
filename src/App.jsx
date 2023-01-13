@@ -3,6 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./components/nav-bar";
 import Main from "./components/main";
 
+// background-color: rgb(239, 239, 239);
+// background-color: rgb(209, 209, 209);
+
 
 function App() {
   let data = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
@@ -28,6 +31,7 @@ function App() {
     const newNote = {
       id: keysArr[incrememt],
       text: "",
+      lastModified: timeStamp()
     };
 
     setNotes([...notes, newNote]);
@@ -54,21 +58,30 @@ function App() {
     setDisplaydNote({
       id: displaydNote.id,
       text: event.target.value,
+      lastModified: timeStamp()
     });
   }
+
+  function timeStamp() {
+    return new Date(Date.now()).toLocaleString()
+  }
+
+  useEffect(() => {
+    console.log(timeStamp());
+  }, []);
 
   function handleOnSave(event) {
     event.preventDefault();
     setMode("showNotesMode")
   }
 
-  function handleOnDelete(event) {
-    setNotes(notes.filter(note => note.id != event.target.id))
-    displaydNote == notes[notes.findIndex(note => note.id === event.target.id)] && setMode("showNotesMode");
+  function handleOnDelete(id) {
+    setNotes(notes.filter(note => note.id != id))
+    displaydNote == notes[notes.findIndex(note => note.id === id)] && setMode("showNotesMode");
   }
 
-  function handleOnEdit(event) {
-    mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === event.target.id)])
+  function handleOnEdit(id) {
+    mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
     setMode('writeNoteMode');
   }
 
@@ -112,19 +125,19 @@ function App() {
 
   return (
     <React.Fragment>
-      <NavBar onNewNote={createNewNote} onShowNotes={handleShowNotes} onSearch={handleSearch} />
-      <Main
-        mode={mode}
-        displaydNote={displaydNote}
-        notes={notes}
-        onChange={handleChangeText}
-        onSave={handleOnSave}
-        onDelete={handleOnDelete}
-        onEdit={handleOnEdit}
-        onNewNote={createNewNote}
-        incrememt={incrememt}
-        noNotesHidden={noNotesHidden}
-      />
+        <NavBar onNewNote={createNewNote} onShowNotes={handleShowNotes} onSearch={handleSearch} />
+        <Main
+          mode={mode}
+          displaydNote={displaydNote}
+          notes={notes}
+          onChange={handleChangeText}
+          onSave={handleOnSave}
+          onDelete={handleOnDelete}
+          onEdit={handleOnEdit}
+          onNewNote={createNewNote}
+          incrememt={incrememt}
+          noNotesHidden={noNotesHidden}
+        />
     </React.Fragment>
   );
 }

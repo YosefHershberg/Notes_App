@@ -2,7 +2,7 @@ import React from 'react';
 import NotesListNote from './notes-list-note';
 
 function NotesList(props) {
-    const { onDelete, onEdit } = props
+    const { onDelete, onEdit, onNotePressed } = props
 
     return (
         <React.Fragment>
@@ -13,6 +13,7 @@ function NotesList(props) {
                         note={note}
                         onDelete={onDelete}
                         onEdit={onEdit}
+                        onNotePressed={onNotePressed}
                     />
                 )}
             </div>

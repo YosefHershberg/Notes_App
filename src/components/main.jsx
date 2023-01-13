@@ -48,12 +48,11 @@ function Main(props) {
                     />
                 }
                 {mode === 'searchMode' &&
-                    <Search 
+                    <Search
                         notes={notes}
                         onEdit={onEdit}
                     />
                 }
-
             </div>
         </React.Fragment>
     );

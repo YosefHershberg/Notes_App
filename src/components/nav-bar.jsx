@@ -1,4 +1,6 @@
 import React from 'react';
+import {GrNotes} from 'react-icons/gr'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 function NavBar(props) {
     const {onNewNote, onShowNotes, onSearch} = props
@@ -10,8 +12,8 @@ function NavBar(props) {
                     <h3 id='brand-name' >My Notes App</h3>
                 </a>
                 <button id='new-note-btn' className='nav-btn' onClick={onNewNote}>Create New Note</button>
-                <button id='my-notes-btn' className='nav-btn' onClick={onShowNotes}>My Notes</button>
-                <button id='search-btn' className='nav-btn' onClick={onSearch}>Search</button>
+                <button id='my-notes-btn' className='nav-btn' onClick={onShowNotes}>My Notes  <GrNotes /></button>
+                <button id='search-btn' className='nav-btn' onClick={onSearch}>Search <AiOutlineSearch /></button>
             </div>
         </React.Fragment>
     )
