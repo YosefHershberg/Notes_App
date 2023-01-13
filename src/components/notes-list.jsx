@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NotesListNote from './notes-list-note';
 
 function NotesList(props) {
-    const { onDelete, onEdit, onNotePressed } = props
+    const { onDelete, onEdit, onNotePressed, notesListRef } = props    
 
     return (
         <React.Fragment>
-            <div id="notes-list">
+            <ul ref={notesListRef} id="notes-list">
                 {props.notes.map(note =>
                     <NotesListNote
                         key={note.id}
@@ -16,7 +16,7 @@ function NotesList(props) {
                         onNotePressed={onNotePressed}
                     />
                 )}
-            </div>
+            </ul>
         </React.Fragment>
     );
 }

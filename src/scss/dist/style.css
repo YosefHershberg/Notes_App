@@ -1,25 +1,35 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+body #background {
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  width: 100vw;
+  align-items: center;
+  background-color: gray;
 }
-body #navbar {
-  width: 100vw;
-  height: 15vh;
+body #background #app {
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+}
+body #background #app #navbar {
+  width: 100%;
+  height: 15%;
   box-shadow: 0 4px 6px -6px #222;
   padding: 0 30px;
   display: flex;
   align-items: center;
 }
-body #navbar #logo {
+body #background #app #navbar #logo {
   color: black;
   text-decoration: none;
   margin-right: 10px;
 }
-body #navbar .nav-btn {
+body #background #app #navbar .nav-btn {
   border: none;
   background-color: white;
   margin: 0 10px;
@@ -27,7 +37,7 @@ body #navbar .nav-btn {
   display: inline-block;
   position: relative;
 }
-body #navbar .nav-btn::after {
+body #background #app #navbar .nav-btn::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -39,32 +49,34 @@ body #navbar .nav-btn::after {
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
-body #navbar .nav-btn:hover::after {
+body #background #app #navbar .nav-btn:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-body #main {
+body #background #app #main {
   width: 100%;
-  height: 85vh;
+  height: 85%;
   position: relative;
 }
-body #main #work-space {
+body #background #app #main #work-space {
   position: absolute;
   height: 100%;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   display: flex;
   overflow: hidden;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #main #work-space #notes-list {
-  width: 30%;
-  padding: 0 15px;
+body #background #app #main #work-space #notes-list {
+  width: 35%;
+  padding: 0 10px;
+  margin: 0;
   overflow: auto;
 }
-body #main #work-space #notes-list .notes-list-note.fade-out {
+body #background #app #main #work-space #notes-list .notes-list-note.fade-out {
   animation: fade-out 0.25s ease-out both;
 }
-body #main #work-space #notes-list .notes-list-note {
+body #background #app #main #work-space #notes-list .notes-list-note {
   max-height: 140px;
   width: 100%;
   margin: 10px 0;
@@ -77,12 +89,12 @@ body #main #work-space #notes-list .notes-list-note {
   justify-content: space-between;
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #main #work-space #notes-list .notes-list-note .last-modified {
+body #background #app #main #work-space #notes-list .notes-list-note .last-modified {
   font-size: 13px;
   margin: 0;
   color: #7e7e7e;
 }
-body #main #work-space #notes-list .notes-list-note .note-list-text {
+body #background #app #main #work-space #notes-list .notes-list-note .note-list-text {
   width: 100%;
   margin: 0;
   overflow: hidden;
@@ -96,12 +108,12 @@ body #main #work-space #notes-list .notes-list-note .note-list-text {
   font-size: 14px;
   color: #5e5d5d;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons {
   margin: 7px 0 5px;
   display: flex;
   justify-content: center;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons button {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons button {
   font-size: 13px;
   margin: 0 7px;
   background-color: #d1d1d1;
@@ -109,66 +121,105 @@ body #main #work-space #notes-list .notes-list-note .edit-delete-icons button {
   padding: 0 7px;
   border: none;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons .edit-btn:hover {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons .edit-btn:hover {
   background-color: white;
   color: black;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons .delete-btn {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons .delete-btn {
   color: #db3e3e;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons .delete-btn:hover {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons .delete-btn:hover {
   color: white;
   background-color: #db3e3e;
 }
-body #main #work-space #notes-list .notes-list-note .edit-delete-icons .fa-solid {
+body #background #app #main #work-space #notes-list .notes-list-note .edit-delete-icons .fa-solid {
   margin: 0 3px;
 }
-body #main #work-space #text-wrapper textarea {
-  border: #be0000 1px solid;
+body #background #app #main #work-space #form-container {
+  width: 65%;
+  height: 100%;
+  padding: 5px;
+}
+body #background #app #main #work-space #form-container #form-datails-container {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+body #background #app #main #work-space #form-container #form-datails-container #last-modified-container #last-modified-title {
+  display: inline-block;
+}
+body #background #app #main #work-space #form-container #form-datails-container #last-modified-container #last-modified-details {
+  margin: 0;
+}
+body #background #app #main #work-space #form-container #form-datails-container button {
+  height: 40px;
+  width: 80px;
+  border-radius: 50px;
+  border: none;
+  background-color: #7abbd2;
+  color: white;
+}
+body #background #app #main #work-space #form-container #form-datails-container button:hover {
+  color: #7abbd2;
+  background-color: #e2eff4;
+  border: 2px solid #7abbd2;
+}
+body #background #app #main #work-space #form-container textarea {
+  width: 100%;
+  height: 85%;
   border-radius: 5px;
   padding: 10px;
-  width: 100%;
   border: none;
   margin: 0 5px;
 }
-body #main #grid-of-notes {
+body #background #app #main #grid-of-notes {
   display: flex;
   justify-content: center;
-  padding: 20px 120px;
-  width: 100vw;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 15px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #main #grid-of-notes .text-box-container {
+body #background #app #main #grid-of-notes .text-box-container {
+  overflow: auto;
   display: grid;
-  column-gap: 4%;
-  grid-template-columns: 22% 22% 22% 22%;
+  column-gap: 2%;
+  grid-template-columns: 18% 18% 18% 18% 18%;
+  flex-wrap: wrap;
   width: 100%;
 }
-body #main #grid-of-notes .text-box-container .text-box {
+body #background #app #main #grid-of-notes .text-box-container .text-box {
   height: 250px;
   width: 100%;
-  padding: 5px 10px 0;
+  padding: 5px 10px;
   border-radius: 10px;
   margin: 10px 0;
   background-color: #efefef;
   cursor: pointer;
 }
-body #main #grid-of-notes .text-box-container .text-box .note-text {
-  height: 77%;
+body #background #app #main #grid-of-notes .text-box-container .text-box .note-text {
+  height: 75%;
   inline-size: 100%;
   overflow-wrap: break-word;
   overflow: hidden;
   font-size: 14px;
 }
-body #main #grid-of-notes .text-box-container .text-box .last-modified {
+body #background #app #main #grid-of-notes .text-box-container .text-box .last-modified {
   font-size: 13px;
   margin: 0 0 3px;
   color: gray;
+  height: 12%;
 }
-body #main #grid-of-notes .text-box-container .text-box .delete-btn-container {
+body #background #app #main #grid-of-notes .text-box-container .text-box .delete-btn-container {
   display: flex;
   justify-content: center;
+  height: 13%;
 }
-body #main #grid-of-notes .text-box-container .text-box .delete-btn-container button {
+body #background #app #main #grid-of-notes .text-box-container .text-box .delete-btn-container button {
   border: none;
   border-radius: 5px;
   background-color: #d1d1d1;
@@ -176,7 +227,7 @@ body #main #grid-of-notes .text-box-container .text-box .delete-btn-container bu
   height: 25px;
   width: 70px;
 }
-body #main .no-notes-yet {
+body #background #app #main .no-notes-yet {
   position: absolute;
   background-color: white;
   z-index: 1;
@@ -188,12 +239,13 @@ body #main .no-notes-yet {
   flex-direction: column;
   transition: transform 0.5s ease-in-out;
   transform: translateY(0);
-  border-bottom: 2px solid black;
+  border-radius: 10px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #main .no-notes-yet h1 {
+body #background #app #main .no-notes-yet h1 {
   margin-bottom: 20px;
 }
-body #main .no-notes-yet button {
+body #background #app #main .no-notes-yet button {
   height: 50px;
   width: 190px;
   border-radius: 5px;
@@ -202,29 +254,30 @@ body #main .no-notes-yet button {
   color: white;
   font-size: 20px;
 }
-body #main .no-notes-yet.hidden {
-  transform: translateY(-120%);
+body #background #app #main .no-notes-yet.hidden {
+  animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
-body #main #search-container {
+body #background #app #main #search-container {
   display: flex;
   justify-content: center;
   height: 100%;
   width: 100%;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #main #search-container #search-input {
+body #background #app #main #search-container #search-input {
   margin: 100px 0 20px;
   width: 500px;
   height: 50px;
   border-radius: 50px;
   padding: 0 10px;
 }
-body #main #search-container #options-container {
+body #background #app #main #search-container #options-container {
   border: black solid 1px;
   max-height: 400px;
   overflow-y: scroll;
   padding: 0 5px;
 }
-body #main #search-container #options-container .option {
+body #background #app #main #search-container #options-container .option {
   border-bottom: #9b9b9b solid 1px;
   display: flex;
   align-items: center;
@@ -251,5 +304,25 @@ body #main #search-container #options-container .option {
   }
   100% {
     opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

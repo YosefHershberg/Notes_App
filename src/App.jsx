@@ -3,13 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./components/nav-bar";
 import Main from "./components/main";
 
-// background-color: rgb(239, 239, 239);
-// background-color: rgb(209, 209, 209);
-
-
 function App() {
   let data = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
-  let keysData = JSON.parse(window.localStorage.getItem('KEYS_DATA'))
+  // let keysData = JSON.parse(window.localStorage.getItem('KEYS_DATA'))
   let incrementData = JSON.parse(window.localStorage.getItem('INCREMENT_DATA'))
 
   // data = []
@@ -22,14 +18,17 @@ function App() {
   const [displaydNote, setDisplaydNote] = useState({});
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(incrementData ? incrementData : 0)
-  const [keysArr, setKeysArr] = useState(keysData ? keysData : ['1234y6'])
+  // const [keysArr, setKeysArr] = useState(keysData ? keysData : ['1234y6'])
   const noNotesHidden = useRef();
+  const notesListRef = useRef();
+  const textAreaRef = useRef()
 
   //FUNCTIONS -----------------------------------
   function createNewNote() {
-
     const newNote = {
-      id: keysArr[incrememt],
+      // id: keysArr[incrememt],
+      id: getRandomString(),
+      // id: Date.now(), //This would also work
       text: "",
       lastModified: timeStamp()
     };
@@ -83,6 +82,7 @@ function App() {
   function handleOnEdit(id) {
     mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
     setMode('writeNoteMode');
+    mode === 'writeNoteMode' && textAreaRef.current.focus()
   }
 
   function handleShowNotes() {
@@ -95,6 +95,7 @@ function App() {
 
   useEffect(() => {
     setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
+    mode === 'writeNoteMode' && textAreaRef.current.focus()
   }, [displaydNote]);
 
   useEffect(() => {
@@ -105,19 +106,21 @@ function App() {
     if (notes.length === 0 && mode != 'searchMode') {
       setMode('noNotesMode')
       setIncrememt(0)
-      setKeysArr(['1234y6'])
+      // setKeysArr(['1234y6'])
     }
   }, [notes]);
 
   useEffect(() => {
     window.localStorage.setItem('INCREMENT_DATA', JSON.stringify(incrememt))
     setDisplaydNote(notes[notes.length - 1])
-    mode != undefined && setKeysArr([...keysArr, getRandomString()])
+    // mode != undefined && setKeysArr([...keysArr, getRandomString()])
+
+    mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
   }, [incrememt]);
 
-  useEffect(() => {
-    window.localStorage.setItem('KEYS_DATA', JSON.stringify(keysArr))
-  }, [keysArr]);
+  // useEffect(() => {
+  //   window.localStorage.setItem('KEYS_DATA', JSON.stringify(keysArr))
+  // }, [keysArr]);
 
   useEffect(() => {
     mode != 'writeNoteMode' && setDisplaydNote({})
@@ -125,19 +128,26 @@ function App() {
 
   return (
     <React.Fragment>
-        <NavBar onNewNote={createNewNote} onShowNotes={handleShowNotes} onSearch={handleSearch} />
-        <Main
-          mode={mode}
-          displaydNote={displaydNote}
-          notes={notes}
-          onChange={handleChangeText}
-          onSave={handleOnSave}
-          onDelete={handleOnDelete}
-          onEdit={handleOnEdit}
-          onNewNote={createNewNote}
-          incrememt={incrememt}
-          noNotesHidden={noNotesHidden}
-        />
+      <div id="background">
+        <div id="app">
+          <NavBar onNewNote={createNewNote} onShowNotes={handleShowNotes} onSearch={handleSearch} />
+          <Main
+            mode={mode}
+            displaydNote={displaydNote}
+            notes={notes}
+            onChange={handleChangeText}
+            onSave={handleOnSave}
+            onDelete={handleOnDelete}
+            onEdit={handleOnEdit}
+            onNewNote={createNewNote}
+            incrememt={incrememt}
+            noNotesHidden={noNotesHidden}
+            notesListRef={notesListRef}
+            textAreaRef={textAreaRef}
+          />
+        </div>
+      </div>
+
     </React.Fragment>
   );
 }

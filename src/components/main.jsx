@@ -5,7 +5,7 @@ import NoNotesYet from './no-notses-yet';
 import Search from './search';
 
 function Main(props) {
-    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote } = props;
+    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef } = props;
 
     return (
         <React.Fragment>
@@ -20,6 +20,8 @@ function Main(props) {
                         onEdit={onEdit}
                         onDelete={onDelete}
                         incrememt={incrememt}
+                        notesListRef={notesListRef}
+                        textAreaRef={textAreaRef}
                     />
                 }
                 {mode === 'showNotesMode' &&
