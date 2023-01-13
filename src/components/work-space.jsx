@@ -3,13 +3,8 @@ import NoteTextArea from './note-text-area'
 import NotesList from './notes-list';
 
 function WorkSpace(props) {
-    // const textAreaRef = useRef()
 
     const { notes, onEdit, onDelete, displaydNote, onChange, onSave, incrememt, mode, notesListRef, textAreaRef} = props
-
-    // useEffect(() => {
-    //     mode === 'writeNoteMode' && textAreaRef.current.focus()
-    // }, [displaydNote]);
 
     function handleNotePressed(event) {
         console.log(event.target.id);

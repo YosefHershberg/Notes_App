@@ -1,3 +1,34 @@
+:root {
+  --primary-color: #00bcd4;
+  --accent-color: #f50057;
+  --text-color: #263238;
+  --body-color: #80deea;
+  --main-font: "roboto";
+  --font-bold: 700;
+  --font-regular: 400;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: blue orange;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #e3e3e3;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b2b2b2;
+  border-radius: 20px;
+  border: 2px solid #d5d5d5;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -227,6 +258,9 @@ body #background #app #main #grid-of-notes .text-box-container .text-box .delete
   height: 25px;
   width: 70px;
 }
+body #background #app #main #grid-of-notes .text-box-container .text-box.fade-out {
+  animation: fade-out 0.25s ease-out both;
+}
 body #background #app #main .no-notes-yet {
   position: absolute;
   background-color: white;
@@ -263,29 +297,82 @@ body #background #app #main #search-container {
   height: 100%;
   width: 100%;
   animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  position: relative;
 }
-body #background #app #main #search-container #search-input {
-  margin: 100px 0 20px;
-  width: 500px;
-  height: 50px;
-  border-radius: 50px;
-  padding: 0 10px;
+body #background #app #main #search-container .search-box-wrapper {
+  height: 140px;
+  width: 100%;
 }
-body #background #app #main #search-container #options-container {
+body #background #app #main #search-container .search-box-wrapper .search-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #dbdbdb;
+  height: 60px;
+  border-radius: 40px;
+  padding: 10px;
+}
+body #background #app #main #search-container .search-box-wrapper .search-box:hover .s-box {
+  width: 240px;
+  padding: 0 6px;
+}
+body #background #app #main #search-container .search-box-wrapper .search-box:hover .s-btn {
+  background: #fff;
+}
+body #background #app #main #search-container .search-box-wrapper .search-box .s-btn {
+  color: black;
+  float: right;
+  width: 40px;
+  height: 40px;
+  transition: 0.4s;
+  border-radius: 50%;
+  background: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #background #app #main #search-container .search-box-wrapper .search-box .s-btn i {
+  font-size: 20px;
+}
+body #background #app #main #search-container .search-box-wrapper .search-box .s-box {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: black;
+  font-size: 16px;
+  transition: 0.5s;
+  line-height: 40px;
+  width: 0px;
+}
+body #background #app #main #search-container #option-container-wrapper {
+  height: 300px;
+  overflow: hidden;
+}
+body #background #app #main #search-container #option-container-wrapper #options-container {
+  overflow: auto;
   border: black solid 1px;
-  max-height: 400px;
-  overflow-y: scroll;
-  padding: 0 5px;
+  max-height: 300px;
+  width: 450px;
+  border-radius: 10px;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-body #background #app #main #search-container #options-container .option {
+body #background #app #main #search-container #option-container-wrapper #options-container .option {
   border-bottom: #9b9b9b solid 1px;
   display: flex;
   align-items: center;
-  padding: 8px 5px;
-  max-width: 470px;
+  padding: 8px 8px;
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: pointer;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #search-container #option-container-wrapper #options-container .option:hover {
+  background-color: #d8d8d8;
 }
 
 @keyframes slide-in-top {
@@ -323,6 +410,18 @@ body #background #app #main #search-container #options-container .option {
   }
   100% {
     transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-ver-top {
+  0% {
+    transform: scaleY(0);
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
     opacity: 1;
   }
 }

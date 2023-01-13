@@ -5,11 +5,9 @@ import Main from "./components/main";
 
 function App() {
   let data = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
-  // let keysData = JSON.parse(window.localStorage.getItem('KEYS_DATA'))
   let incrementData = JSON.parse(window.localStorage.getItem('INCREMENT_DATA'))
 
   // data = []
-  // keysData = ['1234y6']
   // incrementData = 0
 
   //STATE AND REF
@@ -18,7 +16,6 @@ function App() {
   const [displaydNote, setDisplaydNote] = useState({});
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(incrementData ? incrementData : 0)
-  // const [keysArr, setKeysArr] = useState(keysData ? keysData : ['1234y6'])
   const noNotesHidden = useRef();
   const notesListRef = useRef();
   const textAreaRef = useRef()
@@ -26,7 +23,6 @@ function App() {
   //FUNCTIONS -----------------------------------
   function createNewNote() {
     const newNote = {
-      // id: keysArr[incrememt],
       id: getRandomString(),
       // id: Date.now(), //This would also work
       text: "",
@@ -65,10 +61,6 @@ function App() {
     return new Date(Date.now()).toLocaleString()
   }
 
-  useEffect(() => {
-    console.log(timeStamp());
-  }, []);
-
   function handleOnSave(event) {
     event.preventDefault();
     setMode("showNotesMode")
@@ -93,6 +85,9 @@ function App() {
     setMode('searchMode')
   }
 
+  //HOOKS
+  //----------------------
+
   useEffect(() => {
     setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
     mode === 'writeNoteMode' && textAreaRef.current.focus()
@@ -106,21 +101,15 @@ function App() {
     if (notes.length === 0 && mode != 'searchMode') {
       setMode('noNotesMode')
       setIncrememt(0)
-      // setKeysArr(['1234y6'])
     }
   }, [notes]);
 
   useEffect(() => {
     window.localStorage.setItem('INCREMENT_DATA', JSON.stringify(incrememt))
     setDisplaydNote(notes[notes.length - 1])
-    // mode != undefined && setKeysArr([...keysArr, getRandomString()])
 
     mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
   }, [incrememt]);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem('KEYS_DATA', JSON.stringify(keysArr))
-  // }, [keysArr]);
 
   useEffect(() => {
     mode != 'writeNoteMode' && setDisplaydNote({})

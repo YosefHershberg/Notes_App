@@ -4,7 +4,7 @@ function SearchOption(props) {
 
     return (
         <React.Fragment>
-            <div className="option" id={props.option.id} onClick={props.onEdit}>
+            <div className="option" id={props.option.id} onClick={() => props.onEdit(props.option.id)}>
                 {props.option.text}
             </div>
         </React.Fragment>

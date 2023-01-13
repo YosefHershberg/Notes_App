@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SearchOption from './search-option';
+import { AiOutlineSearch } from 'react-icons/ai'
 
 function Search(props) {
     const [options, setOptions] = useState([])
@@ -36,19 +37,38 @@ function Search(props) {
         <React.Fragment>
             <div id="search-container">
                 <div id="serach-form">
-                    <input ref={inputArea} id='search-input' type="text" placeholder=' Serach notes ...' onChange={handleSearchEngine} />
+                    <div className="search-box-wrapper">
+                        <div className="search-box">
+                            <input
+                                className="s-box"
+                                type="text"
+                                name="search"
+                                ref={inputArea}
+                                placeholder=' Serach notes ...'
+                                onChange={handleSearchEngine} >
+                            </input>
+                            <a className="s-btn" href="">
+                                <i className="fab fa-searchengin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {/* <input ref={inputArea} id='search-input' type="text" placeholder=' Serach notes ...' onChange={handleSearchEngine} /> */}
                     {/* <button id='search-btn'>Search</button> */}
-                    {options.length > 0 && <div id="options-container">
-                        {options.map(option =>
-                            <SearchOption
-                                key={option.id}
-                                option={option}
-                                onEdit={onEdit}
-                            />)}
-                    </div>}
+                    <div id="option-container-wrapper">
+                        {options.length > 0 && <div id="options-container">
+                            {options.map(option =>
+                                <SearchOption
+                                    key={option.id}
+                                    option={option}
+                                    onEdit={onEdit}
+                                />)}
+                        </div>}
+                    </div>
                 </div>
+
+
             </div>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 

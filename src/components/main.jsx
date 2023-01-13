@@ -7,6 +7,14 @@ import Search from './search';
 function Main(props) {
     const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef } = props;
 
+    function handleDeleteAndFade(note, element) {
+        element.classList.add('fade-out')
+
+        setTimeout(() => {
+            onDelete(note.id)
+        }, 250);
+    }
+
     return (
         <React.Fragment>
             <div id="main">
@@ -18,7 +26,7 @@ function Main(props) {
                         onChange={onChange}
                         onSave={onSave}
                         onEdit={onEdit}
-                        onDelete={onDelete}
+                        onDelete={handleDeleteAndFade}
                         incrememt={incrememt}
                         notesListRef={notesListRef}
                         textAreaRef={textAreaRef}
@@ -26,7 +34,7 @@ function Main(props) {
                 }
                 {mode === 'showNotesMode' &&
                     <GridOfNotes
-                        onDelete={onDelete}
+                        onDelete={handleDeleteAndFade}
                         notes={notes}
                         onEdit={onEdit}
                     />

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NoteBox from './note-box';
 
 function GridOfNotes(props) {
     const { onDelete, onEdit, notes } = props
-
 
     return (
         <React.Fragment>

@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import { CiSaveDown2 } from 'react-icons/ci'
+import React, { useEffect, useState, useRef } from 'react';
+import { BsSave } from 'react-icons/bs'
 
 function NoteTextArea(props) {
 
     const { onSave, onChange, newNote, displaydNote, mode, textAreaRef } = props;
 
-    const lastModifiedConst = useRef(newNote.lastModified)
+    const [lastModifiedState, setLastModifiedState] = useState()
 
     useEffect(() => {
-        console.log(newNote.lastModified);
-    }, []);
-
+        setLastModifiedState(newNote.lastModified)
+    }, [displaydNote.id]);
 
     return (
         <React.Fragment>
@@ -18,9 +17,9 @@ function NoteTextArea(props) {
                 <div id="form-datails-container">
                     <div id="last-modified-container">
                         <i id='last-modified-title'>Last Modified:</i>
-                        <p id='last-modified-details'>{lastModifiedConst.current}</p>
+                        <p id='last-modified-details'>{lastModifiedState}</p>
                     </div>
-                    <button type="submit">Save </button>
+                    <button type="submit">Save <BsSave /></button>
                 </div>
 
                 <textarea ref={textAreaRef} value={newNote.text} onChange={onChange} rows="20" cols="100" placeholder='Write Something...'/>
