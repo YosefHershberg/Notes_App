@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Styles from '../scss/styles.module.scss'
 import { BsSave } from 'react-icons/bs'
 
 function NoteTextArea(props) {
@@ -13,11 +14,11 @@ function NoteTextArea(props) {
 
     return (
         <React.Fragment>
-            <form onSubmit={onSave} id="form-container">
-                <div id="form-datails-container">
-                    <div id="last-modified-container">
-                        <i id='last-modified-title'>Last Modified:</i>
-                        <p id='last-modified-details'>{lastModifiedState}</p>
+            <form onSubmit={onSave} id={Styles.formContainer}>
+                <div id={Styles.formDatailsContainer}>
+                    <div id={Styles.lastModifiedContainer}>
+                        <i id={Styles.lastModifiedTitle}>Last Modified:</i>
+                        <p id={Styles.lastModifiedDetails}>{lastModifiedState}</p>
                     </div>
                     <button type="submit">Save <BsSave /></button>
                 </div>

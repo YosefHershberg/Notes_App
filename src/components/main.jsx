@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Styles from "../scss/styles.module.scss"
 import WorkSpace from './work-space';
 import GridOfNotes from './grid-of-notes';
 import NoNotesYet from './no-notses-yet';
@@ -17,7 +18,7 @@ function Main(props) {
 
     return (
         <React.Fragment>
-            <div id="main">
+            <div id={Styles.main}>
                 {mode === 'writeNoteMode' &&
                     <WorkSpace
                         mode={mode}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Styles from '../scss/styles.module.scss'
 import NoteTextArea from './note-text-area'
 import NotesList from './notes-list';
 
@@ -12,7 +13,7 @@ function WorkSpace(props) {
 
     return (
         <React.Fragment>
-            <div id="work-space">
+            <div id={Styles.workSpace}>
                 <NotesList
                     notes={notes}
                     onEdit={onEdit}

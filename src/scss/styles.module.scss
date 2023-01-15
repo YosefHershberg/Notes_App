@@ -1,18 +1,7 @@
-:root {
-    --primary-color: #00bcd4;
-    --accent-color: #f50057;
-
-    --text-color: #263238;
-    --body-color: #80deea;
-    --main-font: 'roboto';
-    --font-bold: 700;
-    --font-regular: 400;
-}
+@import './variables.scss';
 
 * {
     box-sizing: border-box;
-    scrollbar-width: thin;
-    scrollbar-color: blue orange;
 }
 
 *::-webkit-scrollbar {
@@ -42,12 +31,12 @@ body {
         align-items: center;
         background-color: gray;
 
-
         #app {
             width: 80%;
             height: 80%;
-            background-color: white;
             border-radius: 10px;
+            background-color: var(--backgroundColor);
+            // background-color: rgb(100, 100, 100);
 
             #navbar {
                 width: 100%;
@@ -56,38 +45,103 @@ body {
                 padding: 0 30px;
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
+                background-color: var(--navbarBackgroundColor);
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
 
-                #logo {
-                    color: black;
-                    text-decoration: none;
-                    margin-right: 10px;
+                .leftContainer {
+                    display: flex;
+                    align-items: center;
+
+                    #logo {
+                        color: var(--textColor);
+                        text-decoration: none;
+                        margin-right: 10px;
+                    }
+
+                    .navBtn {
+                        border: none;
+                        background-color: transparent;
+                        margin: 0 10px;
+                        height: 30px;
+                        display: inline-block;
+                        position: relative;
+                        color: var(--textColor);
+                    }
+
+                    .navBtn::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        transform: scaleX(0);
+                        height: 1px;
+                        bottom: 0;
+                        left: 0;
+                        background-color: var(--textColor);
+                        transform-origin: bottom right;
+                        transition: transform 0.25s ease-out;
+                    }
+
+                    .navBtn:hover::after {
+                        transform: scaleX(1);
+                        transform-origin: bottom left;
+                    }
                 }
 
-                .nav-btn {
-                    border: none;
-                    background-color: white;
-                    margin: 0 10px;
-                    height: 30px;
-                    display: inline-block;
-                    position: relative;
-                }
+                .rightContainer {
+                    display: flex;
+                    align-items: center;
 
-                .nav-btn::after {
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    transform: scaleX(0);
-                    height: 1px;
-                    bottom: 0;
-                    left: 0;
-                    background-color: black;
-                    transform-origin: bottom right;
-                    transition: transform 0.25s ease-out;
-                }
+                    .colorModeOption {
+                        color: var(--textColor);
+                        margin: 0 7px;
+                        font-size: 14px;
+                    }
 
-                .nav-btn:hover::after {
-                    transform: scaleX(1);
-                    transform-origin: bottom left;
+                    .switch {
+                        position: relative;
+                        display: inline-block;
+                        width: 35px;
+                        height: 17px;
+
+                        input {
+                            opacity: 0;
+                            width: 0;
+                            height: 0;
+                        }
+
+                        input:checked+.slider:before {
+                            transform: translateX(15px);
+                        }
+
+                        .slider {
+                            position: absolute;
+                            cursor: pointer;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-color: white;
+                            transition: .4s;
+                            border-radius: 34px;
+                            box-shadow: 0 0 2px black;
+
+
+                            &.slider:before {
+                                border-radius: 50%;
+                                position: absolute;
+                                content: "";
+                                height: 10px;
+                                width: 10px;
+                                left: 4px;
+                                bottom: 4px;
+                                background-color: black;
+                                -webkit-transition: .4s;
+                                transition: .4s;
+                            }
+                        }
+                    }
                 }
 
             }
@@ -97,7 +151,7 @@ body {
                 height: 85%;
                 position: relative;
 
-                #work-space {
+                #workSpace {
                     position: absolute;
                     height: 100%;
                     width: 100%;
@@ -107,38 +161,42 @@ body {
                     overflow: hidden;
                     animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-                    #notes-list {
+                    #notesList {
                         width: 35%;
                         padding: 0 10px;
                         margin: 0;
                         overflow: auto;
                         // height: 100%;
 
-                        .notes-list-note.fade-out {
+                        .notesListNoteFadeOut {
+                            @extend .notesListNote;
                             animation: fade-out 0.25s ease-out both;
                         }
 
-                        .notes-list-note {
+                        .notesListNoteFadein {
+                            @extend .notesListNote;
+                            animation: slide-in-top 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                        }
+
+                        .notesListNote {
                             max-height: 140px;
                             width: 100%;
                             margin: 10px 0;
-                            background-color: rgb(239, 239, 239);
+                            background-color: var(--noteBackgroundColor);
                             cursor: pointer;
                             border-radius: 7px;
                             padding: 7px 10px;
                             display: flex;
                             flex-direction: column;
                             justify-content: space-between;
-                            // animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                            animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-                            .last-modified {
+                            .lastModified {
                                 font-size: 13px;
                                 margin: 0;
-                                color: rgb(126, 126, 126);
+                                color: var(--lastModifiedColor);
                             }
 
-                            .note-list-text {
+                            .noteListText {
                                 width: 100%;
                                 margin: 0;
                                 overflow: hidden;
@@ -150,10 +208,10 @@ body {
                                 word-wrap: break-word;
                                 /* make text wrap to the next line */
                                 font-size: 14px;
-                                color: rgb(94, 93, 93);
+                                color: var(--noteListTextColor);
                             }
 
-                            .edit-delete-icons {
+                            .editDeleteIcons {
                                 margin: 7px 0 5px;
                                 display: flex;
                                 justify-content: center;
@@ -161,22 +219,22 @@ body {
                                 button {
                                     font-size: 13px;
                                     margin: 0 7px;
-                                    background-color: rgb(209, 209, 209);
+                                    background-color: var(--noteButtonBackgroundColor);
                                     border-radius: 5px;
                                     padding: 0 7px;
                                     border: none;
                                 }
 
-                                .edit-btn:hover {
+                                .editBtn:hover {
                                     background-color: white;
                                     color: black;
                                 }
 
-                                .delete-btn {
+                                .deleteBtn {
                                     color: rgb(219, 62, 62);
                                 }
 
-                                .delete-btn:hover {
+                                .deleteBtn:hover {
                                     color: white;
                                     background-color: rgb(219, 62, 62);
                                 }
@@ -189,12 +247,12 @@ body {
                         }
                     }
 
-                    #form-container {
+                    #formContainer {
                         width: 65%;
                         height: 100%;
                         padding: 5px;
 
-                        #form-datails-container {
+                        #formDatailsContainer {
                             width: 100%;
                             height: 15%;
                             display: flex;
@@ -203,13 +261,14 @@ body {
                             padding: 0 10px;
 
 
-                            #last-modified-container {
+                            #lastModifiedContainer {
+                                color: var(--textColor);
 
-                                #last-modified-title {
+                                #lastModifiedTitle {
                                     display: inline-block;
                                 }
 
-                                #last-modified-details {
+                                #lastModifiedDetails {
                                     margin: 0;
                                 }
                             }
@@ -238,11 +297,19 @@ body {
                             padding: 10px;
                             border: none;
                             margin: 0 5px;
+                            background-color: var(--noteBackgroundColor);
+                            color: var(--textColor);
+                            cursor: var(--textAreaCurser);
+
+                            &::placeholder {
+                                color: var(--textColor);
+                                opacity: 0.5;
+                            }
                         }
                     }
                 }
 
-                #grid-of-notes {
+                #gridOfNotes {
                     display: flex;
                     justify-content: center;
                     width: 100%;
@@ -251,7 +318,7 @@ body {
                     padding: 10px 15px;
                     animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-                    .text-box-container {
+                    .textBoxContainer {
                         overflow: auto;
                         display: grid;
                         column-gap: 2%;
@@ -260,56 +327,64 @@ body {
                         // gap: 5px;
                         width: 100%;
 
-                        .text-box {
+                        .textBox {
                             height: 250px;
                             width: 100%;
                             padding: 5px 10px;
                             border-radius: 10px;
                             margin: 10px 0;
-                            background-color: rgb(239, 239, 239);
+                            background-color: var(--noteBackgroundColor);
                             cursor: pointer;
 
 
-                            .note-text {
+                            .noteText {
                                 height: 75%;
                                 inline-size: 100%;
                                 overflow-wrap: break-word;
                                 overflow: hidden;
                                 font-size: 14px;
+                                color: var(--textColor);
                             }
 
-                            .last-modified {
+                            .lastModified {
                                 font-size: 13px;
                                 margin: 0 0 3px;
-                                color: gray;
+                                color: var(--lastModifiedColor);
                                 height: 12%;
                             }
 
-                            .delete-btn-container {
+                            .deleteBtnContainer {
                                 display: flex;
                                 justify-content: center;
                                 height: 13%;
 
-                                button {
+                                .deleteBtn {
                                     border: none;
                                     border-radius: 5px;
                                     background-color: rgb(209, 209, 209);
                                     font-size: 13px;
                                     height: 25px;
                                     width: 70px;
+                                    color: rgb(219, 62, 62);
+
+                                    &:hover {
+                                        color: white;
+                                        background-color: rgb(219, 62, 62);
+                                    }
                                 }
                             }
                         }
 
-                        .text-box.fade-out {
+                        .textBoxFadeOut {
+                            @extend .textBox;
                             animation: fade-out 0.25s ease-out both;
                         }
                     }
                 }
 
-                .no-notes-yet {
+                .noNotesYet {
                     position: absolute;
-                    background-color: white;
+                    background-color: var(--backgroundColor);
                     z-index: 1;
                     display: flex;
                     justify-content: center;
@@ -318,9 +393,7 @@ body {
                     width: 100%;
                     flex-direction: column;
                     transition: transform 0.5s ease-in-out;
-                    // background-color: aqua;
                     transform: translateY(0);
-                    // border-bottom: 2px solid black;
                     border-radius: 10px;
                     animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
@@ -333,17 +406,18 @@ body {
                         width: 190px;
                         border-radius: 5px;
                         border: none;
-                        background-color: rgb(101, 164, 219);
+                        background-color: $noNotesYetButtonBackgroundColor;
                         color: white;
                         font-size: 20px;
                     }
                 }
 
-                .no-notes-yet.hidden {
+                .noNotesYetHidden {
+                    @extend .noNotesYet;
                     animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
                 }
 
-                #search-container {
+                #searchContainer {
                     display: flex;
                     justify-content: center;
                     height: 100%;
@@ -351,39 +425,44 @@ body {
                     animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
                     position: relative;
 
-                    .search-box-wrapper {
+                    .searchBoxWrapper {
                         height: 140px;
                         width: 100%;
 
-                        .search-box {
+                        .searchBox {
                             position: absolute;
                             top: 20%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            background: rgb(219, 219, 219);
+                            background-color: var(--searchBoxBackgroundColor);
                             height: 60px;
                             border-radius: 40px;
                             padding: 10px;
 
                             &:hover {
-                                .s-box {
+                                .searchInput {
                                     width: 240px;
                                     padding: 0 6px;
+
+                                    &::placeholder {
+                                        color: var(--textColor);
+                                        opacity: 0.5;
+                                    }
                                 }
 
-                                .s-btn {
-                                    background: #fff;
+                                .searchBtn {
+                                    background: var(--searchBoxBackgroundColor);
                                 }
                             }
 
-                            .s-btn {
-                                color: black;
+                            .searchBtn {
+                                color: var(--textColor);
                                 float: right;
                                 width: 40px;
                                 height: 40px;
                                 transition: 0.4s;
                                 border-radius: 50%;
-                                background: rgb(219, 219, 219);
+                                background: var(--searchBoxBackgroundColor);
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -393,13 +472,13 @@ body {
                                 }
                             }
 
-                            .s-box {
+                            .searchInput {
                                 border: none;
                                 background: none;
                                 outline: none;
                                 float: left;
                                 padding: 0;
-                                color: black;
+                                color: var(--textColor);
                                 font-size: 16px;
                                 transition: 0.5s;
                                 line-height: 40px;
@@ -408,20 +487,21 @@ body {
                         }
                     }
 
-                    #option-container-wrapper {
+                    #optionContainerWrapper {
                         height: 300px;
                         overflow: hidden;
 
-                        #options-container {
+                        #optionsContainer {
                             overflow: auto;
-                            border: black solid 1px;
+                            border: var(--textColor) solid 1px;
                             max-height: 300px;
                             width: 450px;
                             border-radius: 10px;
                             animation: scale-in-ver-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                            background-color: var(--noteBackgroundColor);
 
                             .option {
-                                border-bottom: rgb(155, 155, 155) solid 1px;
+                                border-bottom: var(--noteListTextColor) solid 1px;
                                 display: flex;
                                 align-items: center;
                                 padding: 8px 8px;
@@ -431,10 +511,10 @@ body {
                                 text-overflow: ellipsis;
                                 cursor: pointer;
                                 animation: scale-in-ver-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
+                                color: var(--textColor);
 
                                 &:hover {
-                                    background-color: rgb(216, 216, 216);
+                                    background-color: var(--backgroundColor);
                                 }
                             }
                         }
@@ -443,8 +523,6 @@ body {
             }
         }
     }
-
-
 }
 
 

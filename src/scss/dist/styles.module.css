@@ -1,0 +1,495 @@
+* {
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #e3e3e3;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b2b2b2;
+  border-radius: 20px;
+  border: 2px solid #d5d5d5;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body #background {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+}
+body #background #app {
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  background-color: var(--backgroundColor);
+}
+body #background #app #navbar {
+  width: 100%;
+  height: 15%;
+  box-shadow: 0 4px 6px -6px #222;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--navbarBackgroundColor);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+body #background #app #navbar .leftContainer {
+  display: flex;
+  align-items: center;
+}
+body #background #app #navbar .leftContainer #logo {
+  color: var(--textColor);
+  text-decoration: none;
+  margin-right: 10px;
+}
+body #background #app #navbar .leftContainer .navBtn {
+  border: none;
+  background-color: transparent;
+  margin: 0 10px;
+  height: 30px;
+  display: inline-block;
+  position: relative;
+  color: var(--textColor);
+}
+body #background #app #navbar .leftContainer .navBtn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--textColor);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+body #background #app #navbar .leftContainer .navBtn:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+body #background #app #navbar .rightContainer {
+  display: flex;
+  align-items: center;
+}
+body #background #app #navbar .rightContainer .colorModeOption {
+  color: var(--textColor);
+  margin: 0 7px;
+  font-size: 14px;
+}
+body #background #app #navbar .rightContainer .switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 17px;
+}
+body #background #app #navbar .rightContainer .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+body #background #app #navbar .rightContainer .switch input:checked + .slider:before {
+  transform: translateX(15px);
+}
+body #background #app #navbar .rightContainer .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 34px;
+  box-shadow: 0 0 2px black;
+}
+body #background #app #navbar .rightContainer .switch .slider.slider:before {
+  border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 4px;
+  bottom: 4px;
+  background-color: black;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+body #background #app #main {
+  width: 100%;
+  height: 85%;
+  position: relative;
+}
+body #background #app #main #workSpace {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  overflow: hidden;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #workSpace #notesList {
+  width: 35%;
+  padding: 0 10px;
+  margin: 0;
+  overflow: auto;
+}
+body #background #app #main #workSpace #notesList .notesListNoteFadeOut {
+  animation: fade-out 0.25s ease-out both;
+}
+body #background #app #main #workSpace #notesList .notesListNoteFadein {
+  animation: slide-in-top 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #workSpace #notesList .notesListNote, body #background #app #main #workSpace #notesList .notesListNoteFadeOut, body #background #app #main #workSpace #notesList .notesListNoteFadein {
+  max-height: 140px;
+  width: 100%;
+  margin: 10px 0;
+  background-color: var(--noteBackgroundColor);
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 7px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body #background #app #main #workSpace #notesList .notesListNote .lastModified, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .lastModified, body #background #app #main #workSpace #notesList .notesListNoteFadein .lastModified {
+  font-size: 13px;
+  margin: 0;
+  color: var(--lastModifiedColor);
+}
+body #background #app #main #workSpace #notesList .notesListNote .noteListText, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .noteListText, body #background #app #main #workSpace #notesList .notesListNoteFadein .noteListText {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* hide text after 3 lines */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  /* make text wrap to the next line */
+  font-size: 14px;
+  color: var(--noteListTextColor);
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons {
+  margin: 7px 0 5px;
+  display: flex;
+  justify-content: center;
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons button, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons button, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons button {
+  font-size: 13px;
+  margin: 0 7px;
+  background-color: var(--noteButtonBackgroundColor);
+  border-radius: 5px;
+  padding: 0 7px;
+  border: none;
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons .editBtn:hover, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons .editBtn:hover, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons .editBtn:hover {
+  background-color: white;
+  color: black;
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons .deleteBtn, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons .deleteBtn, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons .deleteBtn {
+  color: #db3e3e;
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons .deleteBtn:hover, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons .deleteBtn:hover, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons .deleteBtn:hover {
+  color: white;
+  background-color: #db3e3e;
+}
+body #background #app #main #workSpace #notesList .notesListNote .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesList .notesListNoteFadeOut .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesList .notesListNoteFadein .editDeleteIcons .fa-solid {
+  margin: 0 3px;
+}
+body #background #app #main #workSpace #formContainer {
+  width: 65%;
+  height: 100%;
+  padding: 5px;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer {
+  color: var(--textColor);
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer #lastModifiedTitle {
+  display: inline-block;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer #lastModifiedDetails {
+  margin: 0;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer button {
+  height: 40px;
+  width: 80px;
+  border-radius: 50px;
+  border: none;
+  background-color: #7abbd2;
+  color: white;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer button:hover {
+  color: #7abbd2;
+  background-color: #e2eff4;
+  border: 2px solid #7abbd2;
+}
+body #background #app #main #workSpace #formContainer textarea {
+  width: 100%;
+  height: 85%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  margin: 0 5px;
+  background-color: var(--noteBackgroundColor);
+  color: var(--textColor);
+  cursor: var(--textAreaCurser);
+}
+body #background #app #main #workSpace #formContainer textarea::placeholder {
+  color: var(--textColor);
+  opacity: 0.5;
+}
+body #background #app #main #gridOfNotes {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 15px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #gridOfNotes .textBoxContainer {
+  overflow: auto;
+  display: grid;
+  column-gap: 2%;
+  grid-template-columns: 18% 18% 18% 18% 18%;
+  flex-wrap: wrap;
+  width: 100%;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut {
+  height: 250px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  background-color: var(--noteBackgroundColor);
+  cursor: pointer;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox .noteText, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut .noteText {
+  height: 75%;
+  inline-size: 100%;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--textColor);
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox .lastModified, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut .lastModified {
+  font-size: 13px;
+  margin: 0 0 3px;
+  color: var(--lastModifiedColor);
+  height: 12%;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer {
+  display: flex;
+  justify-content: center;
+  height: 13%;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn {
+  border: none;
+  border-radius: 5px;
+  background-color: #d1d1d1;
+  font-size: 13px;
+  height: 25px;
+  width: 70px;
+  color: #db3e3e;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn:hover, body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn:hover {
+  color: white;
+  background-color: #db3e3e;
+}
+body #background #app #main #gridOfNotes .textBoxContainer .textBoxFadeOut {
+  animation: fade-out 0.25s ease-out both;
+}
+body #background #app #main .noNotesYet, body #background #app #main .noNotesYetHidden {
+  position: absolute;
+  background-color: var(--backgroundColor);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(0);
+  border-radius: 10px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main .noNotesYet h1, body #background #app #main .noNotesYetHidden h1 {
+  margin-bottom: 20px;
+}
+body #background #app #main .noNotesYet button, body #background #app #main .noNotesYetHidden button {
+  height: 50px;
+  width: 190px;
+  border-radius: 5px;
+  border: none;
+  background-color: #65a4db;
+  color: white;
+  font-size: 20px;
+}
+body #background #app #main .noNotesYetHidden {
+  animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+body #background #app #main #searchContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  position: relative;
+}
+body #background #app #main #searchContainer .searchBoxWrapper {
+  height: 140px;
+  width: 100%;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--searchBoxBackgroundColor);
+  height: 60px;
+  border-radius: 40px;
+  padding: 10px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchInput {
+  width: 240px;
+  padding: 0 6px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchInput::placeholder {
+  color: var(--textColor);
+  opacity: 0.5;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchBtn {
+  background: var(--searchBoxBackgroundColor);
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchBtn {
+  color: var(--textColor);
+  float: right;
+  width: 40px;
+  height: 40px;
+  transition: 0.4s;
+  border-radius: 50%;
+  background: var(--searchBoxBackgroundColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchBtn i {
+  font-size: 20px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: var(--textColor);
+  font-size: 16px;
+  transition: 0.5s;
+  line-height: 40px;
+  width: 0px;
+}
+body #background #app #main #searchContainer #optionContainerWrapper {
+  height: 300px;
+  overflow: hidden;
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer {
+  overflow: auto;
+  border: var(--textColor) solid 1px;
+  max-height: 300px;
+  width: 450px;
+  border-radius: 10px;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: var(--noteBackgroundColor);
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer .option {
+  border-bottom: var(--noteListTextColor) solid 1px;
+  display: flex;
+  align-items: center;
+  padding: 8px 8px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  color: var(--textColor);
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer .option:hover {
+  background-color: var(--backgroundColor);
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-ver-top {
+  0% {
+    transform: scaleY(0);
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}

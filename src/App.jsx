@@ -1,21 +1,51 @@
-import "./scss/style.css";
+import Styles from "./scss/styles.module.scss"
 import React, { useState, useEffect, useRef } from "react";
 import NavBar from "./components/nav-bar";
 import Main from "./components/main";
 
 function App() {
-  let data = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
+  let notesData = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
   let incrementData = JSON.parse(window.localStorage.getItem('INCREMENT_DATA'))
+  let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
 
   // data = []
   // incrementData = 0
+  // colorModeData = true
 
   //STATE AND REF
   //--------------------------------------------
-  const [notes, setNotes] = useState(data ? data : []);
+  const [notes, setNotes] = useState(notesData ? notesData : []);
   const [displaydNote, setDisplaydNote] = useState({});
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(incrementData ? incrementData : 0)
+  const [lightColorMode, setLightColorMode] = useState(colorModeData)
+  const [colors, setColors] = useState({
+    lightModeColors: {
+      '--textColor': 'black',
+      '--backgroundColor': 'white',
+      '--navbarBackgroundColor': 'white',
+      '--noteBackgroundColor': 'rgb(239, 239, 239)',
+      '--lastModifiedColor': 'rgb(126, 126, 126)',
+      '--noteListTextColor': 'rgb(94, 93, 93)',
+      '--noteButtonBackgroundColor': 'rgb(209, 209, 209)',
+      '--noNotesYetButtonBackgroundColor': 'rgb(101, 164, 219)',
+      '--searchBoxBackgroundColor': 'rgb(219, 219, 219)',
+      '--textAreaCurser': 'auto',
+    },
+    darkModeColors: {
+      '--textColor': 'white',
+      '--backgroundColor': '#525252',
+      '--navbarBackgroundColor': '#414141',
+      '--noteBackgroundColor': 'rgb(125, 125, 125)',
+      '--lastModifiedColor': 'rgb(200, 200, 200)',
+      '--noteListTextColor': 'rgb(230, 230, 230)',
+      '--noteButtonBackgroundColor': 'rgb(209, 209, 209)',
+      '--noNotesYetButtonBackgroundColor': 'rgb(101, 164, 219)',
+      '--searchBoxBackgroundColor': 'rgb(100, 100, 100)',
+      // '--textAreaCurser': './assets/WhiteTextSelect.cur', // Why isnt this working 
+    }
+  })
+
   const noNotesHidden = useRef();
   const notesListRef = useRef();
   const textAreaRef = useRef()
@@ -33,7 +63,6 @@ function App() {
     setIncrememt(prev => prev + 1)
 
     if (mode === 'noNotesMode') {
-      noNotesHidden.current.classList.add('hidden')
       setTimeout(() => setMode('writeNoteMode'), 500);
     } else {
       setMode('writeNoteMode')
@@ -85,6 +114,10 @@ function App() {
     setMode('searchMode')
   }
 
+  function handleChangeColorMode() {
+    setLightColorMode(prev => !prev)
+  }
+
   //HOOKS
   //----------------------
 
@@ -115,11 +148,20 @@ function App() {
     mode != 'writeNoteMode' && setDisplaydNote({})
   }, [mode]);
 
+  useEffect(() => {
+    window.localStorage.setItem('COLOR_MODE_DATA', JSON.stringify(lightColorMode))
+  }, [lightColorMode]);
+
   return (
     <React.Fragment>
-      <div id="background">
-        <div id="app">
-          <NavBar onNewNote={createNewNote} onShowNotes={handleShowNotes} onSearch={handleSearch} />
+      <div id={Styles.background}>
+        <div id={Styles.app} style={lightColorMode? colors.lightModeColors : colors.darkModeColors}>
+          <NavBar
+            onNewNote={createNewNote}
+            onShowNotes={handleShowNotes}
+            onSearch={handleSearch}
+            onChangeColorMode={handleChangeColorMode}
+          />
           <Main
             mode={mode}
             displaydNote={displaydNote}

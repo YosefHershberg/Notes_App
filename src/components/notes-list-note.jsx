@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Styles from '../scss/styles.module.scss'
 
 
 function NotesListNote(props) {
     const { note, onEdit, onDelete } = props;
+    const [notesListNoteClassName, setNotesListNoteClassName]  = useState(Styles.notesListNoteFadein)
     const noteListNoteRef = useRef()
+
+    function handleDeleteBtnClicked() {
+        setNotesListNoteClassName(Styles.notesListNoteFadeOut)
+        onDelete(note, noteListNoteRef.current);
+    }
 
     return (
         <React.Fragment>
-            <li ref={noteListNoteRef} className='notes-list-note'>
-                <div className="last-modified"><i>{note.lastModified}</i></div>
+            <li ref={noteListNoteRef} className={notesListNoteClassName}>
+                <div className={Styles.lastModified}><i>{note.lastModified}</i></div>
 
-                <p className='note-list-text' onClick={() => onEdit(note.id)}>{note.text}</p>
+                <p className={Styles.noteListText} onClick={() => onEdit(note.id)}>{note.text}</p>
 
-                <div className="edit-delete-icons">
-                    <button className='edit-btn' onClick={() => onEdit(note.id)}>Edit<i className="fa-solid fa-pen-to-square"></i></button>
-                    <button className='delete-btn' onClick={() => onDelete(note, noteListNoteRef.current)} >Delete<i className="fa-solid fa-trash"></i></button>
+                <div className={Styles.editDeleteIcons}>
+                    <button className={Styles.editBtn} onClick={() => onEdit(note.id)}>Edit<i className="fa-solid fa-pen-to-square"></i></button>
+                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked} >Delete<i className="fa-solid fa-trash"></i></button>
                 </div>
             </li>
         </React.Fragment>
