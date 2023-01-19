@@ -8,7 +8,7 @@ function App() {
   let incrementData = JSON.parse(window.localStorage.getItem('INCREMENT_DATA'))
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
 
-  // data = []
+  // notesData = []
   // incrementData = 0
   // colorModeData = true
 
@@ -19,6 +19,7 @@ function App() {
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(incrementData ? incrementData : 0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
+  const [displaydFolder, setDisplaydFolder] = useState('All Notes')
   const [colors, setColors] = useState({
     lightModeColors: {
       '--textColor': 'black',
@@ -46,7 +47,6 @@ function App() {
     }
   })
 
-  const noNotesHidden = useRef();
   const notesListRef = useRef();
   const textAreaRef = useRef()
 
@@ -56,7 +56,8 @@ function App() {
       id: getRandomString(),
       // id: Date.now(), //This would also work
       text: "",
-      lastModified: timeStamp()
+      lastModified: timeStamp(),
+      folder: displaydFolder,
     };
 
     setNotes([...notes, newNote]);
@@ -82,7 +83,8 @@ function App() {
     setDisplaydNote({
       id: displaydNote.id,
       text: event.target.value,
-      lastModified: timeStamp()
+      lastModified: timeStamp(),
+      folder: displaydNote.folder
     });
   }
 
@@ -118,12 +120,22 @@ function App() {
     setLightColorMode(prev => !prev)
   }
 
+  function handleChangeFolder(folderName) {
+    console.log(folderName);
+    setDisplaydFolder(folderName)
+  }
+
   //HOOKS
   //----------------------
 
   useEffect(() => {
     setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
     mode === 'writeNoteMode' && textAreaRef.current.focus()
+
+    if (notes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
+      //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
+      mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
+    }
   }, [displaydNote]);
 
   useEffect(() => {
@@ -141,7 +153,6 @@ function App() {
     window.localStorage.setItem('INCREMENT_DATA', JSON.stringify(incrememt))
     setDisplaydNote(notes[notes.length - 1])
 
-    mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
   }, [incrememt]);
 
   useEffect(() => {
@@ -155,12 +166,13 @@ function App() {
   return (
     <React.Fragment>
       <div id={Styles.background}>
-        <div id={Styles.app} style={lightColorMode? colors.lightModeColors : colors.darkModeColors}>
+        <div id={Styles.app} style={lightColorMode ? colors.lightModeColors : colors.darkModeColors}>
           <NavBar
             onNewNote={createNewNote}
             onShowNotes={handleShowNotes}
             onSearch={handleSearch}
             onChangeColorMode={handleChangeColorMode}
+            lightColorMode={lightColorMode}
           />
           <Main
             mode={mode}
@@ -172,9 +184,10 @@ function App() {
             onEdit={handleOnEdit}
             onNewNote={createNewNote}
             incrememt={incrememt}
-            noNotesHidden={noNotesHidden}
             notesListRef={notesListRef}
             textAreaRef={textAreaRef}
+            displaydFolder={displaydFolder}
+            onChangeFolder={handleChangeFolder}
           />
         </div>
       </div>

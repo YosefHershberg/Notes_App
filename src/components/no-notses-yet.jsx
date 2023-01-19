@@ -11,8 +11,8 @@ function NoNotesYet(props) {
 
     return (
         <React.Fragment>
-            <div ref={props.noNotesHidden} className={noNotesclassName}>
-                <h1>You have no notes...</h1>
+            <div  className={noNotesclassName}>
+                <h1 id={Styles.noNotesHeader}>You have no notes...</h1>
                 <button onClick={handleBtnClicked} id='init-note-btn'>Create new note !</button>
             </div>
         </React.Fragment>

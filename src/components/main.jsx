@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Styles from "../scss/styles.module.scss"
 import WorkSpace from './work-space';
-import GridOfNotes from './grid-of-notes';
+import MyNotes from './my-notes';
 import NoNotesYet from './no-notses-yet';
 import Search from './search';
 
 function Main(props) {
-    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef } = props;
+    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, noNotesHidden, displaydFolder, onChangeFolder } = props;
+    const [displaydNotes, setDisplaydNotes] = useState([])
 
     function handleDeleteAndFade(note, element) {
         element.classList.add('fade-out')
@@ -15,6 +16,14 @@ function Main(props) {
             onDelete(note.id)
         }, 250);
     }
+
+    useEffect(() => {
+        let tempDisplaydNotes = [];
+        tempDisplaydNotes = (displaydFolder != 'All Notes' ?
+            notes.filter(note => note.folder === displaydFolder)
+            : notes)
+        setDisplaydNotes(tempDisplaydNotes)
+    }, [displaydFolder, notes]);
 
     return (
         <React.Fragment>
@@ -31,20 +40,25 @@ function Main(props) {
                         incrememt={incrememt}
                         notesListRef={notesListRef}
                         textAreaRef={textAreaRef}
+                        displaydFolder={displaydFolder}
+                        displaydNotes={displaydNotes}
+                        onChangeFolder={onChangeFolder}
                     />
                 }
                 {mode === 'showNotesMode' &&
-                    <GridOfNotes
+                    <MyNotes
                         onDelete={handleDeleteAndFade}
                         notes={notes}
                         onEdit={onEdit}
+                        displaydFolder={displaydFolder}
+                        onChangeFolder={onChangeFolder}
+                        displaydNotes={displaydNotes}
+                        onNewNote={onNewNote}
                     />
                 }
                 {mode === 'noNotesMode' &&
                     <NoNotesYet
                         onNewNote={onNewNote}
-                        onEdit={onEdit}
-                        noNotesHidden={props.noNotesHidden}
                     />
                 }
                 {mode === 'noNotesMode' &&
@@ -56,6 +70,7 @@ function Main(props) {
                         onEdit={onEdit}
                         onDelete={onDelete}
                         incrememt={incrememt}
+                        displaydFolder={displaydFolder}
                     />
                 }
                 {mode === 'searchMode' &&

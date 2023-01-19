@@ -1,11 +1,11 @@
 import React from 'react';
 import Styles from "../scss/styles.module.scss"
-import { GrNotes } from 'react-icons/gr'
+import { BiNotepad } from 'react-icons/bi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BiNote } from 'react-icons/bi'
 
 function NavBar(props) {
-    const { onNewNote, onShowNotes, onSearch } = props
+    const { onNewNote, onShowNotes, onSearch, lightColorMode } = props
 
     return (
         <React.Fragment>
@@ -15,7 +15,7 @@ function NavBar(props) {
                         <h3 id='brand-name' >My Notes App</h3>
                     </a>
                     <button id='new-note-btn' className={Styles.navBtn} onClick={onNewNote}>Create New Note <BiNote /></button>
-                    <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes  <GrNotes /></button>
+                    <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes  <BiNotepad /></button>
                     <button id='search-btn' className={Styles.navBtn} onClick={onSearch}>Search <AiOutlineSearch /></button>
                 </div>
 
@@ -25,7 +25,7 @@ function NavBar(props) {
                         // style={{ opacity: !props.darkMode && 0.5 }}
                         >light</span>
                         <label className={Styles.switch}>
-                            <input type="checkbox" onChange={props.onChangeColorMode} />
+                            <input type="checkbox" checked={!lightColorMode} onChange={props.onChangeColorMode} />
                             <span className={`${Styles.slider} ${Styles.round}`}></span>
                         </label>
                         <span className={Styles.colorModeOption}

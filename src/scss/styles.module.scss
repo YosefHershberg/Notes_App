@@ -161,87 +161,97 @@ body {
                     overflow: hidden;
                     animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-                    #notesList {
+                    #notesListWrapper {
                         width: 35%;
-                        padding: 0 10px;
-                        margin: 0;
-                        overflow: auto;
-                        // height: 100%;
-
-                        .notesListNoteFadeOut {
-                            @extend .notesListNote;
-                            animation: fade-out 0.25s ease-out both;
+                        
+                        #FolderName {
+                            padding: 0 10px;
+                            color: var(--textColor);
+                            height: 7%;
                         }
 
-                        .notesListNoteFadein {
-                            @extend .notesListNote;
-                            animation: slide-in-top 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        }
-
-                        .notesListNote {
-                            max-height: 140px;
+                        #notesList {
                             width: 100%;
-                            margin: 10px 0;
-                            background-color: var(--noteBackgroundColor);
-                            cursor: pointer;
-                            border-radius: 7px;
-                            padding: 7px 10px;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-
-                            .lastModified {
-                                font-size: 13px;
-                                margin: 0;
-                                color: var(--lastModifiedColor);
+                            padding: 0 10px;
+                            margin: 0;
+                            overflow: auto;
+                            height: 91%;
+    
+                            .notesListNoteFadeOut {
+                                @extend .notesListNote;
+                                animation: fade-out 0.25s ease-out both;
                             }
-
-                            .noteListText {
+    
+                            .notesListNoteFadein {
+                                @extend .notesListNote;
+                                animation: slide-in-top 0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                            }
+    
+                            .notesListNote {
+                                max-height: 140px;
                                 width: 100%;
-                                margin: 0;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                display: -webkit-box;
-                                -webkit-line-clamp: 3;
-                                /* hide text after 3 lines */
-                                -webkit-box-orient: vertical;
-                                word-wrap: break-word;
-                                /* make text wrap to the next line */
-                                font-size: 14px;
-                                color: var(--noteListTextColor);
-                            }
-
-                            .editDeleteIcons {
-                                margin: 7px 0 5px;
+                                margin-bottom: 10px;
+                                background-color: var(--noteBackgroundColor);
+                                cursor: pointer;
+                                border-radius: 7px;
+                                padding: 7px 10px;
                                 display: flex;
-                                justify-content: center;
-
-                                button {
+                                flex-direction: column;
+                                justify-content: space-between;
+    
+                                .lastModified {
                                     font-size: 13px;
-                                    margin: 0 7px;
-                                    background-color: var(--noteButtonBackgroundColor);
-                                    border-radius: 5px;
-                                    padding: 0 7px;
-                                    border: none;
+                                    margin: 0;
+                                    color: var(--lastModifiedColor);
                                 }
-
-                                .editBtn:hover {
-                                    background-color: white;
-                                    color: black;
+    
+                                .noteListText {
+                                    width: 100%;
+                                    margin: 0;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 3;
+                                    /* hide text after 3 lines */
+                                    -webkit-box-orient: vertical;
+                                    word-wrap: break-word;
+                                    /* make text wrap to the next line */
+                                    font-size: 14px;
+                                    color: var(--noteListTextColor);
                                 }
-
-                                .deleteBtn {
-                                    color: rgb(219, 62, 62);
-                                }
-
-                                .deleteBtn:hover {
-                                    color: white;
-                                    background-color: rgb(219, 62, 62);
-                                }
-
-
-                                .fa-solid {
-                                    margin: 0 3px;
+    
+                                .editDeleteIcons {
+                                    margin: 7px 0 5px;
+                                    display: flex;
+                                    justify-content: center;
+    
+                                    button {
+                                        font-size: 13px;
+                                        margin: 0 7px;
+                                        background-color: var(--noteButtonBackgroundColor);
+                                        border-radius: 5px;
+                                        padding: 0 7px;
+                                        border: none;
+                                    }
+    
+                                    .editBtn:hover {
+                                        background-color: white;
+                                        color: black;
+                                    }
+    
+                                    .deleteBtn {
+                                        color: rgb(219, 62, 62);
+                                    }
+    
+                                    .deleteBtn:hover {
+                                        color: white;
+                                        background-color: rgb(219, 62, 62);
+                                    }
+    
+    
+                                    .fa-solid {
+                                        margin: 0 3px;
+                                    }
                                 }
                             }
                         }
@@ -250,16 +260,15 @@ body {
                     #formContainer {
                         width: 65%;
                         height: 100%;
-                        padding: 5px;
+                        padding:  0 5px;
 
                         #formDatailsContainer {
                             width: 100%;
-                            height: 15%;
+                            height: 12%;
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
-                            padding: 0 10px;
-
+                            padding: 0 10px 12px;
 
                             #lastModifiedContainer {
                                 color: var(--textColor);
@@ -287,12 +296,11 @@ body {
                                 background-color: rgb(226, 239, 244);
                                 border: 2px solid rgb(122, 187, 210);
                             }
-
                         }
 
                         textarea {
                             width: 100%;
-                            height: 85%;
+                            height: 88%;
                             border-radius: 5px;
                             padding: 10px;
                             border: none;
@@ -309,75 +317,212 @@ body {
                     }
                 }
 
-                #gridOfNotes {
+                #myNotes {
                     display: flex;
-                    justify-content: center;
-                    width: 100%;
                     height: 100%;
-                    overflow: hidden;
-                    padding: 10px 15px;
-                    animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 
-                    .textBoxContainer {
-                        overflow: auto;
-                        display: grid;
-                        column-gap: 2%;
-                        grid-template-columns: 18% 18% 18% 18% 18%;
-                        flex-wrap: wrap;
-                        // gap: 5px;
-                        width: 100%;
+                    #leftContainer {
+                        width: 35%;
+                        height: 100%;
+                        padding: 10px;
+                        margin: 0;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
 
-                        .textBox {
-                            height: 250px;
-                            width: 100%;
-                            padding: 5px 10px;
-                            border-radius: 10px;
-                            margin: 10px 0;
-                            background-color: var(--noteBackgroundColor);
-                            cursor: pointer;
+                        #foldersContainer {
+                            height: 90%;
 
-
-                            .noteText {
-                                height: 75%;
-                                inline-size: 100%;
-                                overflow-wrap: break-word;
-                                overflow: hidden;
-                                font-size: 14px;
+                            #foldersHeader {
                                 color: var(--textColor);
                             }
 
-                            .lastModified {
-                                font-size: 13px;
-                                margin: 0 0 3px;
-                                color: var(--lastModifiedColor);
-                                height: 12%;
-                            }
+                            #foldersListWrapper {
+                                overflow: hidden;
+                                height: 87%;
+                                
+                                #foldersList {
+                                    overflow: auto;
+                                    max-height: 100%;
+                                    list-style: none;
 
-                            .deleteBtnContainer {
-                                display: flex;
-                                justify-content: center;
-                                height: 13%;
+                                    .folderOption {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        height: 40px;
+                                        padding: 0 5px;
+                                        margin-right: 5px;
+                                        border-bottom: 1px solid var(--noteListTextColor);
+                                        color: var(--textColor);
 
-                                .deleteBtn {
-                                    border: none;
-                                    border-radius: 5px;
-                                    background-color: rgb(209, 209, 209);
-                                    font-size: 13px;
-                                    height: 25px;
-                                    width: 70px;
-                                    color: rgb(219, 62, 62);
+                                        span {
+                                            width: 100%;
 
-                                    &:hover {
-                                        color: white;
-                                        background-color: rgb(219, 62, 62);
+                                            &:hover {
+                                                opacity: 0.5;
+                                            }
+                                        }
+
+                                        .deleteBtn {
+                                            color: rgb(219, 62, 62);
+                                            background-color: transparent;
+                                            border: none;
+                                            border-radius: 5px;
+                                        }
+        
+                                        .deleteBtn:hover {
+                                            color: white;
+                                            background-color: rgb(219, 62, 62);
+                                        }
+                                        
+                                    }
+
+                                    .FolderNameForm {
+                                        height: 40px;
+                                        border-bottom: 1px solid var(--noteListTextColor);
+                                        width: 100%;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+
+                                        input {
+                                            width: 100%;
+                                            background-color: transparent;
+                                            color: var(--textColor);
+                                            border: var(--textColor) solid 1px;
+                                            border-radius: 5px;
+                                            height: 30px;
+                                        }
+                                        
+                                        button {
+                                            color: var(--textColor);
+                                            background-color: transparent;
+                                            border: none;
+                                            // width: 20%;
+
+                                            &:hover {
+                                                opacity: 0.5;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
 
-                        .textBoxFadeOut {
-                            @extend .textBox;
-                            animation: fade-out 0.25s ease-out both;
+                        #addFolderBtn {
+                            width: 100%;
+                            height: 10%;
+                            border: none;
+                            border-radius: 5px;
+                            background-color: var(--searchBoxBackgroundColor);
+                            color: var(--textColor);
+                            position: relative;
+
+                            &:active {
+                                opacity: 0.5;
+                            }
+                        }
+
+                        #addFolderBtn::before,
+                        #addFolderBtn::after {
+                            border: 0 solid transparent;
+                            transition: all 0.3s;
+                            content: '';
+                            height: 0;
+                            position: absolute;
+                            width: 0px;
+                        }
+
+                        #addFolderBtn::before {
+                            border-top: 1px solid var(--textColor);
+                            right: 0;
+                            top: -4px;
+                        }
+
+                        #addFolderBtn::after {
+                            border-bottom: 1px solid var(--textColor);
+                            bottom: -4px;
+                            left: 0;
+                        }
+
+                        #addFolderBtn:hover::before,
+                        #addFolderBtn:hover::after {
+                            width: 100%;
+                        }
+
+                    }
+
+                    #gridOfNotes {
+                        display: flex;
+                        justify-content: center;
+                        width: 65%;
+                        height: 100%;
+                        overflow: hidden;
+                        padding: 10px;
+                        animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+                        .textBoxContainer {
+                            overflow: auto;
+                            display: grid;
+                            column-gap: 2%;
+                            grid-template-columns: 31% 31% 31%;
+                            flex-wrap: wrap;
+                            width: 100%;
+
+                            .textBox {
+                                animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                                height: 250px;
+                                width: 100%;
+                                padding: 5px 10px;
+                                border-radius: 10px;
+                                margin: 10px 0;
+                                background-color: var(--noteBackgroundColor);
+                                cursor: pointer;
+
+
+                                .noteText {
+                                    height: 75%;
+                                    inline-size: 100%;
+                                    overflow-wrap: break-word;
+                                    overflow: hidden;
+                                    font-size: 14px;
+                                    color: var(--textColor);
+                                }
+
+                                .lastModified {
+                                    font-size: 13px;
+                                    margin: 0 0 3px;
+                                    color: var(--lastModifiedColor);
+                                    height: 12%;
+                                }
+
+                                .deleteBtnContainer {
+                                    display: flex;
+                                    justify-content: center;
+                                    height: 13%;
+
+                                    .deleteBtn {
+                                        border: none;
+                                        border-radius: 5px;
+                                        background-color: rgb(209, 209, 209);
+                                        font-size: 13px;
+                                        height: 25px;
+                                        width: 70px;
+                                        color: rgb(219, 62, 62);
+
+                                        &:hover {
+                                            color: white;
+                                            background-color: rgb(219, 62, 62);
+                                        }
+                                    }
+                                }
+                            }
+
+                            .textBoxFadeOut {
+                                @extend .textBox;
+                                animation: fade-out 0.25s ease-out both;
+                            }
                         }
                     }
                 }
@@ -415,6 +560,10 @@ body {
                 .noNotesYetHidden {
                     @extend .noNotesYet;
                     animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                }
+
+                #noNotesHeader {
+                    color: var(--textColor);
                 }
 
                 #searchContainer {

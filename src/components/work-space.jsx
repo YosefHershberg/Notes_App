@@ -5,11 +5,7 @@ import NotesList from './notes-list';
 
 function WorkSpace(props) {
 
-    const { notes, onEdit, onDelete, displaydNote, onChange, onSave, incrememt, mode, notesListRef, textAreaRef} = props
-
-    function handleNotePressed(event) {
-        console.log(event.target.id);
-    }
+    const { notes, onEdit, onDelete, displaydNote, onChange, onSave, incrememt, mode, notesListRef, textAreaRef, displaydFolder, displaydNotes, handleNotePressed } = props
 
     return (
         <React.Fragment>
@@ -21,6 +17,8 @@ function WorkSpace(props) {
                     incrememt={incrememt}
                     onNotePressed={handleNotePressed}
                     notesListRef={notesListRef}
+                    displaydFolder={displaydFolder}
+                    displaydNotes={displaydNotes}
                 />
                 <NoteTextArea
                     newNote={displaydNote}
