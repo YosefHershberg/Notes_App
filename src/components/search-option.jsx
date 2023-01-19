@@ -6,11 +6,9 @@ function SearchOption(props) {
 
     return (
         <React.Fragment>
-            <Link to='/workSpace'>
-                <div className={Styles.option} id={props.option.id} onClick={() => props.onEdit(props.option.id)}>
-                    {props.option.text}
-                </div>
-            </Link>
+            <div className={Styles.option} id={props.option.id} onClick={() => props.onEdit(props.option.id)}>
+                {props.option.text}
+            </div>
         </React.Fragment>
     );
 }

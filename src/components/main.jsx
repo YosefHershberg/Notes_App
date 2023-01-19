@@ -4,7 +4,7 @@ import WorkSpace from './work-space';
 import MyNotes from './my-notes';
 import NoNotesYet from './no-notses-yet';
 import Search from './search';
-import {Routes, Route, Link} from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 
 function Main(props) {
     const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, noNotesHidden, displaydFolder, onChangeFolder } = props;
@@ -44,7 +44,8 @@ function Main(props) {
                         displaydFolder={displaydFolder}
                         displaydNotes={displaydNotes}
                         onChangeFolder={onChangeFolder}
-                    />}/>
+                    />} />
+
                     <Route path='/' element={<MyNotes
                         onDelete={handleDeleteAndFade}
                         notes={notes}
@@ -53,67 +54,17 @@ function Main(props) {
                         onChangeFolder={onChangeFolder}
                         displaydNotes={displaydNotes}
                         onNewNote={onNewNote}
-                    />}/>
+                    />} />
+
                     <Route path='/noNotesYet' element={<NoNotesYet
                         onNewNote={onNewNote}
-                    />}/>
+                    />} />
+
                     <Route path='/search' element={<Search
                         notes={notes}
                         onEdit={onEdit}
-                    />}/>
+                    />} />
                 </Routes>
-
-                {/* {mode === 'writeNoteMode' &&
-                    <WorkSpace
-                        mode={mode}
-                        notes={notes}
-                        displaydNote={displaydNote}
-                        onChange={onChange}
-                        onSave={onSave}
-                        onEdit={onEdit}
-                        onDelete={handleDeleteAndFade}
-                        incrememt={incrememt}
-                        notesListRef={notesListRef}
-                        textAreaRef={textAreaRef}
-                        displaydFolder={displaydFolder}
-                        displaydNotes={displaydNotes}
-                        onChangeFolder={onChangeFolder}
-                    />
-                }
-                {mode === 'showNotesMode' &&
-                    <MyNotes
-                        onDelete={handleDeleteAndFade}
-                        notes={notes}
-                        onEdit={onEdit}
-                        displaydFolder={displaydFolder}
-                        onChangeFolder={onChangeFolder}
-                        displaydNotes={displaydNotes}
-                        onNewNote={onNewNote}
-                    />
-                }
-                {mode === 'noNotesMode' &&
-                    <NoNotesYet
-                        onNewNote={onNewNote}
-                    />
-                }
-                {mode === 'noNotesMode' &&
-                    <WorkSpace
-                        notes={notes}
-                        displaydNote={displaydNote}
-                        onChange={onChange}
-                        onSave={onSave}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
-                        incrememt={incrememt}
-                        displaydFolder={displaydFolder}
-                    />
-                }
-                {mode === 'searchMode' &&
-                    <Search
-                        notes={notes}
-                        onEdit={onEdit}
-                    />
-                } */}
             </div>
         </React.Fragment>
     );

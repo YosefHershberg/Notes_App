@@ -53,6 +53,7 @@ function App() {
     const textAreaRef = useRef();
     const navigate = useNavigate();
     const routeToNoNotes = useCallback(() => navigate('/noNotesYet', {replace: true}), [navigate])
+    const routeToWorkSpace = useCallback(() => navigate('/workSpace', {replace: true}), [navigate])
 
     //FUNCTIONS -----------------------------------
     function createNewNote() {
@@ -108,6 +109,7 @@ function App() {
     }
 
     function handleOnEdit(id) {
+      routeToWorkSpace();
       mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
       setMode('writeNoteMode');
       mode === 'writeNoteMode' && textAreaRef.current.focus()

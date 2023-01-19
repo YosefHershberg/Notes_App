@@ -16,12 +16,10 @@ function NoteBox(props) {
     return (
         <React.Fragment>
             <div ref={noteBoxRef} className={textBoxClassName}>
-                <Link to='/workSpace'>
-                    <div className={Styles.noteText} onClick={() => onEdit(note.id)}>
-                        {note.text}
-                    </div>
-                </Link>
-                
+                <div className={Styles.noteText} onClick={() => onEdit(note.id)}>
+                    {note.text}
+                </div>
+
                 <div className={Styles.lastModified}><i>{note.lastModified}</i></div>
 
                 <div className={Styles.deleteBtnContainer}>
