@@ -121,7 +121,6 @@ function App() {
   }
 
   function handleChangeFolder(folderName) {
-    console.log(folderName);
     setDisplaydFolder(folderName)
   }
 
