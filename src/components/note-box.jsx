@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Styles from '../scss/styles.module.scss'
+import { Link } from 'react-router-dom'
 
 function NoteBox(props) {
     const { note, onEdit, onDelete } = props;
@@ -15,10 +16,12 @@ function NoteBox(props) {
     return (
         <React.Fragment>
             <div ref={noteBoxRef} className={textBoxClassName}>
-                <div className={Styles.noteText} onClick={() => onEdit(note.id)}>
-                    {note.text}
-                </div>
-
+                <Link to='/workSpace'>
+                    <div className={Styles.noteText} onClick={() => onEdit(note.id)}>
+                        {note.text}
+                    </div>
+                </Link>
+                
                 <div className={Styles.lastModified}><i>{note.lastModified}</i></div>
 
                 <div className={Styles.deleteBtnContainer}>
