@@ -12,6 +12,10 @@ function App() {
   // incrementData = 0
   // colorModeData = true
 
+  // notesData = []
+  // incrementData = 0
+  // colorModeData = true
+
   //STATE AND REF
   //--------------------------------------------
   const [notes, setNotes] = useState(notesData ? notesData : []);
