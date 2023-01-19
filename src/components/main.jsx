@@ -7,7 +7,7 @@ import Search from './search';
 import { Routes, Route, Link } from 'react-router-dom'
 
 function Main(props) {
-    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, noNotesHidden, displaydFolder, onChangeFolder } = props;
+    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, displaydFolder, onChangeFolder } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
 
     function handleDeleteAndFade(note, element) {
