@@ -151,7 +151,7 @@ body #background #app #main #myNotes {
             flex-wrap: wrap;
             width: 100%;
 
-            .textBox {
+            .NoteBox {
                 animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
                 height: 250px;
                 width: 100%;
@@ -162,7 +162,7 @@ body #background #app #main #myNotes {
                 cursor: pointer;
 
                 &:hover {
-                    border: var(--lastModifiedColor) solid 2px;
+                    border: var(--lastModifiedColor) solid 1px;
                 }
 
                 .noteText {
@@ -203,8 +203,8 @@ body #background #app #main #myNotes {
                 }
             }
 
-            .textBoxFadeOut {
-                @extend .textBox;
+            .NoteBoxFadeOut {
+                @extend .NoteBox;
                 animation: fade-out 0.25s ease-out both;
             }
         }
