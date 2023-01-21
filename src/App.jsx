@@ -2,7 +2,7 @@ import Styles from "./scss/styles.module.scss"
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import NavBar from "./components/nav-bar";
 import Main from "./components/main";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   let notesData = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
@@ -17,7 +17,6 @@ function App() {
   const [displaydNote, setDisplaydNote] = useState({});
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
-  const [incrememt2, setIncrememt2] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   const [displaydFolder, setDisplaydFolder] = useState('All Notes')
   const [colors, setColors] = useState({
@@ -50,9 +49,9 @@ function App() {
   const notesListRef = useRef();
   const textAreaRef = useRef()
   const navigate = useNavigate();
-  const navToWorkSpace = useCallback(() => navigate('/workSpace', {replace: true}), [navigate]);
-  const navToAllNotes = useCallback(() => navigate('/', {replace: true}), [navigate]);
-  const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', {replace: true}), [navigate]);
+  const navToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate]);
+  const navToAllNotes = useCallback(() => navigate('/', { replace: true }), [navigate]);
+  const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', { replace: true }), [navigate]);
 
   //FUNCTIONS -----------------------------------
   function createNewNote() {
@@ -65,6 +64,7 @@ function App() {
     };
 
     setNotes([...notes, newNote]);
+    setDisplaydNote(newNote)
     setIncrememt(prev => prev + 1)
 
     if (mode === 'noNotesMode') {
@@ -130,7 +130,7 @@ function App() {
   useEffect(() => {
     setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
     mode === 'writeNoteMode' && textAreaRef.current.focus()
-    
+
   }, [displaydNote]);
 
   useEffect(() => {
@@ -145,17 +145,12 @@ function App() {
     }
   }, [notes]);
 
-  useEffect(() => {
-    setDisplaydNote(notes[notes.length - 1])
-    setIncrememt2(prev => prev + 1)
-  }, [incrememt]);
-
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
     if (notes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
       mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
     }
-  }, [incrememt2]);
+  }, [incrememt]);
 
   useEffect(() => {
     mode != 'writeNoteMode' && setDisplaydNote({})
