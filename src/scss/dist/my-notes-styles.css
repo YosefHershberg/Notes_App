@@ -1,0 +1,175 @@
+body #background #app #main #myNotes {
+  display: flex;
+  height: 100%;
+}
+body #background #app #main #myNotes #leftContainer {
+  width: 35%;
+  height: 100%;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer {
+  height: 90%;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersHeader {
+  color: var(--textColor);
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper {
+  overflow: hidden;
+  height: 87%;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList {
+  overflow: auto;
+  max-height: 100%;
+  list-style: none;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 5px;
+  margin-right: 5px;
+  border-bottom: 1px solid var(--noteListTextColor);
+  color: var(--textColor);
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span {
+  width: 100%;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span:hover {
+  opacity: 0.5;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn {
+  color: #db3e3e;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn:hover {
+  color: white;
+  background-color: #db3e3e;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm {
+  height: 40px;
+  border-bottom: 1px solid var(--noteListTextColor);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm input {
+  width: 100%;
+  background-color: transparent;
+  color: var(--textColor);
+  border: var(--textColor) solid 1px;
+  border-radius: 5px;
+  height: 30px;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm button {
+  color: var(--textColor);
+  background-color: transparent;
+  border: none;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm button:hover {
+  opacity: 0.5;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn {
+  width: 100%;
+  height: 10%;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--searchBoxBackgroundColor);
+  color: var(--textColor);
+  position: relative;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn:active {
+  opacity: 0.5;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn::before,
+body #background #app #main #myNotes #leftContainer #addFolderBtn::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 0px;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn::before {
+  border-top: 1px solid var(--textColor);
+  right: 0;
+  top: -4px;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn::after {
+  border-bottom: 1px solid var(--textColor);
+  bottom: -4px;
+  left: 0;
+}
+body #background #app #main #myNotes #leftContainer #addFolderBtn:hover::before,
+body #background #app #main #myNotes #leftContainer #addFolderBtn:hover::after {
+  width: 100%;
+}
+body #background #app #main #myNotes #gridOfNotes {
+  display: flex;
+  justify-content: center;
+  width: 65%;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer {
+  overflow: auto;
+  display: grid;
+  column-gap: 2%;
+  grid-template-columns: 31% 31% 31%;
+  flex-wrap: wrap;
+  width: 100%;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut {
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  height: 250px;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  background-color: var(--noteBackgroundColor);
+  cursor: pointer;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .noteText, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .noteText {
+  height: 75%;
+  inline-size: 100%;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--textColor);
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .lastModified, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .lastModified {
+  font-size: 13px;
+  margin: 0 0 3px;
+  color: var(--lastModifiedColor);
+  height: 12%;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer {
+  display: flex;
+  justify-content: center;
+  height: 13%;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn {
+  border: none;
+  border-radius: 5px;
+  background-color: #d1d1d1;
+  font-size: 13px;
+  height: 25px;
+  width: 70px;
+  color: #db3e3e;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn:hover, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn:hover {
+  color: white;
+  background-color: #db3e3e;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut {
+  animation: fade-out 0.25s ease-out both;
+}

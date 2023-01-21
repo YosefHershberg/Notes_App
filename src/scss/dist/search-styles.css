@@ -1,0 +1,89 @@
+body #background #app #main #searchContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  position: relative;
+}
+body #background #app #main #searchContainer .searchBoxWrapper {
+  height: 140px;
+  width: 100%;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--searchBoxBackgroundColor);
+  height: 60px;
+  border-radius: 40px;
+  padding: 10px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchInput {
+  width: 240px;
+  padding: 0 6px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchInput::placeholder {
+  color: var(--textColor);
+  opacity: 0.5;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox:hover .searchBtn {
+  background: var(--searchBoxBackgroundColor);
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchBtn {
+  color: var(--textColor);
+  float: right;
+  width: 40px;
+  height: 40px;
+  transition: 0.4s;
+  border-radius: 50%;
+  background: var(--searchBoxBackgroundColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchBtn i {
+  font-size: 20px;
+}
+body #background #app #main #searchContainer .searchBoxWrapper .searchBox .searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: var(--textColor);
+  font-size: 16px;
+  transition: 0.5s;
+  line-height: 40px;
+  width: 0px;
+}
+body #background #app #main #searchContainer #optionContainerWrapper {
+  height: 300px;
+  overflow: hidden;
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer {
+  overflow: auto;
+  border: var(--textColor) solid 1px;
+  max-height: 300px;
+  width: 450px;
+  border-radius: 10px;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background-color: var(--noteBackgroundColor);
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer .option {
+  border-bottom: var(--noteListTextColor) solid 1px;
+  display: flex;
+  align-items: center;
+  padding: 8px 8px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  color: var(--textColor);
+}
+body #background #app #main #searchContainer #optionContainerWrapper #optionsContainer .option:hover {
+  background-color: var(--backgroundColor);
+}

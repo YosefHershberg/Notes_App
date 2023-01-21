@@ -1,0 +1,138 @@
+body #background #app #main #workSpace {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  overflow: hidden;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #workSpace #notesListWrapper {
+  width: 35%;
+}
+body #background #app #main #workSpace #notesListWrapper #FolderName {
+  padding: 0 10px;
+  color: var(--textColor);
+  height: 7%;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList {
+  width: 100%;
+  padding: 0 10px;
+  margin: 0;
+  overflow: auto;
+  height: 91%;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut {
+  animation: fade-out 0.25s ease-out both;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein {
+  animation: slide-in-top 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein {
+  max-height: 140px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: var(--noteBackgroundColor);
+  cursor: pointer;
+  border-radius: 7px;
+  padding: 7px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .lastModified, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .lastModified, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .lastModified {
+  font-size: 13px;
+  margin: 0;
+  color: var(--lastModifiedColor);
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .noteListText, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .noteListText, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .noteListText {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* hide text after 3 lines */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  /* make text wrap to the next line */
+  font-size: 14px;
+  color: var(--noteListTextColor);
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons {
+  margin: 7px 0 5px;
+  display: flex;
+  justify-content: center;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons button, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons button, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons button {
+  font-size: 13px;
+  margin: 0 7px;
+  background-color: var(--noteButtonBackgroundColor);
+  border-radius: 5px;
+  padding: 0 7px;
+  border: none;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .editBtn:hover, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .editBtn:hover, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .editBtn:hover {
+  background-color: white;
+  color: black;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .deleteBtn, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .deleteBtn, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .deleteBtn {
+  color: #db3e3e;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .deleteBtn:hover, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .deleteBtn:hover, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .deleteBtn:hover {
+  color: white;
+  background-color: #db3e3e;
+}
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .fa-solid {
+  margin: 0 3px;
+}
+body #background #app #main #workSpace #formContainer {
+  width: 65%;
+  height: 100%;
+  padding: 0 5px;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer {
+  width: 100%;
+  height: 12%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 12px;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer {
+  color: var(--textColor);
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer #lastModifiedTitle {
+  display: inline-block;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer #lastModifiedContainer #lastModifiedDetails {
+  margin: 0;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer button {
+  height: 40px;
+  width: 80px;
+  border-radius: 50px;
+  border: none;
+  background-color: #7abbd2;
+  color: white;
+}
+body #background #app #main #workSpace #formContainer #formDatailsContainer button:hover {
+  color: #7abbd2;
+  background-color: #e2eff4;
+  border: 2px solid #7abbd2;
+}
+body #background #app #main #workSpace #formContainer textarea {
+  width: 100%;
+  height: 88%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  margin: 0 5px;
+  background-color: var(--noteBackgroundColor);
+  color: var(--textColor);
+  cursor: var(--textAreaCurser);
+}
+body #background #app #main #workSpace #formContainer textarea::placeholder {
+  color: var(--textColor);
+  opacity: 0.5;
+}
