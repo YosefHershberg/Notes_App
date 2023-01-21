@@ -3,6 +3,7 @@ import Styles from "../scss/styles.module.scss"
 import { BiNotepad } from 'react-icons/bi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BiNote } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 function NavBar(props) {
     const { onNewNote, onShowNotes, onSearch, lightColorMode } = props
@@ -14,9 +15,15 @@ function NavBar(props) {
                     <a href="" id={Styles.logo}>
                         <h3 id='brand-name' >My Notes App</h3>
                     </a>
-                    <button id='new-note-btn' className={Styles.navBtn} onClick={onNewNote}>Create New Note <BiNote /></button>
-                    <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes  <BiNotepad /></button>
-                    <button id='search-btn' className={Styles.navBtn} onClick={onSearch}>Search <AiOutlineSearch /></button>
+                    <Link to='/workSpace'>
+                        <button id='new-note-btn' className={Styles.navBtn} onClick={onNewNote}>Create New Note <BiNote /></button>
+                    </Link>
+                    <Link to='/'>
+                        <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes <BiNotepad /></button>
+                    </Link>
+                    <Link to='/search'>
+                        <button id='search-btn' className={Styles.navBtn} onClick={onSearch}>Search <AiOutlineSearch /></button>
+                    </Link>
                 </div>
 
                 <div className={Styles.leftContainer}>

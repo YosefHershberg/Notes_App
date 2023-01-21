@@ -1,0 +1,212 @@
+body #background #app #main #myNotes {
+    display: flex;
+    height: 100%;
+
+    #leftContainer {
+        width: 35%;
+        height: 100%;
+        padding: 10px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        #foldersContainer {
+            height: 90%;
+
+            #foldersHeader {
+                color: var(--textColor);
+            }
+
+            #foldersListWrapper {
+                overflow: hidden;
+                height: 87%;
+                
+                #foldersList {
+                    overflow: auto;
+                    max-height: 100%;
+                    list-style: none;
+
+                    .folderOption {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        height: 40px;
+                        padding: 0 5px;
+                        margin-right: 5px;
+                        border-bottom: 1px solid var(--noteListTextColor);
+                        color: var(--textColor);
+
+                        span {
+                            width: 100%;
+
+                            &:hover {
+                                opacity: 0.5;
+                            }
+                        }
+
+                        .deleteBtn {
+                            color: rgb(219, 62, 62);
+                            background-color: transparent;
+                            border: none;
+                            border-radius: 5px;
+                        }
+
+                        .deleteBtn:hover {
+                            color: white;
+                            background-color: rgb(219, 62, 62);
+                        }
+                        
+                    }
+
+                    .FolderNameForm {
+                        height: 40px;
+                        border-bottom: 1px solid var(--noteListTextColor);
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        input {
+                            width: 100%;
+                            background-color: transparent;
+                            color: var(--textColor);
+                            border: var(--textColor) solid 1px;
+                            border-radius: 5px;
+                            height: 30px;
+                        }
+                        
+                        button {
+                            color: var(--textColor);
+                            background-color: transparent;
+                            border: none;
+                            // width: 20%;
+
+                            &:hover {
+                                opacity: 0.5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #addFolderBtn {
+            width: 100%;
+            height: 10%;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--searchBoxBackgroundColor);
+            color: var(--textColor);
+            position: relative;
+
+            &:active {
+                opacity: 0.5;
+            }
+        }
+
+        #addFolderBtn::before,
+        #addFolderBtn::after {
+            border: 0 solid transparent;
+            transition: all 0.3s;
+            content: '';
+            height: 0;
+            position: absolute;
+            width: 0px;
+        }
+
+        #addFolderBtn::before {
+            border-top: 1px solid var(--textColor);
+            right: 0;
+            top: -4px;
+        }
+
+        #addFolderBtn::after {
+            border-bottom: 1px solid var(--textColor);
+            bottom: -4px;
+            left: 0;
+        }
+
+        #addFolderBtn:hover::before,
+        #addFolderBtn:hover::after {
+            width: 100%;
+        }
+
+    }
+
+    #gridOfNotes {
+        display: flex;
+        justify-content: center;
+        width: 65%;
+        height: 100%;
+        overflow: hidden;
+        padding: 10px;
+        animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+        .textBoxContainer {
+            overflow: auto;
+            display: grid;
+            column-gap: 2%;
+            grid-template-columns: 31% 31% 31%;
+            flex-wrap: wrap;
+            width: 100%;
+
+            .NoteBox {
+                animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                height: 250px;
+                width: 100%;
+                padding: 5px 10px;
+                border-radius: 10px;
+                margin: 10px 0;
+                background-color: var(--noteBackgroundColor);
+                cursor: pointer;
+
+                &:hover {
+                    border: var(--lastModifiedColor) solid 1px;
+                }
+
+                .noteText {
+                    height: 75%;
+                    inline-size: 100%;
+                    overflow-wrap: break-word;
+                    overflow: hidden;
+                    font-size: 14px;
+                    color: var(--textColor);
+                }
+
+                .lastModified {
+                    font-size: 13px;
+                    margin: 0 0 3px;
+                    color: var(--lastModifiedColor);
+                    height: 12%;
+                }
+
+                .deleteBtnContainer {
+                    display: flex;
+                    justify-content: center;
+                    height: 13%;
+
+                    .deleteBtn {
+                        border: none;
+                        border-radius: 5px;
+                        background-color: rgb(209, 209, 209);
+                        font-size: 13px;
+                        height: 25px;
+                        width: 70px;
+                        color: rgb(219, 62, 62);
+
+                        &:hover {
+                            color: white;
+                            background-color: rgb(219, 62, 62);
+                        }
+                    }
+                }
+            }
+
+            .NoteBoxFadeOut {
+                @extend .NoteBox;
+                animation: fade-out 0.25s ease-out both;
+            }
+        }
+    }
+}

@@ -1,0 +1,103 @@
+body #background #app #main #searchContainer {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    position: relative;
+
+    .searchBoxWrapper {
+        height: 140px;
+        width: 100%;
+
+        .searchBox {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--searchBoxBackgroundColor);
+            height: 60px;
+            border-radius: 40px;
+            padding: 10px;
+
+            &:hover {
+                .searchInput {
+                    width: 240px;
+                    padding: 0 6px;
+
+                    &::placeholder {
+                        color: var(--textColor);
+                        opacity: 0.5;
+                    }
+                }
+
+                .searchBtn {
+                    background: var(--searchBoxBackgroundColor);
+                }
+            }
+
+            .searchBtn {
+                color: var(--textColor);
+                float: right;
+                width: 40px;
+                height: 40px;
+                transition: 0.4s;
+                border-radius: 50%;
+                background: var(--searchBoxBackgroundColor);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                i {
+                    font-size: 20px;
+                }
+            }
+
+            .searchInput {
+                border: none;
+                background: none;
+                outline: none;
+                float: left;
+                padding: 0;
+                color: var(--textColor);
+                font-size: 16px;
+                transition: 0.5s;
+                line-height: 40px;
+                width: 0px;
+            }
+        }
+    }
+
+    #optionContainerWrapper {
+        height: 300px;
+        overflow: hidden;
+
+        #optionsContainer {
+            overflow: auto;
+            border: var(--textColor) solid 1px;
+            max-height: 300px;
+            width: 450px;
+            border-radius: 10px;
+            animation: scale-in-ver-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            background-color: var(--noteBackgroundColor);
+
+            .option {
+                border-bottom: var(--noteListTextColor) solid 1px;
+                display: flex;
+                align-items: center;
+                padding: 8px 8px;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                cursor: pointer;
+                animation: scale-in-ver-top 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                color: var(--textColor);
+
+                &:hover {
+                    background-color: var(--backgroundColor);
+                }
+            }
+        }
+    }
+}

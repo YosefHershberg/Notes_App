@@ -1,0 +1,43 @@
+@mixin noNotesYetMixin {
+    position: absolute;
+    background-color: var(--backgroundColor);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    transform: translateY(0);
+    border-radius: 10px;
+    
+    h1 {
+        margin-bottom: 20px;
+    }
+    
+    button {
+        height: 50px;
+        width: 190px;
+        border-radius: 5px;
+        border: none;
+        background-color: $noNotesYetButtonBackgroundColor;
+        color: white;
+        font-size: 20px;
+    }
+
+}
+
+body #background #app #main .noNotesYet {
+    @include noNotesYetMixin;
+    animation: scale-in-center 0.15s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.noNotesYetHidden {
+    @include noNotesYetMixin;
+    animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+#noNotesHeader {
+    color: var(--textColor);
+}

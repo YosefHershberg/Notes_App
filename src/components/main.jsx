@@ -4,9 +4,10 @@ import WorkSpace from './work-space';
 import MyNotes from './my-notes';
 import NoNotesYet from './no-notses-yet';
 import Search from './search';
+import { Routes, Route, Link } from 'react-router-dom'
 
 function Main(props) {
-    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, noNotesHidden, displaydFolder, onChangeFolder } = props;
+    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, incrememt, onNewNote, notesListRef, textAreaRef, displaydFolder, onChangeFolder } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
 
     function handleDeleteAndFade(note, element) {
@@ -28,8 +29,8 @@ function Main(props) {
     return (
         <React.Fragment>
             <div id={Styles.main}>
-                {mode === 'writeNoteMode' &&
-                    <WorkSpace
+                <Routes>
+                    <Route path='/workSpace' element={<WorkSpace
                         mode={mode}
                         notes={notes}
                         displaydNote={displaydNote}
@@ -43,10 +44,9 @@ function Main(props) {
                         displaydFolder={displaydFolder}
                         displaydNotes={displaydNotes}
                         onChangeFolder={onChangeFolder}
-                    />
-                }
-                {mode === 'showNotesMode' &&
-                    <MyNotes
+                    />} />
+
+                    <Route path='/' element={<MyNotes
                         onDelete={handleDeleteAndFade}
                         notes={notes}
                         onEdit={onEdit}
@@ -54,31 +54,17 @@ function Main(props) {
                         onChangeFolder={onChangeFolder}
                         displaydNotes={displaydNotes}
                         onNewNote={onNewNote}
-                    />
-                }
-                {mode === 'noNotesMode' &&
-                    <NoNotesYet
+                    />} />
+
+                    <Route path='/noNotesYet' element={<NoNotesYet
                         onNewNote={onNewNote}
-                    />
-                }
-                {mode === 'noNotesMode' &&
-                    <WorkSpace
-                        notes={notes}
-                        displaydNote={displaydNote}
-                        onChange={onChange}
-                        onSave={onSave}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
-                        incrememt={incrememt}
-                        displaydFolder={displaydFolder}
-                    />
-                }
-                {mode === 'searchMode' &&
-                    <Search
+                    />} />
+
+                    <Route path='/search' element={<Search
                         notes={notes}
                         onEdit={onEdit}
-                    />
-                }
+                    />} />
+                </Routes>
             </div>
         </React.Fragment>
     );

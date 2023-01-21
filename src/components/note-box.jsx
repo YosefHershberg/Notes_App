@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Styles from '../scss/styles.module.scss'
+import { Link } from 'react-router-dom'
 
 function NoteBox(props) {
     const { note, onEdit, onDelete } = props;
-    const [textBoxClassName, setTextBoxClassName] = useState(Styles.textBox)
+    const [NoteBoxClassName, setTextBoxClassName] = useState(Styles.NoteBox)
 
     const noteBoxRef = useRef();
 
     function handleDeleteBtnClicked() {
-        setTextBoxClassName(Styles.textBoxFadeOut)
+        setTextBoxClassName(Styles.NoteBoxFadeOut)
         onDelete(note, noteBoxRef.current)
     }
 
     return (
         <React.Fragment>
-            <div ref={noteBoxRef} className={textBoxClassName}>
+            <div ref={noteBoxRef} className={NoteBoxClassName}>
                 <div className={Styles.noteText} onClick={() => onEdit(note.id)}>
                     {note.text}
                 </div>
