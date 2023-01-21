@@ -14,9 +14,9 @@ function NoNotesYet(props) {
         <React.Fragment>
             <div className={noNotesclassName}>
                 <h1 id={Styles.noNotesHeader}>You have no notes...</h1>
-                <Link to='/workSpace'>
+                {/* <Link to='/workSpace'> */}
                     <button onClick={handleBtnClicked} id='init-note-btn'>Create new note !</button>
-                </Link>
+                {/* </Link> */}
             </div>
         </React.Fragment>
     );

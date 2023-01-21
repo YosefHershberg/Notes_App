@@ -15,9 +15,9 @@ function NavBar(props) {
                     <a href="" id={Styles.logo}>
                         <h3 id='brand-name' >My Notes App</h3>
                     </a>
-                    <Link to='/workSpace'>
+                    {/* <Link to='/workSpace'> */}
                         <button id='new-note-btn' className={Styles.navBtn} onClick={onNewNote}>Create New Note <BiNote /></button>
-                    </Link>
+                    {/* </Link> */}
                     <Link to='/'>
                         <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes <BiNotepad /></button>
                     </Link>
