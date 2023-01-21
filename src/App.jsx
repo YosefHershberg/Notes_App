@@ -44,14 +44,7 @@ function App() {
     setNotes([...notes, newNote]);
     setIncrememt(prev => prev + 1)
 
-    if (mode === 'noNotesMode') {
-      setTimeout(function() {
-        routeToWorkSpace()
-        setMode('writeNoteMode')
-      }, 500);
-    } else {
-      setMode('writeNoteMode')
-    }
+    setMode('writeNoteMode')
   }
 
   function getRandomString() {
@@ -91,7 +84,6 @@ function App() {
     routeToWorkSpace();
     mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
     setMode('writeNoteMode');
-    mode === 'writeNoteMode' && textAreaRef.current.focus()
   }
 
   function handleShowNotes() {

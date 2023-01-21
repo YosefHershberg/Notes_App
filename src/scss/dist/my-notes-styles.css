@@ -138,6 +138,9 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox, bo
   background-color: var(--noteBackgroundColor);
   cursor: pointer;
 }
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox:hover, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut:hover {
+  border: var(--lastModifiedColor) solid 2px;
+}
 body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .noteText, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .noteText {
   height: 75%;
   inline-size: 100%;

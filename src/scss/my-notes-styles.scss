@@ -161,6 +161,9 @@ body #background #app #main #myNotes {
                 background-color: var(--noteBackgroundColor);
                 cursor: pointer;
 
+                &:hover {
+                    border: var(--lastModifiedColor) solid 2px;
+                }
 
                 .noteText {
                     height: 75%;
