@@ -1,15 +1,14 @@
 import Styles from "./scss/styles.module.scss"
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import NavBar from "./components/nav-bar";
 import Main from "./components/main";
+import {useNavigate} from 'react-router-dom';
 
 function App() {
   let notesData = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
-  let incrementData = JSON.parse(window.localStorage.getItem('INCREMENT_DATA'))
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
 
   // notesData = []
-  // incrementData = 0
   // colorModeData = true
 
   //STATE AND REF
@@ -17,7 +16,8 @@ function App() {
   const [notes, setNotes] = useState(notesData ? notesData : []);
   const [displaydNote, setDisplaydNote] = useState({});
   const [mode, setMode] = useState()
-  const [incrememt, setIncrememt] = useState(incrementData ? incrementData : 0)
+  const [incrememt, setIncrememt] = useState(0)
+  const [incrememt2, setIncrememt2] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   const [displaydFolder, setDisplaydFolder] = useState('All Notes')
   const [colors, setColors] = useState({
@@ -49,6 +49,10 @@ function App() {
 
   const notesListRef = useRef();
   const textAreaRef = useRef()
+  const navigate = useNavigate();
+  const navToWorkSpace = useCallback(() => navigate('/workSpace', {replace: true}), [navigate]);
+  const navToAllNotes = useCallback(() => navigate('/', {replace: true}), [navigate]);
+  const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', {replace: true}), [navigate]);
 
   //FUNCTIONS -----------------------------------
   function createNewNote() {
@@ -92,17 +96,13 @@ function App() {
     return new Date(Date.now()).toLocaleString()
   }
 
-  function handleOnSave(event) {
-    event.preventDefault();
-    setMode("showNotesMode")
-  }
-
   function handleOnDelete(id) {
     setNotes(notes.filter(note => note.id != id))
-    displaydNote == notes[notes.findIndex(note => note.id === id)] && setMode("showNotesMode");
+    displaydNote === notes[notes.findIndex(note => note.id === id)] && setDisplaydNote(notes[0]);
   }
 
   function handleOnEdit(id) {
+    navToWorkSpace()
     mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
     setMode('writeNoteMode');
     mode === 'writeNoteMode' && textAreaRef.current.focus()
@@ -130,11 +130,7 @@ function App() {
   useEffect(() => {
     setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
     mode === 'writeNoteMode' && textAreaRef.current.focus()
-
-    if (notes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
-      //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
-      mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
-    }
+    
   }, [displaydNote]);
 
   useEffect(() => {
@@ -143,16 +139,23 @@ function App() {
     mode === undefined && setMode('showNotesMode')
 
     if (notes.length === 0 && mode != 'searchMode') {
+      navToNoNotesYet()
       setMode('noNotesMode')
       setIncrememt(0)
     }
   }, [notes]);
 
   useEffect(() => {
-    window.localStorage.setItem('INCREMENT_DATA', JSON.stringify(incrememt))
     setDisplaydNote(notes[notes.length - 1])
-
+    setIncrememt2(prev => prev + 1)
   }, [incrememt]);
+
+  useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
+    if (notes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
+      //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
+      mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
+    }
+  }, [incrememt2]);
 
   useEffect(() => {
     mode != 'writeNoteMode' && setDisplaydNote({})
@@ -178,11 +181,9 @@ function App() {
             displaydNote={displaydNote}
             notes={notes}
             onChange={handleChangeText}
-            onSave={handleOnSave}
             onDelete={handleOnDelete}
             onEdit={handleOnEdit}
             onNewNote={createNewNote}
-            incrememt={incrememt}
             notesListRef={notesListRef}
             textAreaRef={textAreaRef}
             displaydFolder={displaydFolder}

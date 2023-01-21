@@ -14,7 +14,6 @@ function WorkSpace(props) {
                     notes={notes}
                     onEdit={onEdit}
                     onDelete={onDelete}
-                    incrememt={incrememt}
                     onNotePressed={handleNotePressed}
                     notesListRef={notesListRef}
                     displaydFolder={displaydFolder}

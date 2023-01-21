@@ -166,7 +166,7 @@ body #background #app #main #myNotes {
                 }
 
                 .noteText {
-                    height: 75%;
+                    height: 80%;
                     inline-size: 100%;
                     overflow-wrap: break-word;
                     overflow: hidden;
@@ -176,9 +176,9 @@ body #background #app #main #myNotes {
 
                 .lastModified {
                     font-size: 13px;
-                    margin: 0 0 3px;
+                    margin: 0 0 5px;
                     color: var(--lastModifiedColor);
-                    height: 12%;
+                    height: 7%;
                 }
 
                 .deleteBtnContainer {

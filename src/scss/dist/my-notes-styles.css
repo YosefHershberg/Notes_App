@@ -142,7 +142,7 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox:hov
   border: var(--lastModifiedColor) solid 1px;
 }
 body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .noteText, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .noteText {
-  height: 75%;
+  height: 80%;
   inline-size: 100%;
   overflow-wrap: break-word;
   overflow: hidden;
@@ -151,9 +151,9 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .no
 }
 body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .lastModified, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .lastModified {
   font-size: 13px;
-  margin: 0 0 3px;
+  margin: 0 0 5px;
   color: var(--lastModifiedColor);
-  height: 12%;
+  height: 7%;
 }
 body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer {
   display: flex;
