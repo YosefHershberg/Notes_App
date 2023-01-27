@@ -48,7 +48,7 @@ function MyNotes(props) {
         notes.filter(note => note.folder === folderName).forEach(note => note.folder = 'All Notes')
         //^^^^^^moving all the notes in deleted folder to All Notes
         setFolderNamesArr(folderNamesArr.filter(name => name != folderName))
-        props.onChangeFolder('All Notes')
+        onChangeFolder('All Notes')
     }
 
     useEffect(() => {

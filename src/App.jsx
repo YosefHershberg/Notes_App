@@ -81,7 +81,7 @@ function App() {
     navToWorkSpace()
     mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
     setMode('writeNoteMode');
-    mode === 'writeNoteMode' && textAreaRef.current.focus()
+    // mode === 'writeNoteMode' && textAreaRef.current.focus()
   }
 
   function handleShowNotes() {
