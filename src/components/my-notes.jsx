@@ -9,7 +9,7 @@ function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
     // window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify([]))
 
-    const { onDelete, onEdit, notes, displaydFolder, onChangeFolder, displaydNotes, onNewNote } = props
+    const { onDelete, onEdit, notes, displaydFolder, onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
 
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])
     const [writeNameMode, setWriteNameMode] = useState(false)
@@ -29,6 +29,7 @@ function MyNotes(props) {
         tempFolderNamesArr[tempFolderNamesArr.length - 1] = folderInputValue
         window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(tempFolderNamesArr))
         setFolderNamesArr(tempFolderNamesArr)
+        setDisplaydFolder(folderInputValue)
     }
 
     function handleNameInputChange(name) {

@@ -157,6 +157,7 @@ function App() {
             notesListRef={notesListRef}
             textAreaRef={textAreaRef}
             displaydFolder={displaydFolder}
+            setDisplaydFolder={setDisplaydFolder}
             onChangeFolder={handleChangeFolder}
           />
         </div>
