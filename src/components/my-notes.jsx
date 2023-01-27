@@ -7,6 +7,8 @@ import Styles from '../scss/styles.module.scss'
 
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
+
+    // edwdw
     // window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify([]))
 
     const { onDelete, onEdit, notes, displaydFolder, onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
