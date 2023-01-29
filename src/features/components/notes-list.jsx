@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux';
 import { selectedAllNotes } from '../slices/notesSlice';
 
 function NotesList(props) {
+    const { onDelete, onEdit, onNotePressed, notesListRef, displaydFolder, displaydNotes,  } = props
+
     const notesData = useSelector(selectedAllNotes)
-    const { onDelete, onEdit, onNotePressed, notesListRef, displaydFolder, displaydNotes } = props
 
     return (
         <React.Fragment>
             <div id={Styles.notesListWrapper}>
                 <h3 id={Styles.FolderName}>{displaydFolder}:</h3>
-                <ul ref={notesListRef} id={Styles.notesList}>
+                    <ul ref={notesListRef} id={Styles.notesList}>
                     {(displaydNotes != undefined ? displaydNotes : notesData).map(note =>
                         <NotesListNote
                             key={note.id}

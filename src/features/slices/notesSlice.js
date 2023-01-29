@@ -13,7 +13,6 @@ export const notesSlice = createSlice({
                 return {
                     payload: {
                         id: uuidv4(),
-                        // id: 111,
                         text: "",
                         lastModified: new Date(Date.now()).toLocaleString(),
                         folder: displaydFolder,
@@ -24,7 +23,6 @@ export const notesSlice = createSlice({
 
         editNote(state, action) {
             const {noteId, value} = action.payload
-            // console.log(noteId);
             const theNote = state.find(note => note.id === noteId)
             theNote.text = value
             theNote.lastModified = new Date(Date.now()).toLocaleString()

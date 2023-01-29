@@ -21,7 +21,6 @@ var notesSlice = (0, _toolkit.createSlice)({
         return {
           payload: {
             id: (0, _uuid.v4)(),
-            // id: 111,
             text: "",
             lastModified: new Date(Date.now()).toLocaleString(),
             folder: displaydFolder
@@ -32,8 +31,7 @@ var notesSlice = (0, _toolkit.createSlice)({
     editNote: function editNote(state, action) {
       var _action$payload = action.payload,
           noteId = _action$payload.noteId,
-          value = _action$payload.value; // console.log(noteId);
-
+          value = _action$payload.value;
       var theNote = state.find(function (note) {
         return note.id === noteId;
       });

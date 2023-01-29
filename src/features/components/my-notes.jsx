@@ -10,20 +10,23 @@ import { selectedAllNotes } from '../slices/notesSlice';
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
 
-    const notesData = useSelector(selectedAllNotes)
-
-    const { onDelete, onEdit, notes,  onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
-
+    
+    const { onDelete, onEdit,  onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
+    
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])
     const [writeNameMode, setWriteNameMode] = useState(false)
     const [folderInputValue, setFolderInputValue] = useState()
+    const [scrollTriger, setScrollTriger] = useState()
     const notesListRef = useRef()
+
+    const notesData = useSelector(selectedAllNotes)
 
     function handleAddNewFolder() {
         if (!writeNameMode) {
             setWriteNameMode(true)
             setFolderNamesArr([...folderNamesArr, ''])
         }
+        notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop
     }
 
     function handleSaveFolder() {
@@ -33,11 +36,7 @@ function MyNotes(props) {
         window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(tempFolderNamesArr))
         setFolderNamesArr(tempFolderNamesArr)
         setDisplaydFolder(folderInputValue)
-    }
-
-    function handleNameInputChange(name) {
-        notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop
-        setFolderInputValue(name)
+        setScrollTriger(prev => !prev)
     }
 
     function handleKeyDown(event) {
@@ -56,6 +55,9 @@ function MyNotes(props) {
 
     useEffect(() => {
         notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop
+    }, [scrollTriger]);
+
+    useEffect(() => {
         window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(folderNamesArr))
     }, [folderNamesArr]);
 
@@ -73,7 +75,7 @@ function MyNotes(props) {
                                     <FolderOption
                                         key={uuidv4()}
                                         folderOption={folderName}
-                                        onNameInputChange={handleNameInputChange}
+                                        onNameInputChange={setFolderInputValue}
                                         folderInputValue={folderInputValue}
                                         onKeyDown={handleKeyDown}
                                         onChangeFolder={onChangeFolder}

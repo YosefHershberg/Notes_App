@@ -11,7 +11,7 @@ import { selectedAllNotes, deleteNote } from '../slices/notesSlice';
 import { displaydNote } from '../slices/displaydNoteSlice';
 
 function Main(props) {
-    const { mode, setDisplaydNote, onEdit, onNewNote, notesListRef, displaydFolder, setDisplaydFolder, onChangeFolder } = props;
+    const { setDisplaydNote, onEdit, onNewNote, notesListRef, displaydFolder, setDisplaydFolder, onChangeFolder } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
     const notesData = useSelector(selectedAllNotes)
     const dispatch = useDispatch()
@@ -38,7 +38,6 @@ function Main(props) {
             <div id={Styles.main}>
                 <Routes>
                     <Route path='/workSpace' element={<WorkSpace
-                        mode={mode}
                         displaydNote={displaydNote}
                         onEdit={onEdit}
                         onDelete={handleDeleteAndFade}

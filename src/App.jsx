@@ -18,6 +18,7 @@ function App() {
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   const [displaydFolder, setDisplaydFolder] = useState('All Notes')
+  const [scrollTriger , setScrollTriger] = useState(true)
   const notesListRef = useRef();
 
   //ROUTING -----------------------------------
@@ -78,18 +79,19 @@ function App() {
       setIncrememt(0)
     }
 
-    // console.log(notesData);
   }, [notesData]);
 
+  useEffect(() => { 
+    dispatch(setDisplaydNote(notesData[notesData.length - 1]))
+    setScrollTriger(prev => !prev)
+  }, [incrememt]);
+  
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
     if (notesData.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
       mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
     }
-
-    // console.log(setDisplaydNote);
-    dispatch(setDisplaydNote(notesData[notesData.length - 1]))
-  }, [incrememt]);
+  }, [scrollTriger]);
 
   useEffect(() => {
     mode != 'writeNoteMode' && dispatch(setDisplaydNote({}))
@@ -115,7 +117,6 @@ function App() {
             lightColorMode={lightColorMode}
           />
           <Main
-            mode={mode}
             setDisplaydNote={setDisplaydNote}
             onEdit={handleOnEdit}
             onNewNote={createNewNote}
