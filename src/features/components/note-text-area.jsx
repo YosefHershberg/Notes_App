@@ -7,7 +7,6 @@ import { editNote } from '../slices/notesSlice';
 import { displaydNote } from '../slices/displaydNoteSlice';
 
 function NoteTextArea(props) {
-    const { onSave } = props;
     const [lastModifiedState, setLastModifiedState] = useState()
     const [textareaValue, setTextareaValue] = useState()
     const textAreaRef = useRef()
@@ -30,7 +29,7 @@ function NoteTextArea(props) {
 
     return (
         <React.Fragment>
-            <form onSubmit={onSave} id={Styles.formContainer}>
+            <form id={Styles.formContainer}>
                 <div id={Styles.formDatailsContainer}>
                     <div id={Styles.lastModifiedContainer}>
                         <i id={Styles.lastModifiedTitle}>Last Modified:</i>
