@@ -29,10 +29,8 @@ function App() {
   
   //REDUXING ----------------------------------
   const dispatch = useDispatch()
-  const notesData = useSelector(selectedAllNotes)
+  const allNotes = useSelector(selectedAllNotes)
   const displaydFolder = useSelector(displaydFolderData)
-
-  console.log(displaydFolder);
   
   //FUNCTIONS -----------------------------------
   function createNewNote() {
@@ -47,9 +45,9 @@ function App() {
   }
 
   function handleOnEdit(id) {
-    const theNote = notesData.find(note => note.id === id)
+    const theNote = allNotes.find(note => note.id === id)
     console.log(displaydFolder != 'All Notes', theNote.folder);
-    displaydFolder != 'All Notes' && setDisplaydFolder(theNote.folder) 
+    displaydFolder != 'All Notes' && dispatch(setDisplaydFolder(theNote.folder))
     //^^^ this is for when the note was selected from the search
     mode != 'noNotesMode' && dispatch(setDisplaydNote(theNote))
     setMode('writeNoteMode');
@@ -69,31 +67,31 @@ function App() {
   }
 
   function handleChangeFolder(folderName) {
-    setDisplaydFolder(folderName)
+    dispatch(setDisplaydFolder(folderName))
   }
 
   //HOOKS
   //----------------------
   useEffect(() => {
-    window.localStorage.setItem('NOTES_DATA', JSON.stringify(notesData))
+    window.localStorage.setItem('NOTES_DATA', JSON.stringify(allNotes))
 
     mode === undefined && setMode('showNotesMode')
 
-    if (notesData.length === 0 && mode != 'searchMode') {
+    if (allNotes.length === 0 && mode != 'searchMode') {
       navToNoNotesYet()
       setMode('noNotesMode')
       setIncrememt(0)
     }
 
-  }, [notesData]);
+  }, [allNotes]);
 
   useEffect(() => { 
-    dispatch(setDisplaydNote(notesData[notesData.length - 1]))
+    dispatch(setDisplaydNote(allNotes[allNotes.length - 1]))
     setScrollTriger(prev => !prev)
   }, [incrememt]);
   
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
-    if (notesData.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
+    if (allNotes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
       mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
     }
@@ -128,8 +126,6 @@ function App() {
             onEdit={handleOnEdit}
             onNewNote={createNewNote}
             notesListRef={notesListRef}
-            displaydFolder={displaydFolder}
-            setDisplaydFolder={setDisplaydFolder}
             onChangeFolder={handleChangeFolder}
           />
         </div>

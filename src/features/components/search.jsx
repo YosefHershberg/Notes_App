@@ -5,17 +5,16 @@ import { useSelector } from 'react-redux';
 import { selectedAllNotes } from '../slices/notesSlice';
 
 function Search(props) {
+    const { onEdit } = props
     const [options, setOptions] = useState([])
     const [input, setInput] = useState()
     const inputArea = useRef();
-    const notesData = useSelector(selectedAllNotes)
-
-    const { onEdit } = props
+    const allNotes = useSelector(selectedAllNotes)
 
     function handleSearchEngine(event) {
         const results = []
 
-        notesData.forEach(note => {
+        allNotes.forEach(note => {
             note.text.includes(event.target.value) && results.push(note)
         });
 
@@ -51,8 +50,6 @@ function Search(props) {
                             </a>
                         </div>
                     </div>
-                    {/* <input ref={inputArea} id='search-input' type="text" placeholder=' Serach notes ...' onChange={handleSearchEngine} /> */}
-                    {/* <button id='search-btn'>Search</button> */}
                     <div id={Styles.optionContainerWrapper}>
                         {options.length > 0 && <div id={Styles.optionsContainer}>
                             {options.map(option =>
@@ -64,8 +61,6 @@ function Search(props) {
                         </div>}
                     </div>
                 </div>
-
-
             </div>
         </React.Fragment >
     );

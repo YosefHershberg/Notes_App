@@ -4,14 +4,15 @@ import FolderOption from './folder-option';
 import NoteBox from './note-box';
 import NoNotesYet from './no-notses-yet';
 import Styles from '../scss/styles.module.scss'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectedAllNotes } from '../slices/notesSlice';
+import { setDisplaydFolder } from '../slices/displaydFolderSlice';
 
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
     //thing about how to set folderNamesArr algorithmecly the first time the component renders
 
-    const { onDelete, onEdit,  onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
+    const { onDelete, onEdit,  onChangeFolder, displaydNotes, onNewNote } = props
     
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])
     const [writeNameMode, setWriteNameMode] = useState(false)
@@ -19,8 +20,9 @@ function MyNotes(props) {
     const [scrollTriger, setScrollTriger] = useState()
     const notesListRef = useRef()
 
-    const notesData = useSelector(selectedAllNotes)
-
+    const allNotes = useSelector(selectedAllNotes)
+    const dispatch = useDispatch()
+  
     function handleAddNewFolder() {
         if (!writeNameMode) {
             setWriteNameMode(true)
@@ -35,7 +37,7 @@ function MyNotes(props) {
         tempFolderNamesArr[tempFolderNamesArr.length - 1] = folderInputValue
         window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(tempFolderNamesArr))
         setFolderNamesArr(tempFolderNamesArr)
-        setDisplaydFolder(folderInputValue)
+        dispatch(setDisplaydFolder(folderInputValue))
         setScrollTriger(prev => !prev)
     }
 
@@ -47,7 +49,7 @@ function MyNotes(props) {
     }
 
     function handleDeleteFolder(folderName) {
-        notesData.filter(note => note.folder === folderName).forEach(note => note.folder = 'All Notes')
+        allNotes.filter(note => note.folder === folderName).forEach(note => note.folder = 'All Notes')
         //^^^^^^moving all the notes in deleted folder to All Notes
         setFolderNamesArr(folderNamesArr.filter(name => name != folderName))
         props.onChangeFolder('All Notes')
