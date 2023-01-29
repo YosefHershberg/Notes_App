@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SearchOption from './search-option';
-import Styles from '../scss/styles.module.scss'
+import Styles from '../scss/styles.module.scss';
+import { useSelector } from 'react-redux';
+import { selectedAllNotes } from '../slices/notesSlice';
 
 function Search(props) {
     const [options, setOptions] = useState([])
     const [input, setInput] = useState()
     const inputArea = useRef();
+    const notesData = useSelector(selectedAllNotes)
 
-    const { notes, onEdit } = props
+    const { onEdit } = props
 
     function handleSearchEngine(event) {
         const results = []
 
-        notes.forEach(note => {
+        notesData.forEach(note => {
             note.text.includes(event.target.value) && results.push(note)
         });
 

@@ -5,26 +5,33 @@ import MyNotes from './my-notes';
 import NoNotesYet from './no-notses-yet';
 import Search from './search';
 import { Routes, Route, Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectedAllNotes, deleteNote } from '../slices/notesSlice';
+// import { deleteNote } from '../slices/notesSlice';
+import { displaydNote } from '../slices/displaydNoteSlice';
 
 function Main(props) {
-    const { mode, notes, displaydNote, onChange, onSave, onEdit, onDelete, onNewNote, notesListRef, textAreaRef, displaydFolder, setDisplaydFolder, onChangeFolder } = props;
+    const { mode, setDisplaydNote, onSave, onEdit, onNewNote, notesListRef, displaydFolder, setDisplaydFolder, onChangeFolder } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
+    const notesData = useSelector(selectedAllNotes)
+    const dispatch = useDispatch()
 
     function handleDeleteAndFade(note, element) {
         element.classList.add('fade-out')
 
         setTimeout(() => {
-            onDelete(note.id)
+            displaydNote.id === notesData.find(note1 => note1.id === note.id).id && setDisplaydNote(notesData[0]);
+            dispatch(deleteNote({ noteId: note.id }))
         }, 250);
     }
 
     useEffect(() => {
         let tempDisplaydNotes = [];
         tempDisplaydNotes = (displaydFolder != 'All Notes' ?
-            notes.filter(note => note.folder === displaydFolder)
-            : notes)
+            notesData.filter(note => note.folder === displaydFolder)
+            : notesData)
         setDisplaydNotes(tempDisplaydNotes)
-    }, [displaydFolder, notes]);
+    }, [displaydFolder, notesData]);
 
     return (
         <React.Fragment>
@@ -32,14 +39,11 @@ function Main(props) {
                 <Routes>
                     <Route path='/workSpace' element={<WorkSpace
                         mode={mode}
-                        notes={notes}
                         displaydNote={displaydNote}
-                        onChange={onChange}
                         onSave={onSave}
                         onEdit={onEdit}
                         onDelete={handleDeleteAndFade}
                         notesListRef={notesListRef}
-                        textAreaRef={textAreaRef}
                         displaydFolder={displaydFolder}
                         displaydNotes={displaydNotes}
                         onChangeFolder={onChangeFolder}
@@ -47,7 +51,6 @@ function Main(props) {
 
                     <Route path='/' element={<MyNotes
                         onDelete={handleDeleteAndFade}
-                        notes={notes}
                         onEdit={onEdit}
                         displaydFolder={displaydFolder}
                         setDisplaydFolder={setDisplaydFolder}
@@ -61,7 +64,6 @@ function Main(props) {
                     />} />
 
                     <Route path='/search' element={<Search
-                        notes={notes}
                         onEdit={onEdit}
                     />} />
                 </Routes>

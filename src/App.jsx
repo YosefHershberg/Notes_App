@@ -1,46 +1,38 @@
-import Styles from "./scss/styles.module.scss"
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import NavBar from "./components/nav-bar";
-import Main from "./components/main";
-import { useNavigate } from 'react-router-dom';
+import Styles from "./features/scss/styles.module.scss"
+import NavBar from "./features/components/nav-bar";
+import Main from "./features/components/main";
 import modeColors from "./modeColors";
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { addNote, editNote, deleteNote, selectedAllNotes } from './features/slices/notesSlice'
+import { setDisplaydNote } from "./features/slices/displaydNoteSlice";
 
 function App() {
-  let notesData = JSON.parse(window.localStorage.getItem('NOTES_DATA'))
+
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
-
-  // notesData = []
-  // colorModeData = true
-
-  //STATE etc.
-  //--------------------------------------------
-  const [notes, setNotes] = useState(notesData ? notesData : []);
-  const [displaydNote, setDisplaydNote] = useState({});
+  
+  //STATE etc. -----------------------------
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   const [displaydFolder, setDisplaydFolder] = useState('All Notes')
-  
   const notesListRef = useRef();
-  const textAreaRef = useRef()
 
+  //ROUTING -----------------------------------
   const navigate = useNavigate();
   const navToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate]);
   const navToAllNotes = useCallback(() => navigate('/', { replace: true }), [navigate]);
   const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', { replace: true }), [navigate]);
-
+  
+  //REDUXING ----------------------------------
+  const dispatch = useDispatch()
+  const notesData = useSelector(selectedAllNotes)
+  
   //FUNCTIONS -----------------------------------
   function createNewNote() {
-    const newNote = {
-      id: getRandomString(),
-      // id: Date.now(), //This would also work
-      text: "",
-      lastModified: timeStamp(),
-      folder: displaydFolder,
-    };
-
-    setNotes([...notes, newNote]);
-    setDisplaydNote(newNote)
+    dispatch(addNote(displaydFolder))
     setIncrememt(prev => prev + 1)
 
     if (mode === 'noNotesMode') {
@@ -50,38 +42,11 @@ function App() {
     }
   }
 
-  function getRandomString() {
-    let str = '';
-    const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 6; i++) {
-      str += possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length));
-    }
-    return str;
-  }
-
-  function handleChangeText(event) {
-    setDisplaydNote({
-      id: displaydNote.id,
-      text: event.target.value,
-      lastModified: timeStamp(),
-      folder: displaydNote.folder
-    });
-  }
-
-  function timeStamp() {
-    return new Date(Date.now()).toLocaleString()
-  }
-
-  function handleOnDelete(id) {
-    setNotes(notes.filter(note => note.id != id))
-    displaydNote === notes[notes.findIndex(note => note.id === id)] && setDisplaydNote(notes[0]);
-  }
-
   function handleOnEdit(id) {
     navToWorkSpace()
-    mode != 'noNotesMode' && setDisplaydNote(notes[notes.findIndex(note => note.id === id)])
+    // mode != 'noNotesMode' && setDisplaydNote(notesData.find(note => note.id === id))
+    mode != 'noNotesMode' && dispatch(setDisplaydNote(notesData.find(note => note.id === id)))
     setMode('writeNoteMode');
-    // mode === 'writeNoteMode' && textAreaRef.current.focus()
   }
 
   function handleShowNotes() {
@@ -102,38 +67,41 @@ function App() {
 
   //HOOKS
   //----------------------
-
   useEffect(() => {
-    setNotes(notes.map(note => (note.id === displaydNote.id) ? displaydNote : note))
-    mode === 'writeNoteMode' && textAreaRef.current.focus()
-  }, [displaydNote]);
-
-  useEffect(() => {
-    window.localStorage.setItem('NOTES_DATA', JSON.stringify(notes))
+    window.localStorage.setItem('NOTES_DATA', JSON.stringify(notesData))
 
     mode === undefined && setMode('showNotesMode')
 
-    if (notes.length === 0 && mode != 'searchMode') {
+    if (notesData.length === 0 && mode != 'searchMode') {
       navToNoNotesYet()
       setMode('noNotesMode')
       setIncrememt(0)
     }
-  }, [notes]);
+
+    // console.log(notesData);
+  }, [notesData]);
 
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
-    if (notes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
+    if (notesData.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
       mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
     }
+
+    // console.log(setDisplaydNote);
+    dispatch(setDisplaydNote(notesData[notesData.length - 1]))
   }, [incrememt]);
 
   useEffect(() => {
-    mode != 'writeNoteMode' && setDisplaydNote({})
+    mode != 'writeNoteMode' && dispatch(setDisplaydNote({}))
   }, [mode]);
 
   useEffect(() => {
     window.localStorage.setItem('COLOR_MODE_DATA', JSON.stringify(lightColorMode))
   }, [lightColorMode]);
+
+  useEffect(() => {
+    navToAllNotes()
+  }, []);
 
   return (
     <React.Fragment>
@@ -148,14 +116,10 @@ function App() {
           />
           <Main
             mode={mode}
-            displaydNote={displaydNote}
-            notes={notes}
-            onChange={handleChangeText}
-            onDelete={handleOnDelete}
+            setDisplaydNote={setDisplaydNote}
             onEdit={handleOnEdit}
             onNewNote={createNewNote}
             notesListRef={notesListRef}
-            textAreaRef={textAreaRef}
             displaydFolder={displaydFolder}
             setDisplaydFolder={setDisplaydFolder}
             onChangeFolder={handleChangeFolder}
