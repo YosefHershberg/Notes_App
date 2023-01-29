@@ -3,11 +3,11 @@ import Styles from "./features/scss/styles.module.scss"
 import NavBar from "./features/components/nav-bar";
 import Main from "./features/components/main";
 import modeColors from "./modeColors";
-import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { addNote, editNote, deleteNote, selectedAllNotes } from './features/slices/notesSlice'
+import { addNote, selectedAllNotes } from './features/slices/notesSlice'
 import { setDisplaydNote } from "./features/slices/displaydNoteSlice";
+import { displaydFolderData, setDisplaydFolder } from './features/slices/displaydFolderSlice'
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
-  const [displaydFolder, setDisplaydFolder] = useState('All Notes')
+  // const [displaydFolder, setDisplaydFolder] = useState('All Notes')
   const [scrollTriger , setScrollTriger] = useState(true)
   const notesListRef = useRef();
 
@@ -30,6 +30,9 @@ function App() {
   //REDUXING ----------------------------------
   const dispatch = useDispatch()
   const notesData = useSelector(selectedAllNotes)
+  const displaydFolder = useSelector(displaydFolderData)
+
+  console.log(displaydFolder);
   
   //FUNCTIONS -----------------------------------
   function createNewNote() {
@@ -44,10 +47,13 @@ function App() {
   }
 
   function handleOnEdit(id) {
-    navToWorkSpace()
-    // mode != 'noNotesMode' && setDisplaydNote(notesData.find(note => note.id === id))
-    mode != 'noNotesMode' && dispatch(setDisplaydNote(notesData.find(note => note.id === id)))
+    const theNote = notesData.find(note => note.id === id)
+    console.log(displaydFolder != 'All Notes', theNote.folder);
+    displaydFolder != 'All Notes' && setDisplaydFolder(theNote.folder) 
+    //^^^ this is for when the note was selected from the search
+    mode != 'noNotesMode' && dispatch(setDisplaydNote(theNote))
     setMode('writeNoteMode');
+    navToWorkSpace()
   }
 
   function handleShowNotes() {

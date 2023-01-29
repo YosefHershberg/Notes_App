@@ -9,6 +9,7 @@ import { selectedAllNotes } from '../slices/notesSlice';
 
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
+    //thing about how to set folderNamesArr algorithmecly the first time the component renders
 
     const { onDelete, onEdit,  onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
     

@@ -15,6 +15,8 @@ var _notesSlice = _interopRequireDefault(require("../features/slices/notesSlice"
 
 var _displaydNoteSlice = _interopRequireDefault(require("../features/slices/displaydNoteSlice"));
 
+var _displaydFolderSlice = _interopRequireDefault(require("../features/slices/displaydFolderSlice"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -24,7 +26,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var store = (0, _toolkit.configureStore)({
   reducer: {
     notes: _notesSlice["default"],
-    displaydNote: _displaydNoteSlice["default"]
+    displaydNote: _displaydNoteSlice["default"],
+    displaydFolder: _displaydFolderSlice["default"]
   }
 });
 exports.store = store;

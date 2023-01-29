@@ -22,7 +22,7 @@ function Main(props) {
             displaydNote.id === notesData.find(note1 => note1.id === note.id).id && setDisplaydNote(notesData[0]);
             dispatch(deleteNote({ noteId: note.id }))
             displaydFolder != 'All Notes' && displaydNotes.length === 1 && navToAllNotes()
-            // displaydNotes.length === 1, 1 and not 0 because the note wasnt actually deleted yet
+            // displaydNotes.length === 1, 1 and not 0 because the note wasnt actually deleted yet ^^^
         }, 250);
 
     }
