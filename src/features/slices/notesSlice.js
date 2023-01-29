@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid';
 
+const stateFromStorage = JSON.parse(localStorage.getItem('ALL_NOTES'))
+
 export const notesSlice = createSlice({
     name: 'notes',
-    initialState: [],
+    initialState: stateFromStorage || [],
     reducers: {
         addNote: {
             reducer(state, action) {

@@ -10,15 +10,14 @@ import { setDisplaydNote } from "./features/slices/displaydNoteSlice";
 import { displaydFolderData, setDisplaydFolder } from './features/slices/displaydFolderSlice'
 
 function App() {
-
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
-  
+
   //STATE etc. -----------------------------
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   // const [displaydFolder, setDisplaydFolder] = useState('All Notes')
-  const [scrollTriger , setScrollTriger] = useState(true)
+  const [scrollTriger, setScrollTriger] = useState(true)
   const notesListRef = useRef();
 
   //ROUTING -----------------------------------
@@ -26,12 +25,12 @@ function App() {
   const navToAllNotes = useCallback(() => navigate('/', { replace: true }), [navigate]);
   const navToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate]);
   const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', { replace: true }), [navigate]);
-  
+
   //REDUXING ----------------------------------
   const dispatch = useDispatch()
   const allNotes = useSelector(selectedAllNotes)
   const displaydFolder = useSelector(displaydFolderData)
-  
+
   //FUNCTIONS -----------------------------------
   function createNewNote() {
     dispatch(addNote(displaydFolder))
@@ -72,8 +71,9 @@ function App() {
 
   //HOOKS
   //----------------------
+  
   useEffect(() => {
-    window.localStorage.setItem('NOTES_DATA', JSON.stringify(allNotes))
+    window.localStorage.setItem('ALL_NOTES', JSON.stringify(allNotes))
 
     mode === undefined && setMode('showNotesMode')
 
@@ -82,14 +82,13 @@ function App() {
       setMode('noNotesMode')
       setIncrememt(0)
     }
-
   }, [allNotes]);
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(setDisplaydNote(allNotes[allNotes.length - 1]))
     setScrollTriger(prev => !prev)
   }, [incrememt]);
-  
+
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
     if (allNotes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet

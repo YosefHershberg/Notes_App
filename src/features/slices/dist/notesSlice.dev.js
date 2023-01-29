@@ -9,9 +9,10 @@ var _toolkit = require("@reduxjs/toolkit");
 
 var _uuid = require("uuid");
 
+var stateFromStorage = JSON.parse(localStorage.getItem('ALL_NOTES'));
 var notesSlice = (0, _toolkit.createSlice)({
   name: 'notes',
-  initialState: [],
+  initialState: stateFromStorage || [],
   reducers: {
     addNote: {
       reducer: function reducer(state, action) {
