@@ -23,8 +23,8 @@ function App() {
 
   //ROUTING -----------------------------------
   const navigate = useNavigate();
-  const navToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate]);
   const navToAllNotes = useCallback(() => navigate('/', { replace: true }), [navigate]);
+  const navToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate]);
   const navToNoNotesYet = useCallback(() => navigate('/noNotesYet', { replace: true }), [navigate]);
   
   //REDUXING ----------------------------------
@@ -117,6 +117,7 @@ function App() {
             lightColorMode={lightColorMode}
           />
           <Main
+            navToAllNotes={navToAllNotes}
             setDisplaydNote={setDisplaydNote}
             onEdit={handleOnEdit}
             onNewNote={createNewNote}

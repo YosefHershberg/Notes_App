@@ -10,7 +10,6 @@ import { selectedAllNotes } from '../slices/notesSlice';
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
 
-    
     const { onDelete, onEdit,  onChangeFolder, displaydNotes, setDisplaydFolder, onNewNote } = props
     
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])

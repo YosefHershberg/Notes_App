@@ -7,11 +7,10 @@ import Search from './search';
 import { Routes, Route, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectedAllNotes, deleteNote } from '../slices/notesSlice';
-// import { deleteNote } from '../slices/notesSlice';
 import { displaydNote } from '../slices/displaydNoteSlice';
 
 function Main(props) {
-    const { setDisplaydNote, onEdit, onNewNote, notesListRef, displaydFolder, setDisplaydFolder, onChangeFolder } = props;
+    const { setDisplaydNote, onEdit, onNewNote, notesListRef, displaydFolder, setDisplaydFolder, onChangeFolder, navToAllNotes } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
     const notesData = useSelector(selectedAllNotes)
     const dispatch = useDispatch()
@@ -22,7 +21,10 @@ function Main(props) {
         setTimeout(() => {
             displaydNote.id === notesData.find(note1 => note1.id === note.id).id && setDisplaydNote(notesData[0]);
             dispatch(deleteNote({ noteId: note.id }))
+            displaydFolder != 'All Notes' && displaydNotes.length === 1 && navToAllNotes()
+            // displaydNotes.length === 1, 1 and not 0 because the note wasnt actually deleted yet
         }, 250);
+
     }
 
     useEffect(() => {
