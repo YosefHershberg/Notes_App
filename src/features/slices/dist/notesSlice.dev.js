@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.deleteNote = exports.editNote = exports.addNote = exports.selectedAllNotes = exports.notesSlice = void 0;
+exports["default"] = exports.changeFolderToAllNotes = exports.deleteNote = exports.editNote = exports.addNote = exports.selectedAllNotes = exports.notesSlice = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -44,6 +44,14 @@ var notesSlice = (0, _toolkit.createSlice)({
       return state.filter(function (note) {
         return note.id != noteId;
       });
+    },
+    changeFolderToAllNotes: function changeFolderToAllNotes(state, action) {
+      var theNotes = state.filter(function (note) {
+        return note.folder === action.payload;
+      });
+      theNotes.map(function (note) {
+        return note.folder = 'All Notes';
+      });
     }
   }
 });
@@ -57,7 +65,9 @@ exports.selectedAllNotes = selectedAllNotes;
 var _notesSlice$actions = notesSlice.actions,
     addNote = _notesSlice$actions.addNote,
     editNote = _notesSlice$actions.editNote,
-    deleteNote = _notesSlice$actions.deleteNote;
+    deleteNote = _notesSlice$actions.deleteNote,
+    changeFolderToAllNotes = _notesSlice$actions.changeFolderToAllNotes;
+exports.changeFolderToAllNotes = changeFolderToAllNotes;
 exports.deleteNote = deleteNote;
 exports.editNote = editNote;
 exports.addNote = addNote;

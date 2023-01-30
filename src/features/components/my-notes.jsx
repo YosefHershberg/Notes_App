@@ -5,7 +5,7 @@ import NoteBox from './note-box';
 import NoNotesYet from './no-notses-yet';
 import Styles from '../scss/styles.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectedAllNotes } from '../slices/notesSlice';
+import { selectedAllNotes, changeFolderToAllNotes } from '../slices/notesSlice';
 import { setDisplaydFolder } from '../slices/displaydFolderSlice';
 
 function MyNotes(props) {
@@ -49,7 +49,7 @@ function MyNotes(props) {
     }
 
     function handleDeleteFolder(folderName) {
-        allNotes.filter(note => note.folder === folderName).forEach(note => note.folder = 'All Notes')
+        dispatch(changeFolderToAllNotes(folderName))
         //^^^^^^moving all the notes in deleted folder to All Notes
         setFolderNamesArr(folderNamesArr.filter(name => name != folderName))
         props.onChangeFolder('All Notes')
