@@ -9,11 +9,14 @@ body #background #app #main #workSpace {
 
     #notesListWrapper {
         width: 35%;
-        
+
         #FolderName {
             padding: 0 10px;
             color: var(--textColor);
             height: 7%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         #notesList {
@@ -106,7 +109,7 @@ body #background #app #main #workSpace {
     #formContainer {
         width: 65%;
         height: 100%;
-        padding:  0 5px;
+        padding: 0 5px;
 
         #formDatailsContainer {
             width: 100%;

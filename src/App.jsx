@@ -45,7 +45,6 @@ function App() {
 
   function handleOnEdit(id) {
     const theNote = allNotes.find(note => note.id === id)
-    console.log(displaydFolder != 'All Notes', theNote.folder);
     displaydFolder != 'All Notes' && dispatch(setDisplaydFolder(theNote.folder))
     //^^^ this is for when the note was selected from the search
     mode != 'noNotesMode' && dispatch(setDisplaydNote(theNote))

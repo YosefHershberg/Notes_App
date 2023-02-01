@@ -14,6 +14,9 @@ body #background #app #main #workSpace #notesListWrapper #FolderName {
   padding: 0 10px;
   color: var(--textColor);
   height: 7%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 body #background #app #main #workSpace #notesListWrapper #notesList {
   width: 100%;

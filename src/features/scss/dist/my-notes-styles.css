@@ -38,6 +38,9 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span {
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span:hover {
   opacity: 0.5;
