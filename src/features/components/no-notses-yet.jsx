@@ -1,9 +1,11 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef, useContext } from 'react';
+import { AppContext } from '../../App';
 import Styles from '../scss/styles.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 
-function NoNotesYet(props) {
+function NoNotesYet() {
     const [noNotesclassName, setNoNotesclassName] = useState(Styles.noNotesYet)
+    const { onNewNote } = useContext(AppContext)
     const navigate = useNavigate();
     const routeToWorkSpace = useCallback(() => navigate('/workSpace', { replace: true }), [navigate])
   
@@ -12,7 +14,8 @@ function NoNotesYet(props) {
         setNoNotesclassName(Styles.noNotesYetHidden)
         setTimeout(function () {
             routeToWorkSpace()
-            props.onNewNote()
+            onNewNote()
+            //TODO: CHANGE THIS TO CONTEXT
         }, 500);
 
     }

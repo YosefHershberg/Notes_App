@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Styles from '../scss/styles.module.scss'
-
+import { AppContext } from '../../App';
 
 function NotesListNote(props) {
-    const { note, onEdit, onDelete } = props;
+    const { note, onDelete } = props;
+    const { onEdit } = useContext(AppContext)
     const [notesListNoteClassName, setNotesListNoteClassName] = useState(Styles.notesListNoteFadein)
     const noteListNoteRef = useRef()
 

@@ -12,7 +12,7 @@ function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
     //thing about how to set folderNamesArr algorithmecly the first time the component renders
 
-    const { onDelete, onEdit,  onChangeFolder, displaydNotes, onNewNote } = props
+    const { onDelete, onChangeFolder, displaydNotes, } = props
     
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])
     const [writeNameMode, setWriteNameMode] = useState(false)
@@ -92,15 +92,12 @@ function MyNotes(props) {
 
                 <div id={Styles.gridOfNotes}>
                     {displaydNotes.length === 0 ?
-                        <NoNotesYet
-                            onNewNote={onNewNote}
-                        />
+                        <NoNotesYet />
                         : (<div className={Styles.textBoxContainer}>
                             {displaydNotes.map(note => (
                                 <NoteBox
                                     note={note}
                                     key={note.id}
-                                    onEdit={onEdit}
                                     onDelete={onDelete}
                                 />
                             ))}

@@ -7,26 +7,29 @@ import Search from './search';
 import { Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectedAllNotes, deleteNote } from '../slices/notesSlice';
-import { displaydNote } from '../slices/displaydNoteSlice';
+import { displaydNote, setDisplaydNote } from '../slices/displaydNoteSlice';
 import { displaydFolderData } from '../slices/displaydFolderSlice'
 
 function Main(props) {
-    const { setDisplaydNote, onEdit, onNewNote, notesListRef, onChangeFolder, navToAllNotes } = props;
+    const { notesListRef, onChangeFolder, navToAllNotes } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
     const dispatch = useDispatch()
     const allNotes = useSelector(selectedAllNotes)
     const displaydFolder = useSelector(displaydFolderData)
+    const displaydNoteData = useSelector(displaydNote)
 
     function handleDeleteAndFade(note, element) {
         element.classList.add('fade-out')
 
         setTimeout(() => {
-            displaydNote.id === allNotes.find(note1 => note1.id === note.id).id && setDisplaydNote(allNotes[0]);
+            displaydNoteData.id === note.id && dispatch(setDisplaydNote(allNotes[0]));
+            // ^^^ Checks if deleted note is the displayed note, if so displays first note
+            note.id === allNotes[0].id && displaydNoteData.id === note.id && dispatch(setDisplaydNote(allNotes[1]))
+            // ^^^ Checks if deleted note is the first note and the displayed note, if so displayes seconed note
             dispatch(deleteNote({ noteId: note.id }))
             displaydFolder != 'All Notes' && displaydNotes.length === 1 && navToAllNotes()
-            // "displaydNotes.length === 1" 1 and not 0 because the note wasnt actually deleted yet ^^^
+            // ^^^ "displaydNotes.length === 1" 1 and not 0 because the note wasnt actually deleted yet
         }, 250);
-
     }
 
     useEffect(() => {
@@ -42,30 +45,20 @@ function Main(props) {
             <div id={Styles.main}>
                 <Routes>
                     <Route path='/workSpace' element={<WorkSpace
-                        displaydNote={displaydNote}
-                        onEdit={onEdit}
                         onDelete={handleDeleteAndFade}
                         notesListRef={notesListRef}
-                        displaydFolder={displaydFolder}
                         displaydNotes={displaydNotes}
-                        onChangeFolder={onChangeFolder}
                     />} />
 
                     <Route path='/' element={<MyNotes
                         onDelete={handleDeleteAndFade}
-                        onEdit={onEdit}
                         onChangeFolder={onChangeFolder}
                         displaydNotes={displaydNotes}
-                        onNewNote={onNewNote}
                     />} />
 
-                    <Route path='/noNotesYet' element={<NoNotesYet
-                        onNewNote={onNewNote}
-                    />} />
+                    <Route path='/noNotesYet' element={<NoNotesYet />} />
 
-                    <Route path='/search' element={<Search
-                        onEdit={onEdit}
-                    />} />
+                    <Route path='/search' element={<Search />} />
                 </Routes>
             </div>
         </React.Fragment>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { AppContext } from '../../App';
 import Styles from "../scss/styles.module.scss"
 import { BiNotepad } from 'react-icons/bi'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -6,7 +7,8 @@ import { BiNote } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 function NavBar(props) {
-    const { onNewNote, onShowNotes, onSearch, lightColorMode } = props
+    const { onShowNotes, onSearch, lightColorMode } = props
+    const { onNewNote } = useContext(AppContext)
 
     return (
         <React.Fragment>
@@ -28,16 +30,12 @@ function NavBar(props) {
 
                 <div className={Styles.leftContainer}>
                     <div className={Styles.rightContainer}>
-                        <span className={Styles.colorModeOption}
-                        // style={{ opacity: !props.darkMode && 0.5 }}
-                        >light</span>
+                        <span className={Styles.colorModeOption}>light</span>
                         <label className={Styles.switch}>
                             <input type="checkbox" checked={!lightColorMode} onChange={props.onChangeColorMode} />
                             <span className={`${Styles.slider} ${Styles.round}`}></span>
                         </label>
-                        <span className={Styles.colorModeOption}
-                        // style={{ opacity: props.darkMode && 0.5 }}
-                        >dark</span>
+                        <span className={Styles.colorModeOption}>dark</span>
                     </div>
                 </div>
             </div>

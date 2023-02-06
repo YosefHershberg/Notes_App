@@ -4,16 +4,13 @@ import NoteTextArea from './note-text-area'
 import NotesList from './notes-list';
 
 function WorkSpace(props) {
-
-    const { onEdit, onDelete, notesListRef, displaydNotes, handleNotePressed } = props
+    const { onDelete, notesListRef, displaydNotes } = props
 
     return (
         <React.Fragment>
             <div id={Styles.workSpace}>
                 <NotesList
-                    onEdit={onEdit}
                     onDelete={onDelete}
-                    onNotePressed={handleNotePressed}
                     notesListRef={notesListRef}
                     displaydNotes={displaydNotes}
                 />

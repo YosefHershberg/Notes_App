@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import NotesListNote from './notes-list-note';
 import Styles from '../scss/styles.module.scss'
 import { useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { selectedAllNotes } from '../slices/notesSlice';
 import { displaydFolderData } from '../slices/displaydFolderSlice';
 
 function NotesList(props) {
-    const { onDelete, onEdit, onNotePressed, notesListRef, displaydNotes,  } = props
+    const { onDelete, notesListRef, displaydNotes } = props
 
     const allNotes = useSelector(selectedAllNotes)
     const displaydFolder = useSelector(displaydFolderData)
@@ -21,8 +21,6 @@ function NotesList(props) {
                             key={note.id}
                             note={note}
                             onDelete={onDelete}
-                            onEdit={onEdit}
-                            onNotePressed={onNotePressed}
                         />
                     )}
                 </ul>

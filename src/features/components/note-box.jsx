@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Styles from '../scss/styles.module.scss'
-import { Link } from 'react-router-dom'
+import { AppContext } from '../../App';
 
 function NoteBox(props) {
-    const { note, onEdit, onDelete } = props;
+    const { note, onDelete } = props;
+    const { onEdit } = useContext(AppContext)
     const [NoteBoxClassName, setTextBoxClassName] = useState(Styles.NoteBox)
 
     const noteBoxRef = useRef();

@@ -4,8 +4,7 @@ import Styles from '../scss/styles.module.scss';
 import { useSelector } from 'react-redux';
 import { selectedAllNotes } from '../slices/notesSlice';
 
-function Search(props) {
-    const { onEdit } = props
+function Search() {
     const [options, setOptions] = useState([])
     const [input, setInput] = useState()
     const inputArea = useRef();
@@ -56,7 +55,6 @@ function Search(props) {
                                 <SearchOption
                                     key={option.id}
                                     option={option}
-                                    onEdit={onEdit}
                                 />)}
                         </div>}
                     </div>

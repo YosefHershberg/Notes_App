@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, createContext } from "react";
 import Styles from "./features/scss/styles.module.scss"
 import NavBar from "./features/components/nav-bar";
 import Main from "./features/components/main";
@@ -9,6 +9,8 @@ import { addNote, selectedAllNotes } from './features/slices/notesSlice'
 import { setDisplaydNote } from "./features/slices/displaydNoteSlice";
 import { displaydFolderData, setDisplaydFolder } from './features/slices/displaydFolderSlice'
 
+export const AppContext = createContext();
+
 function App() {
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
 
@@ -16,7 +18,6 @@ function App() {
   const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
-  // const [displaydFolder, setDisplaydFolder] = useState('All Notes')
   const [scrollTriger, setScrollTriger] = useState(true)
   const notesListRef = useRef();
 
@@ -70,7 +71,7 @@ function App() {
 
   //HOOKS
   //----------------------
-  
+
   useEffect(() => {
     window.localStorage.setItem('ALL_NOTES', JSON.stringify(allNotes))
 
@@ -109,25 +110,24 @@ function App() {
 
   return (
     <React.Fragment>
-      <div id={Styles.background}>
-        <div id={Styles.app} style={lightColorMode ? modeColors.lightModeColors : modeColors.darkModeColors}>
-          <NavBar
-            onNewNote={createNewNote}
-            onShowNotes={handleShowNotes}
-            onSearch={handleSearch}
-            onChangeColorMode={handleChangeColorMode}
-            lightColorMode={lightColorMode}
-          />
-          <Main
-            navToAllNotes={navToAllNotes}
-            setDisplaydNote={setDisplaydNote}
-            onEdit={handleOnEdit}
-            onNewNote={createNewNote}
-            notesListRef={notesListRef}
-            onChangeFolder={handleChangeFolder}
-          />
+      <AppContext.Provider value={{onEdit: handleOnEdit, onNewNote: createNewNote}}>
+        <div id={Styles.background}>
+          <div id={Styles.app} style={lightColorMode ? modeColors.lightModeColors : modeColors.darkModeColors}>
+            <NavBar
+              onShowNotes={handleShowNotes}
+              onSearch={handleSearch}
+              onChangeColorMode={handleChangeColorMode}
+              lightColorMode={lightColorMode}
+            />
+            <Main
+              navToAllNotes={navToAllNotes}
+              setDisplaydNote={setDisplaydNote}
+              notesListRef={notesListRef}
+              onChangeFolder={handleChangeFolder}
+            />
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
 
     </React.Fragment>
   );
