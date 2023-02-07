@@ -35,15 +35,17 @@ export const notesSlice = createSlice({
             return state.filter(note => note.id != noteId)
         },
 
-        changeFolderToAllNotes(state, action) {
-            const theNotes = state.filter(note => note.folder === action.payload)
-            theNotes.map(note => note.folder = 'All Notes')
-        } 
+        changeFolderToNewName(state, action) {
+            const { oldName, newName } = action.payload
+            console.log(action.payload);
+            const theNotes = state.filter(note => note.folder === oldName)
+            theNotes.map(note => note.folder = newName)
+        }
     }
 })
 
 export const selectedAllNotes = (state) => state.notes
 
-export const { addNote, editNote, deleteNote, changeFolderToAllNotes} = notesSlice.actions
+export const { addNote, editNote, deleteNote, changeFolderToNewName} = notesSlice.actions
 
 export default notesSlice.reducer;

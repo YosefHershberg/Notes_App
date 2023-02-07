@@ -48,18 +48,26 @@ body #background #app #main #myNotes {
                             }
                         }
 
+                        .editBtn {
+                            color: var(--textColor);
+                            background-color: transparent;
+                            border: none;
+                            border-radius: 5px;
+                            &:hover {
+                                background-color: var(--noteBackgroundColor);
+                            }
+                        }
+
                         .deleteBtn {
                             color: rgb(219, 62, 62);
                             background-color: transparent;
                             border: none;
                             border-radius: 5px;
+                            &:hover {
+                                color: white;
+                                background-color: rgb(219, 62, 62);
+                            }
                         }
-
-                        .deleteBtn:hover {
-                            color: white;
-                            background-color: rgb(219, 62, 62);
-                        }
-
                     }
 
                     .FolderNameForm {

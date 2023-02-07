@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.changeFolderToAllNotes = exports.deleteNote = exports.editNote = exports.addNote = exports.selectedAllNotes = exports.notesSlice = void 0;
+exports["default"] = exports.changeFolderToNewName = exports.deleteNote = exports.editNote = exports.addNote = exports.selectedAllNotes = exports.notesSlice = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -45,12 +45,16 @@ var notesSlice = (0, _toolkit.createSlice)({
         return note.id != noteId;
       });
     },
-    changeFolderToAllNotes: function changeFolderToAllNotes(state, action) {
+    changeFolderToNewName: function changeFolderToNewName(state, action) {
+      var _action$payload2 = action.payload,
+          oldName = _action$payload2.oldName,
+          newName = _action$payload2.newName;
+      console.log(action.payload);
       var theNotes = state.filter(function (note) {
-        return note.folder === action.payload;
+        return note.folder === oldName;
       });
       theNotes.map(function (note) {
-        return note.folder = 'All Notes';
+        return note.folder = newName;
       });
     }
   }
@@ -66,8 +70,8 @@ var _notesSlice$actions = notesSlice.actions,
     addNote = _notesSlice$actions.addNote,
     editNote = _notesSlice$actions.editNote,
     deleteNote = _notesSlice$actions.deleteNote,
-    changeFolderToAllNotes = _notesSlice$actions.changeFolderToAllNotes;
-exports.changeFolderToAllNotes = changeFolderToAllNotes;
+    changeFolderToNewName = _notesSlice$actions.changeFolderToNewName;
+exports.changeFolderToNewName = changeFolderToNewName;
 exports.deleteNote = deleteNote;
 exports.editNote = editNote;
 exports.addNote = addNote;

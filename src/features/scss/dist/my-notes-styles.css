@@ -45,6 +45,15 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span:hover {
   opacity: 0.5;
 }
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .editBtn {
+  color: var(--textColor);
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .editBtn:hover {
+  background-color: var(--noteBackgroundColor);
+}
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn {
   color: #db3e3e;
   background-color: transparent;

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Styles from "../scss/styles.module.scss"
 
 function FolderOption(props) {
-    const { folderOption, onNameInputChange, onSaveFolderName, folderInputValue, onKeyDown, onChangeFolder, onDeleteFolder } = props;
+    const { onChangeFolderName, onNameInputChange, onSaveFolderName, folderInputValue, onKeyDown, onChangeFolder, onDeleteFolder } = props;
+    const [folderOption, setFolderOption] = useState(props.folderOption)
     const inputRef = useRef()
 
     useEffect(() => {
@@ -21,10 +22,13 @@ function FolderOption(props) {
                         onKeyDown={onKeyDown}
                         placeholder='Enter folder name...'
                     />
-                    <button onClick={onSaveFolderName}>Save</button>
+                    <button onClick={() => onSaveFolderName()}>Save</button>
                 </div>
                 : <div className={Styles.folderOption}>
                     <span onClick={() => onChangeFolder(folderOption)}>{folderOption}</span>
+                    <button className={Styles.editBtn} onClick={() => onChangeFolderName(folderOption)}>
+                        <i className="fa-solid fa-pen-to-square"></i> 
+                    </button>
                     <button className={Styles.deleteBtn} onClick={() => onDeleteFolder(folderOption)}>
                         <i className="fa-solid fa-trash"></i>
                     </button>
