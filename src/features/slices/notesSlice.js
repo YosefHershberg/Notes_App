@@ -37,7 +37,7 @@ export const notesSlice = createSlice({
 
         changeFolderToNewName(state, action) {
             const { oldName, newName } = action.payload
-            console.log(action.payload);
+            // console.log(action.payload);
             const theNotes = state.filter(note => note.folder === oldName)
             theNotes.map(note => note.folder = newName)
         }

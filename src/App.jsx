@@ -81,6 +81,7 @@ function App() {
       navToNoNotesYet()
       setMode('noNotesMode')
       setIncrememt(0)
+      dispatch(setDisplaydFolder('All Notes'))
     }
   }, [allNotes]);
 

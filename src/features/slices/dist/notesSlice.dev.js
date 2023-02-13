@@ -48,8 +48,8 @@ var notesSlice = (0, _toolkit.createSlice)({
     changeFolderToNewName: function changeFolderToNewName(state, action) {
       var _action$payload2 = action.payload,
           oldName = _action$payload2.oldName,
-          newName = _action$payload2.newName;
-      console.log(action.payload);
+          newName = _action$payload2.newName; // console.log(action.payload);
+
       var theNotes = state.filter(function (note) {
         return note.folder === oldName;
       });
