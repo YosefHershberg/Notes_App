@@ -15,7 +15,6 @@ function App() {
   let colorModeData = JSON.parse(window.localStorage.getItem('COLOR_MODE_DATA'))
 
   //STATE etc. -----------------------------
-  const [mode, setMode] = useState()
   const [incrememt, setIncrememt] = useState(0)
   const [lightColorMode, setLightColorMode] = useState(colorModeData)
   const [scrollTriger, setScrollTriger] = useState(true)
@@ -36,29 +35,14 @@ function App() {
   function createNewNote() {
     dispatch(addNote(displaydFolder))
     setIncrememt(prev => prev + 1)
-
-    if (mode === 'noNotesMode') {
-      setTimeout(() => setMode('writeNoteMode'), 500);
-    } else {
-      setMode('writeNoteMode')
-    }
   }
 
   function handleOnEdit(id) {
     const theNote = allNotes.find(note => note.id === id)
     displaydFolder != 'All Notes' && dispatch(setDisplaydFolder(theNote.folder))
     //^^^ this is for when the note was selected from the search
-    mode != 'noNotesMode' && dispatch(setDisplaydNote(theNote))
-    setMode('writeNoteMode');
+    dispatch(setDisplaydNote(theNote))
     navToWorkSpace()
-  }
-
-  function handleShowNotes() {
-    setMode("showNotesMode")
-  }
-
-  function handleSearch() {
-    setMode('searchMode')
   }
 
   function handleChangeColorMode() {
@@ -75,11 +59,8 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem('ALL_NOTES', JSON.stringify(allNotes))
 
-    mode === undefined && setMode('showNotesMode')
-
-    if (allNotes.length === 0 && mode != 'searchMode') {
+    if (allNotes.length === 0) {
       navToNoNotesYet()
-      setMode('noNotesMode')
       setIncrememt(0)
       dispatch(setDisplaydFolder('All Notes'))
     }
@@ -91,15 +72,11 @@ function App() {
   }, [incrememt]);
 
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
-    if (allNotes.filter(note => note.folder === displaydFolder).length > 1) { //checks if theere is at least 1 in the notes list
+    if (allNotes.filter(note => note.folder === displaydFolder).length > 1) { //checks if there is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
-      mode === 'writeNoteMode' && (notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop);
+      notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop;
     }
   }, [scrollTriger]);
-
-  useEffect(() => {
-    mode != 'writeNoteMode' && dispatch(setDisplaydNote({}))
-  }, [mode]);
 
   useEffect(() => {
     window.localStorage.setItem('COLOR_MODE_DATA', JSON.stringify(lightColorMode))
@@ -111,7 +88,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <AppContext.Provider value={{onEdit: handleOnEdit, onNewNote: createNewNote}}>
+      <AppContext.Provider value={{ onEdit: handleOnEdit, onNewNote: createNewNote }}>
         <div id={Styles.background}>
           <div id={Styles.app} style={lightColorMode ? modeColors.lightModeColors : modeColors.darkModeColors}>
             <NavBar
