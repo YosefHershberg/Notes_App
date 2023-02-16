@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Styles from '../scss/styles.module.scss'
+import { AiFillDelete } from 'react-icons/ai'
 import { AppContext } from '../../App';
 
 function NoteBox(props) {
@@ -24,7 +25,7 @@ function NoteBox(props) {
                 <div className={Styles.lastModified}><i>{note.lastModified}</i></div>
 
                 <div className={Styles.deleteBtnContainer}>
-                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked}>Delete <i className="fa-solid fa-trash"></i></button>
+                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked}>Delete <AiFillDelete className={Styles.icon}/></button>
                 </div>
             </div>
         </React.Fragment>

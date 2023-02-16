@@ -86,8 +86,9 @@ body #background #app #main #workSpace #notesListWrapper #notesList .notesListNo
   color: white;
   background-color: #db3e3e;
 }
-body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .fa-solid {
-  margin: 0 3px;
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .icon, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .icon, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .icon {
+  margin-bottom: 3px;
+  font-size: 15px;
 }
 body #background #app #main #workSpace #formContainer {
   width: 65%;

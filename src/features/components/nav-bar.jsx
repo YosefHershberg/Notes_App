@@ -7,7 +7,7 @@ import { BiNote } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 function NavBar(props) {
-    const { onShowNotes, onSearch, lightColorMode } = props
+    const { lightColorMode, onChangeColorMode } = props
     const { onNewNote } = useContext(AppContext)
 
     return (
@@ -21,10 +21,10 @@ function NavBar(props) {
                         <button id='new-note-btn' className={Styles.navBtn} onClick={onNewNote}>Create New Note <BiNote /></button>
                     </Link>
                     <Link to='/'>
-                        <button id='my-notes-btn' className={Styles.navBtn} onClick={onShowNotes}>My Notes <BiNotepad /></button>
+                        <button id='my-notes-btn' className={Styles.navBtn}>My Notes <BiNotepad /></button>
                     </Link>
                     <Link to='/search'>
-                        <button id='search-btn' className={Styles.navBtn} onClick={onSearch}>Search <AiOutlineSearch /></button>
+                        <button id='search-btn' className={Styles.navBtn}>Search <AiOutlineSearch /></button>
                     </Link>
                 </div>
 
@@ -32,7 +32,7 @@ function NavBar(props) {
                     <div className={Styles.rightContainer}>
                         <span className={Styles.colorModeOption}>light</span>
                         <label className={Styles.switch}>
-                            <input type="checkbox" checked={!lightColorMode} onChange={props.onChangeColorMode} />
+                            <input type="checkbox" checked={!lightColorMode} onChange={onChangeColorMode} />
                             <span className={`${Styles.slider} ${Styles.round}`}></span>
                         </label>
                         <span className={Styles.colorModeOption}>dark</span>

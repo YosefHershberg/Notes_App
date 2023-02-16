@@ -92,8 +92,6 @@ function App() {
         <div id={Styles.background}>
           <div id={Styles.app} style={lightColorMode ? modeColors.lightModeColors : modeColors.darkModeColors}>
             <NavBar
-              onShowNotes={handleShowNotes}
-              onSearch={handleSearch}
               onChangeColorMode={handleChangeColorMode}
               lightColorMode={lightColorMode}
             />

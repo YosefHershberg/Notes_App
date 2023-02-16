@@ -185,6 +185,10 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .de
   color: white;
   background-color: #db3e3e;
 }
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer .deleteBtn .icon, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer .deleteBtn .icon {
+  margin-bottom: 3px;
+  font-size: 15px;
+}
 body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut {
   animation: fade-out 0.25s ease-out both;
 }

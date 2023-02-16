@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Styles from '../scss/styles.module.scss'
 import { AppContext } from '../../App';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 
 function NotesListNote(props) {
     const { note, onDelete } = props;
@@ -21,8 +22,8 @@ function NotesListNote(props) {
                 <p className={Styles.noteListText} onClick={() => onEdit(note.id)}>{note.text}</p>
 
                 <div className={Styles.editDeleteIcons}>
-                    <button className={Styles.editBtn} onClick={() => onEdit(note.id)}>Edit <i className="fa-solid fa-pen-to-square"></i></button>
-                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked} >Delete <i className="fa-solid fa-trash"></i></button>
+                    <button className={Styles.editBtn} onClick={() => onEdit(note.id)}>Edit <AiFillEdit className={Styles.icon}/></button>
+                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked} >Delete <AiFillDelete className={Styles.icon}/></button>
                 </div>
             </li>
         </React.Fragment>
