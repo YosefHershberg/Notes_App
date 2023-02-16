@@ -64,6 +64,10 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
   color: white;
   background-color: #db3e3e;
 }
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .icon {
+  font-size: 20px;
+  margin-bottom: 3px;
+}
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm {
   height: 40px;
   border-bottom: 1px solid var(--noteListTextColor);

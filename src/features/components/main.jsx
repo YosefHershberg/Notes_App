@@ -11,7 +11,7 @@ import { displaydNote, setDisplaydNote } from '../slices/displaydNoteSlice';
 import { displaydFolderData } from '../slices/displaydFolderSlice'
 
 function Main(props) {
-    const { notesListRef, onChangeFolder, navToAllNotes } = props;
+    const { notesListRef, navToAllNotes } = props;
     const [displaydNotes, setDisplaydNotes] = useState([])
     const dispatch = useDispatch()
     const allNotes = useSelector(selectedAllNotes)
@@ -52,7 +52,6 @@ function Main(props) {
 
                     <Route path='/' element={<MyNotes
                         onDelete={handleDeleteAndFade}
-                        onChangeFolder={onChangeFolder}
                         displaydNotes={displaydNotes}
                     />} />
 

@@ -11,7 +11,7 @@ import { setDisplaydFolder } from '../slices/displaydFolderSlice';
 function MyNotes(props) {
     let folderNamesData = JSON.parse(window.localStorage.getItem('FOLDER_NAME_DATA'))
 
-    const { onDelete, onChangeFolder, displaydNotes, } = props
+    const { onDelete, displaydNotes, } = props
 
     const [folderNamesArr, setFolderNamesArr] = useState(folderNamesData ? folderNamesData : [])
     const [writeNameMode, setWriteNameMode] = useState(false)
@@ -62,7 +62,8 @@ function MyNotes(props) {
         dispatch(changeFolderToNewName({ oldName: folderName, newName: 'All Notes' }))
         //^^^^^^moving all the notes in deleted folder to All Notes
         setFolderNamesArr(folderNamesArr.filter(name => name != folderName))
-        props.onChangeFolder('All Notes')
+        // onChangeFolder('All Notes')
+        dispatch(setDisplaydFolder('All Notes'))
     }
 
     function handleChangeFolderName(oldNameArg) {
@@ -92,7 +93,7 @@ function MyNotes(props) {
                         <div id={Styles.foldersListWrapper}>
 
                             <div ref={notesListRef} id={Styles.foldersList}>
-                                <div className={Styles.folderOption} onClick={() => onChangeFolder('All Notes')}><span>All Notes</span></div>
+                                <div className={Styles.folderOption} onClick={() => dispatch(setDisplaydFolder('All Notes'))}><span>All Notes</span></div>
                                 {folderNamesArr.map(folderName => (
                                     <FolderOption
                                         key={uuidv4()}
@@ -100,7 +101,6 @@ function MyNotes(props) {
                                         onNameInputChange={setFolderInputValue}
                                         folderInputValue={folderInputValue}
                                         onKeyDown={handleKeyDown}
-                                        onChangeFolder={onChangeFolder}
                                         onSaveFolderName={handleSaveFolder}
                                         onDeleteFolder={handleDeleteFolder}
                                         writeNameMode={writeNameMode}

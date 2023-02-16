@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Styles from "../scss/styles.module.scss"
+import { setDisplaydFolder } from '../slices/displaydFolderSlice'
+import { useDispatch } from 'react-redux';
+import { AiFillDelete, AiFillEdit } from'react-icons/ai'
 
 function FolderOption(props) {
-    const { onChangeFolderName, onNameInputChange, onSaveFolderName, folderInputValue, onKeyDown, onChangeFolder, onDeleteFolder } = props;
-    const [folderOption, setFolderOption] = useState(props.folderOption)
+    const { onChangeFolderName,folderOption, onNameInputChange, onSaveFolderName, folderInputValue, onKeyDown, onDeleteFolder } = props;
+    const dispatch = useDispatch()
     const inputRef = useRef()
 
     useEffect(() => {
@@ -25,12 +28,12 @@ function FolderOption(props) {
                     <button onClick={() => onSaveFolderName()}>Save</button>
                 </div>
                 : <div className={Styles.folderOption}>
-                    <span onClick={() => onChangeFolder(folderOption)}>{folderOption}</span>
+                    <span onClick={() => dispatch(setDisplaydFolder(folderOption))}>{folderOption}</span>
                     <button className={Styles.editBtn} onClick={() => onChangeFolderName(folderOption)}>
-                        <i className="fa-solid fa-pen-to-square"></i> 
+                        <AiFillEdit className={Styles.icon}/> 
                     </button>
                     <button className={Styles.deleteBtn} onClick={() => onDeleteFolder(folderOption)}>
-                        <i className="fa-solid fa-trash"></i>
+                        <AiFillDelete className={Styles.icon}/>
                     </button>
                 </div>
             }

@@ -63,10 +63,20 @@ body #background #app #main #myNotes {
                             background-color: transparent;
                             border: none;
                             border-radius: 5px;
+                            // height: 100%;
+                            // display: flex;
+                            // justify-content: center;
+                            // align-items: center;
                             &:hover {
                                 color: white;
                                 background-color: rgb(219, 62, 62);
                             }
+
+                        }
+                        
+                        .icon {
+                            font-size: 20px;
+                            margin-bottom: 3px;
                         }
                     }
 

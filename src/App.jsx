@@ -50,7 +50,7 @@ function App() {
   }
 
   function handleChangeFolder(folderName) {
-    dispatch(setDisplaydFolder(folderName))
+
   }
 
   //HOOKS
@@ -97,9 +97,7 @@ function App() {
             />
             <Main
               navToAllNotes={navToAllNotes}
-              setDisplaydNote={setDisplaydNote}
               notesListRef={notesListRef}
-              onChangeFolder={handleChangeFolder}
             />
           </div>
         </div>

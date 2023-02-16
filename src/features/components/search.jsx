@@ -3,6 +3,7 @@ import SearchOption from './search-option';
 import Styles from '../scss/styles.module.scss';
 import { useSelector } from 'react-redux';
 import { selectedAllNotes } from '../slices/notesSlice';
+import { BsSearch } from 'react-icons/bs'
 
 function Search() {
     const [options, setOptions] = useState([])
@@ -45,7 +46,7 @@ function Search() {
                                 onChange={handleSearchEngine} >
                             </input>
                             <a className={Styles.searchBtn} href="">
-                                <i className="fab fa-searchengin"></i>
+                                <BsSearch />
                             </a>
                         </div>
                     </div>
