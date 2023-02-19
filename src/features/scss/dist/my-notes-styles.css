@@ -50,6 +50,8 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
   background-color: transparent;
   border: none;
   border-radius: 5px;
+  padding: 2px;
+  margin: 0 2px;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .editBtn:hover {
   background-color: var(--noteBackgroundColor);
@@ -59,6 +61,7 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
   background-color: transparent;
   border: none;
   border-radius: 5px;
+  padding: 2px;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn:hover {
   color: white;

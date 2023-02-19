@@ -109,6 +109,9 @@ body #background #app #main #workSpace #notesListWrapper #FolderName {
   padding: 0 10px;
   color: var(--textColor);
   height: 7%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 body #background #app #main #workSpace #notesListWrapper #notesList {
   width: 100%;
@@ -178,8 +181,9 @@ body #background #app #main #workSpace #notesListWrapper #notesList .notesListNo
   color: white;
   background-color: #db3e3e;
 }
-body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .fa-solid, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .fa-solid {
-  margin: 0 3px;
+body #background #app #main #workSpace #notesListWrapper #notesList .notesListNote .editDeleteIcons .icon, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadeOut .editDeleteIcons .icon, body #background #app #main #workSpace #notesListWrapper #notesList .notesListNoteFadein .editDeleteIcons .icon {
+  margin-bottom: 3px;
+  font-size: 15px;
 }
 body #background #app #main #workSpace #formContainer {
   width: 65%;
@@ -272,19 +276,38 @@ body #background #app #main #myNotes #leftContainer #foldersContainer #foldersLi
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span {
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption span:hover {
   opacity: 0.5;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .editBtn {
+  color: var(--textColor);
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 0 2px;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .editBtn:hover {
+  background-color: var(--noteBackgroundColor);
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn {
   color: #db3e3e;
   background-color: transparent;
   border: none;
   border-radius: 5px;
+  padding: 2px;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .deleteBtn:hover {
   color: white;
   background-color: #db3e3e;
+}
+body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .folderOption .icon {
+  font-size: 20px;
+  margin-bottom: 3px;
 }
 body #background #app #main #myNotes #leftContainer #foldersContainer #foldersListWrapper #foldersList .FolderNameForm {
   height: 40px;
@@ -362,7 +385,7 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer {
   flex-wrap: wrap;
   width: 100%;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut {
   animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   height: 250px;
   width: 100%;
@@ -372,26 +395,29 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox, bo
   background-color: var(--noteBackgroundColor);
   cursor: pointer;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .noteText, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .noteText {
-  height: 75%;
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox:hover, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut:hover {
+  border: var(--lastModifiedColor) solid 1px;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .noteText, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .noteText {
+  height: 80%;
   inline-size: 100%;
   overflow-wrap: break-word;
   overflow: hidden;
   font-size: 14px;
   color: var(--textColor);
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .lastModified, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .lastModified {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .lastModified, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .lastModified {
   font-size: 13px;
-  margin: 0 0 3px;
+  margin: 0 0 5px;
   color: var(--lastModifiedColor);
-  height: 12%;
+  height: 7%;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer {
   display: flex;
   justify-content: center;
   height: 13%;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer .deleteBtn, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer .deleteBtn {
   border: none;
   border-radius: 5px;
   background-color: #d1d1d1;
@@ -400,16 +426,76 @@ body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .de
   width: 70px;
   color: #db3e3e;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBox .deleteBtnContainer .deleteBtn:hover, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut .deleteBtnContainer .deleteBtn:hover {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer .deleteBtn:hover, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer .deleteBtn:hover {
   color: white;
   background-color: #db3e3e;
 }
-body #background #app #main #myNotes #gridOfNotes .textBoxContainer .textBoxFadeOut {
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBox .deleteBtnContainer .deleteBtn .icon, body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut .deleteBtnContainer .deleteBtn .icon {
+  margin-bottom: 3px;
+  font-size: 15px;
+}
+body #background #app #main #myNotes #gridOfNotes .textBoxContainer .NoteBoxFadeOut {
   animation: fade-out 0.25s ease-out both;
 }
 
 body #background #app #main .noNotesYet {
+  position: absolute;
+  background-color: var(--backgroundColor);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(0);
+  border-radius: 10px;
+  animation: scale-in-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+body #background #app #main .noNotesYet h1 {
+  margin-bottom: 20px;
+}
+body #background #app #main .noNotesYet button {
+  height: 50px;
+  width: 190px;
+  border-radius: 5px;
+  border: none;
+  background-color: #65a4db;
+  color: white;
+  font-size: 20px;
+}
+
+.noNotesYetHidden {
+  position: absolute;
+  background-color: var(--backgroundColor);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(0);
+  border-radius: 10px;
   animation: slide-out-top 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+.noNotesYetHidden h1 {
+  margin-bottom: 20px;
+}
+.noNotesYetHidden button {
+  height: 50px;
+  width: 190px;
+  border-radius: 5px;
+  border: none;
+  background-color: #65a4db;
+  color: white;
+  font-size: 20px;
+}
+
+#noNotesHeader {
+  color: var(--textColor);
 }
 
 body #background #app #main #searchContainer {

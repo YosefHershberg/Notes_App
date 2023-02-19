@@ -31,30 +31,27 @@ function MyNotes(props) {
         notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop
     }
 
-    function handleSaveFolder() {
-        let tempFolderNamesArr = folderNamesArr;
+    function handleSaveFolder(e) {
+        e.preventDefault()
+        if (!folderNamesArr.includes(folderInputValue)) {
+            let tempFolderNamesArr = folderNamesArr;
 
-        if (editMode) {
-            tempFolderNamesArr = folderNamesArr.map(folderName => {
-                return folderName === '' ? folderInputValue : folderName
-            })
-            setEditMode(false)
-            dispatch(changeFolderToNewName({ oldName: oldName, newName: folderInputValue }))
-        } else {
-            tempFolderNamesArr[tempFolderNamesArr.length - 1] = folderInputValue
-            setScrollTriger(prev => !prev)
-        }
-        
-        setFolderNamesArr(tempFolderNamesArr)
-        window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(tempFolderNamesArr))
-        setWriteNameMode(false)
-        dispatch(setDisplaydFolder(folderInputValue))
-    }
+            if (editMode) {
+                tempFolderNamesArr = folderNamesArr.map(folderName => {
+                    return folderName === '' ? folderInputValue : folderName
+                })
+                setEditMode(false)
+                dispatch(changeFolderToNewName({ oldName: oldName, newName: folderInputValue }))
+            } else {
+                tempFolderNamesArr[tempFolderNamesArr.length - 1] = folderInputValue
+                setScrollTriger(prev => !prev)
+            }
 
-    function handleKeyDown(event) {
-        if (event.key === "Enter") {
-            handleSaveFolder();
             setFolderInputValue('')
+            setFolderNamesArr(tempFolderNamesArr)
+            window.localStorage.setItem('FOLDER_NAME_DATA', JSON.stringify(tempFolderNamesArr))
+            setWriteNameMode(false)
+            dispatch(setDisplaydFolder(folderInputValue))
         }
     }
 
@@ -67,13 +64,12 @@ function MyNotes(props) {
     }
 
     function handleChangeFolderName(oldNameArg) {
-        if (!editMode) {
-            setEditMode(true)
-            setOldName(oldNameArg)
-            setFolderNamesArr(folderNamesArr.map(folderName => {
-                return folderName === oldNameArg ? '' : folderName
-            }))
-        }
+        setEditMode(true)
+        setOldName(oldNameArg)
+        setFolderNamesArr(folderNamesArr.map(folderName => {
+            return folderName === oldNameArg ? '' : folderName
+        }))
+        setFolderInputValue(oldNameArg)
     }
 
     useEffect(() => {
@@ -100,11 +96,8 @@ function MyNotes(props) {
                                         folderOption={folderName}
                                         onNameInputChange={setFolderInputValue}
                                         folderInputValue={folderInputValue}
-                                        onKeyDown={handleKeyDown}
                                         onSaveFolderName={handleSaveFolder}
                                         onDeleteFolder={handleDeleteFolder}
-                                        writeNameMode={writeNameMode}
-                                        setWriteNameMode={setWriteNameMode}
                                         onChangeFolderName={handleChangeFolderName}
                                     />))}
                             </div>

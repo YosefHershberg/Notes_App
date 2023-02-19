@@ -53,6 +53,9 @@ body #background #app #main #myNotes {
                             background-color: transparent;
                             border: none;
                             border-radius: 5px;
+                            padding: 2px;
+                            margin: 0 2px;
+
                             &:hover {
                                 background-color: var(--noteBackgroundColor);
                             }
@@ -63,10 +66,8 @@ body #background #app #main #myNotes {
                             background-color: transparent;
                             border: none;
                             border-radius: 5px;
-                            // height: 100%;
-                            // display: flex;
-                            // justify-content: center;
-                            // align-items: center;
+                            padding: 2px;
+
                             &:hover {
                                 color: white;
                                 background-color: rgb(219, 62, 62);

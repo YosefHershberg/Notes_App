@@ -49,10 +49,6 @@ function App() {
     setLightColorMode(prev => !prev)
   }
 
-  function handleChangeFolder(folderName) {
-
-  }
-
   //HOOKS
   //----------------------
 
@@ -74,7 +70,7 @@ function App() {
   useEffect(() => { // This becuase I want to the scroll to go down AFTER displayedNote is updated
     if (allNotes.filter(note => note.folder === displaydFolder).length > 1) { //checks if there is at least 1 in the notes list
       //^^^^this is because notesListRef cant hold notes list bacause it doesnt exist yet
-      notesListRef.current.scrollTop = notesListRef.current.lastChild.offsetTop;
+      notesListRef.current && (notesListRef.current.scrollTop = notesListRef.current.lastChild?.offsetTop);
     }
   }, [scrollTriger]);
 
