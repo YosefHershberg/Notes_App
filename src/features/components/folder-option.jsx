@@ -9,6 +9,11 @@ function FolderOption(props) {
     const dispatch = useDispatch()
     const inputRef = useRef()
 
+    function handleDeleteFolder(e) {
+        e.stopPropagation();
+        onDeleteFolder(folderOption)
+    }
+
     useEffect(() => {
         folderOption === '' && inputRef.current.focus()
     }, []);
@@ -26,12 +31,12 @@ function FolderOption(props) {
                     />
                     <button onClick={(e) => onSaveFolderName(e)} type='submit'>Save</button>
                 </form>
-                : <div className={Styles.folderOption}>
-                    <span onClick={() => dispatch(setDisplaydFolder(folderOption))}>{folderOption}</span>
+                : <div className={Styles.folderOption} onClick={() => dispatch(setDisplaydFolder(folderOption))}>
+                    <span>{folderOption}</span>
                     <button className={Styles.editBtn} onClick={() => onChangeFolderName(folderOption)}>
                         <AiFillEdit className={Styles.icon} />
                     </button>
-                    <button className={Styles.deleteBtn} onClick={() => onDeleteFolder(folderOption)}>
+                    <button className={Styles.deleteBtn} onClick={(e) => handleDeleteFolder(e)}>
                         <AiFillDelete className={Styles.icon} />
                     </button>
                 </div>

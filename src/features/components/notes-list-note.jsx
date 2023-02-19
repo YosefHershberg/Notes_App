@@ -9,21 +9,26 @@ function NotesListNote(props) {
     const [notesListNoteClassName, setNotesListNoteClassName] = useState(Styles.notesListNoteFadein)
     const noteListNoteRef = useRef()
 
-    function handleDeleteBtnClicked() {
+    function handleDeleteBtnClicked(e) {
+        e.stopPropagation();
         setNotesListNoteClassName(Styles.notesListNoteFadeOut)
         onDelete(note, noteListNoteRef.current);
     }
 
     return (
         <React.Fragment>
-            <li ref={noteListNoteRef} className={notesListNoteClassName}>
+            <li
+                ref={noteListNoteRef}
+                className={notesListNoteClassName}
+                onClick={() => onEdit(note.id)}
+            >
                 <div className={Styles.lastModified}><i>{note.lastModified}</i></div>
 
-                <p className={Styles.noteListText} onClick={() => onEdit(note.id)}>{note.text}</p>
+                <p className={Styles.noteListText}>{note.text}</p>
 
                 <div className={Styles.editDeleteIcons}>
-                    <button className={Styles.editBtn} onClick={() => onEdit(note.id)}>Edit <AiFillEdit className={Styles.icon}/></button>
-                    <button className={Styles.deleteBtn} onClick={handleDeleteBtnClicked} >Delete <AiFillDelete className={Styles.icon}/></button>
+                    <button className={Styles.editBtn} onClick={() => onEdit(note.id)}>Edit <AiFillEdit className={Styles.icon} /></button>
+                    <button className={Styles.deleteBtn} onClick={(e) => handleDeleteBtnClicked(e)} >Delete <AiFillDelete className={Styles.icon} /></button>
                 </div>
             </li>
         </React.Fragment>

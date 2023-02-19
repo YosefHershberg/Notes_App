@@ -59,7 +59,6 @@ function MyNotes(props) {
         dispatch(changeFolderToNewName({ oldName: folderName, newName: 'All Notes' }))
         //^^^^^^moving all the notes in deleted folder to All Notes
         setFolderNamesArr(folderNamesArr.filter(name => name != folderName))
-        // onChangeFolder('All Notes')
         dispatch(setDisplaydFolder('All Notes'))
     }
 
